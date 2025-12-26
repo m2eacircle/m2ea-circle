@@ -1,0 +1,29 @@
+m2eacircle/
+├── index.html                                    ← Entry redirect (→ English)
+├── index_en.html                                 ← Homepage (English)
+├── index_fr.html                                 ← Homepage (French)
+├── style.css                                     ← Shared stylesheet
+├── script.js                                     ← Shared JavaScript (+ content protection)
+│
+├── education/
+│   ├── index.html                                ← Redirect (→ English)
+│   ├── index_en.html                             ← Education products (English)
+│   ├── index_fr.html                             ← Education products (French)
+│   └── testbank/
+│       └── public/
+│           ├── index_testbank.html               ← TEST BANK page (English)
+│           └── index_testbank_fr.html            ← TEST BANK page (French)
+│
+├── health/
+│   ├── index.html                                ← Redirect (→ English)
+│   ├── index_en.html                             ← Health products (English) - Coming Soon
+│   └── index_fr.html                             ← Health products (French) - Coming Soon
+│
+└── entertainment/
+    ├── index.html                                ← Redirect (→ English)
+    ├── index_en.html                             ← Entertainment products (English)
+    ├── index_fr.html                             ← Entertainment products (French)
+    └── blackjack/
+        └── public/
+            ├── index_blackjack.html              ← Black Jack page (English)
+            └── index_blackjack_fr.html           ← Black Jack page (French)
