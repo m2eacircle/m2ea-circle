@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/education/testbank/static/css/main.233b3b67.css",
+    "main.js": "/education/testbank/static/js/main.bb7c3ce2.js",
+    "index.html": "/education/testbank/index.html",
+    "main.233b3b67.css.map": "/education/testbank/static/css/main.233b3b67.css.map",
+    "main.bb7c3ce2.js.map": "/education/testbank/static/js/main.bb7c3ce2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.233b3b67.css",
+    "static/js/main.bb7c3ce2.js"
+  ]
+}
