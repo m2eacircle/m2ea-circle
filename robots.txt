@@ -1,0 +1,13 @@
+# robots.txt for m2eacircle.com
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Disallow: 
+
+# Sitemap location
+Sitemap: https://m2eacircle.com/sitemap.xml
+
+# Crawl delay (optional, helps with server load)
+Crawl-delay: 1
