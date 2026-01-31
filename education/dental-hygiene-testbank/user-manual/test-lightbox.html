@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightbox Test</title>
+    <title>Terms of Use — User Manual</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <script src="../../../script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,9 +93,62 @@
         }
     </style>
 </head>
+    
 <body>
-    <h1>Lightbox Test Page</h1>
-    <p>Click the image below to test the lightbox:</p>
+    <nav id="navbar">
+        <a href="../../../" class="logo">m2ea <span>Circle</span></a>
+        <ul class="nav-links">
+            <li><a href="../../">Education</a></li>
+            <li><a href="../../../health/">Health</a></li>
+            <li><a href="../../../entertainment/">Entertainment</a></li>
+            <li><a href="../../../#contact">Contact</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <a href="terms-of-use.html" class="lang-btn active">EN</a>
+            <span class="lang-divider">|</span>
+            <a href="terms-of-use_fr.html" class="lang-btn">FR</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <a href="./" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                Back to Manual Index
+            </a>
+            <p class="page-hero-tagline education">Section 1</p>
+            <h1>Terms of Use</h1>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-inner">
+            <div class="about-content" style="display: block;">
+                <p>When you access the Dental Hygiene Test Bank web app, you can see the 'Terms of Use' page, and when you acknowledge and agree to it, you can access the Dental Hygiene Test Bank web app.</p>
+
+                <p>You don't have to log in to the Dental Hygiene Test Bank web app, so the 'Terms of Use' must be checked on each device. For example, if you already checked the 'Terms of Use' from your laptop, but if you access it from your cell phone, you should check it again.</p>
+
+                <img src="screenshots/1.Terms_of_Use.png" alt="1. Terms of Use" class="screenshot-thumb" onclick="openModal(this)">
+                <p class="screenshot-caption">Click image to view full size</p>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <a href="main-page.html" class="hero-cta">
+                    Next: Main Page
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
     
     <img src="screenshots/1.Terms_of_Use.png" 
          alt="1. Terms of Use" 
@@ -100,6 +156,16 @@
          onclick="openModal(this)">
     <p class="screenshot-caption">Click image to view full size</p>
 
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">© 2025 m2ea Labs. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="../../../privacy.html">Privacy Policy</a></li>
+                <li><a href="../../../terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+    
     <!-- Lightbox Modal -->
     <div id="imageModal" class="modal" onclick="closeModal()">
         <span class="modal-close" onclick="closeModal()">&times;</span>
