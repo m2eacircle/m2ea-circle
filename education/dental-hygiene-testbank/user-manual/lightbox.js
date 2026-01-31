@@ -1,8 +1,14 @@
 // Screenshot Lightbox Functionality
 function openModal(img) {
+    console.log('openModal called with:', img); // Debug
     var modal = document.getElementById("imageModal");
     var modalImg = document.getElementById("modalImage");
     var captionText = document.getElementById("modalCaption");
+    
+    if (!modal || !modalImg || !captionText) {
+        console.error('Modal elements not found');
+        return;
+    }
     
     modal.style.display = "block";
     modalImg.src = img.src;
@@ -11,24 +17,41 @@ function openModal(img) {
     
     // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
+    console.log('Modal opened successfully'); // Debug
 }
 
 function closeModal() {
+    console.log('closeModal called'); // Debug
     var modal = document.getElementById("imageModal");
-    modal.style.display = "none";
-    
-    // Restore body scroll
-    document.body.style.overflow = 'auto';
+    if (modal) {
+        modal.style.display = "none";
+        
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+        console.log('Modal closed successfully'); // Debug
+    }
 }
 
-// Close modal when clicking outside the image
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Lightbox initialized'); // Debug
+    
+    // Close modal when clicking on the modal background (not the image)
     var modal = document.getElementById("imageModal");
     if (modal) {
         modal.addEventListener('click', function(event) {
+            // Only close if clicking the modal itself, not its children
             if (event.target === modal || event.target.className === 'modal-close') {
                 closeModal();
             }
+        });
+    }
+    
+    // Prevent modal close when clicking on the image itself
+    var modalContent = document.getElementById("modalImage");
+    if (modalContent) {
+        modalContent.addEventListener('click', function(event) {
+            event.stopPropagation();
         });
     }
 });
@@ -40,12 +63,4 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Prevent modal close when clicking on the image itself
-document.addEventListener('DOMContentLoaded', function() {
-    var modalContent = document.getElementById("modalImage");
-    if (modalContent) {
-        modalContent.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-    }
-});
+console.log('Lightbox script loaded'); // Debug
