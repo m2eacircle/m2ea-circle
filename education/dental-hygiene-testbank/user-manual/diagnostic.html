@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Path Diagnostic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+        h1 { color: #3d5a80; }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>📋 File Path Diagnostic Tool</h1>
+    <p>This page tests if all CSS and JS files are loading correctly from the user-manual folder.</p>
+
+    <div class="test-box">
+        <h3>Current Page Location:</h3>
+        <code id="currentPath"></code>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 1: Main style.css</h3>
+        <p>Path: <code>../../../style.css</code></p>
+        <p id="test1" class="fail">❌ Testing...</p>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 2: Main script.js</h3>
+        <p>Path: <code>../../../script.js</code></p>
+        <p id="test2" class="fail">❌ Testing...</p>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 3: lightbox.css</h3>
+        <p>Path: <code>lightbox.css</code></p>
+        <p id="test3" class="fail">❌ Testing...</p>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 4: lightbox.js</h3>
+        <p>Path: <code>lightbox.js</code></p>
+        <p id="test4" class="fail">❌ Testing...</p>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 5: Screenshot file</h3>
+        <p>Path: <code>screenshots/1.Terms_of_Use.png</code></p>
+        <p id="test5" class="fail">❌ Testing...</p>
+        <img id="testImage" src="screenshots/1.Terms_of_Use.png" style="max-width: 200px; display: none;">
+    </div>
+
+    <div class="test-box">
+        <h3>Test 6: openModal function</h3>
+        <p id="test6" class="fail">❌ Testing...</p>
+    </div>
+
+    <div class="test-box">
+        <h3>Test 7: CSS Classes</h3>
+        <p id="test7" class="fail">❌ Testing...</p>
+    </div>
+
+    <script>
+        // Show current path
+        document.getElementById('currentPath').textContent = window.location.href;
+
+        // Test 1: Check if main style.css loaded
+        function checkStyleCSS() {
+            const links = document.styleSheets;
+            let found = false;
+            for (let sheet of links) {
+                if (sheet.href && sheet.href.includes('style.css')) {
+                    found = true;
+                    break;
+                }
+            }
+            document.getElementById('test1').innerHTML = found ? 
+                '<span class="pass">✅ PASS - style.css is loaded</span>' : 
+                '<span class="fail">❌ FAIL - style.css not found</span>';
+        }
+
+        // Test 2: Check if script.js loaded
+        function checkScriptJS() {
+            const scripts = document.scripts;
+            let found = false;
+            for (let script of scripts) {
+                if (script.src && script.src.includes('script.js')) {
+                    found = true;
+                    break;
+                }
+            }
+            document.getElementById('test2').innerHTML = found ? 
+                '<span class="pass">✅ PASS - script.js is loaded</span>' : 
+                '<span class="fail">❌ FAIL - script.js not found</span>';
+        }
+
+        // Test 3: Check lightbox.css
+        function checkLightboxCSS() {
+            const links = document.styleSheets;
+            let found = false;
+            for (let sheet of links) {
+                if (sheet.href && sheet.href.includes('lightbox.css')) {
+                    found = true;
+                    break;
+                }
+            }
+            document.getElementById('test3').innerHTML = found ? 
+                '<span class="pass">✅ PASS - lightbox.css is loaded</span>' : 
+                '<span class="fail">❌ FAIL - lightbox.css not found</span>';
+        }
+
+        // Test 4: Check lightbox.js
+        function checkLightboxJS() {
+            const scripts = document.scripts;
+            let found = false;
+            for (let script of scripts) {
+                if (script.src && script.src.includes('lightbox.js')) {
+                    found = true;
+                    break;
+                }
+            }
+            document.getElementById('test4').innerHTML = found ? 
+                '<span class="pass">✅ PASS - lightbox.js is loaded</span>' : 
+                '<span class="fail">❌ FAIL - lightbox.js not found</span>';
+        }
+
+        // Test 5: Check screenshot image
+        const testImg = document.getElementById('testImage');
+        testImg.onload = function() {
+            document.getElementById('test5').innerHTML = '<span class="pass">✅ PASS - Screenshot file exists</span>';
+            testImg.style.display = 'block';
+        };
+        testImg.onerror = function() {
+            document.getElementById('test5').innerHTML = '<span class="fail">❌ FAIL - Screenshot file not found</span>';
+        };
+
+        // Test 6: Check if openModal function exists
+        setTimeout(function() {
+            if (typeof openModal === 'function') {
+                document.getElementById('test6').innerHTML = '<span class="pass">✅ PASS - openModal function is defined</span>';
+            } else {
+                document.getElementById('test6').innerHTML = '<span class="fail">❌ FAIL - openModal function not found</span>';
+            }
+        }, 500);
+
+        // Test 7: Check if CSS classes work
+        setTimeout(function() {
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                const style = window.getComputedStyle(navbar);
+                const hasStyles = style.getPropertyValue('position') !== '';
+                document.getElementById('test7').innerHTML = hasStyles ? 
+                    '<span class="pass">✅ PASS - CSS classes are working</span>' : 
+                    '<span class="fail">❌ FAIL - CSS classes not applying</span>';
+            } else {
+                document.getElementById('test7').innerHTML = '<span class="fail">❌ FAIL - No navbar to test</span>';
+            }
+        }, 500);
+
+        // Run tests
+        setTimeout(function() {
+            checkStyleCSS();
+            checkScriptJS();
+            checkLightboxCSS();
+            checkLightboxJS();
+        }, 1000);
+    </script>
+
+    <!-- Include the actual files to test -->
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="lightbox.css">
+    <script src="../../../script.js"></script>
+    <script src="lightbox.js"></script>
+
+    <div style="margin-top: 40px; padding: 20px; background: #fff3cd; border-radius: 8px;">
+        <h3>🔍 What to look for:</h3>
+        <ul>
+            <li>All tests should show <span class="pass">✅ PASS</span></li>
+            <li>If any show <span class="fail">❌ FAIL</span>, that file isn't loading correctly</li>
+            <li>Check browser Console (F12) for any 404 errors</li>
+            <li>Check Network tab to see which files failed to load</li>
+        </ul>
+    </div>
+</body>
+</html>
