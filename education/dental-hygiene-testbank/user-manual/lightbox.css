@@ -1,0 +1,111 @@
+/* Screenshot Lightbox Styles */
+.screenshot-thumb {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.screenshot-thumb:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    border-color: #3d5a80;
+}
+
+.screenshot-caption {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    cursor: pointer;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 95%;
+    max-height: 95%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: zoomIn 0.3s;
+    border-radius: 4px;
+}
+
+@keyframes zoomIn {
+    from { transform: translate(-50%, -50%) scale(0.8); }
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 100000;
+    transition: color 0.3s;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.modal-close:hover {
+    color: #ee6c4d;
+}
+
+.modal-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 20px;
+    border-radius: 4px;
+    max-width: 80%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .screenshot-thumb {
+        max-width: 100%;
+    }
+    
+    .modal-close {
+        top: 10px;
+        right: 20px;
+        font-size: 40px;
+    }
+    
+    .modal-content {
+        max-width: 98%;
+        max-height: 98%;
+    }
+}

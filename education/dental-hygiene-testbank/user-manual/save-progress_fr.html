@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sauvegarder la Progression — Manuel d'Utilisation</title>
     <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="lightbox.css">
 </head>
 <body>
     <nav id="navbar">
@@ -36,7 +37,8 @@
                 <p><strong>1. Sauvegarder depuis l'Écran de Pause</strong><br>Si vous souhaitez sauvegarder la progression actuelle et souhaitez tester ou étudier plus tard, vous pouvez cliquer sur le bouton Sauvegarder la Progression depuis l'écran de pause.</p>
                 <p><strong>2. Reprendre le Test Sauvegardé</strong><br>Lorsque vous accédez à nouveau à l'application web Hygiène Dentaire, vous pouvez reprendre le test sauvegardé là où vous l'avez laissé.</p>
                 <p><em>Note : Votre progression est sauvegardée localement sur votre appareil uniquement. Différents appareils auront un suivi de progression séparé.</em></p>
-                <p><em>Note : Les captures d'écran seront ajoutées ultérieurement.</em></p>
+                <img src="screenshots/7.Save_Progress.png" alt="7. Save_Progress" class="screenshot-thumb" onclick="openModal(this)">
+                <p class="screenshot-caption">Cliquez sur l'image pour l'agrandir</p>
             </div>
             <div style="margin-top: 3rem; display: flex; justify-content: space-between; gap: 1rem;">
                 <a href="flag_fr.html" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Précédent: Drapeau</a>
@@ -46,5 +48,14 @@
     </section>
     <footer><div class="footer-inner"><p class="footer-copy">© 2025 m2ea Labs. Tous droits réservés.</p><ul class="footer-links"><li><a href="../../../privacy_fr.html">Politique de confidentialité</a></li><li><a href="../../../terms_fr.html">Conditions d'utilisation</a></li></ul></div></footer>
     <script src="../../../script.js"></script>
+    <script src="lightbox.js"></script>
+
+    <!-- Lightbox Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
 </body>
 </html>

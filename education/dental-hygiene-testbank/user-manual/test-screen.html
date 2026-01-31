@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Screen — User Manual</title>
     <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="lightbox.css">
 </head>
 <body>
     <nav id="navbar">
@@ -76,6 +77,10 @@
                 After confirmation, click the Next Question button for the continuous test.</p>
             </div>
 
+            <img src="screenshots/4.Test_Screen.png" alt="4. Test_Screen" class="screenshot-thumb" onclick="openModal(this)">
+                <p class="screenshot-caption">Click image to view full size</p>
+            </div>
+
             <div style="margin-top: 3rem; display: flex; justify-content: space-between; gap: 1rem;">
                 <a href="test-lesson-board-exam.html" class="back-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -104,5 +109,14 @@
     </footer>
 
     <script src="../../../script.js"></script>
+    <script src="lightbox.js"></script>
+
+    <!-- Lightbox Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
 </body>
 </html>
