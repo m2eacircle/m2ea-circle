@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page — User Manual</title>
+    <title>Terms of Use — User Manual (Inline Version)</title>
     <link rel="stylesheet" href="../../../style.css">
     <style>
-        /* Screenshot Lightbox Styles */
+        /* Inline Lightbox CSS */
         .screenshot-thumb {
             max-width: 500px;
             width: 100%;
@@ -61,7 +61,9 @@
             cursor: pointer;
             z-index: 100000;
         }
-        .modal-close:hover { color: #ee6c4d; }
+        .modal-close:hover {
+            color: #ee6c4d;
+        }
         .modal-caption {
             position: absolute;
             bottom: 20px;
@@ -75,7 +77,6 @@
             border-radius: 4px;
         }
     </style>
-    
 </head>
 <body>
     <nav id="navbar">
@@ -87,9 +88,9 @@
             <li><a href="../../../#contact">Contact</a></li>
         </ul>
         <div class="lang-switcher">
-            <a href="main-page.html" class="lang-btn active">EN</a>
+            <a href="terms-of-use-inline.html" class="lang-btn active">EN</a>
             <span class="lang-divider">|</span>
-            <a href="main-page_fr.html" class="lang-btn">FR</a>
+            <a href="terms-of-use_fr.html" class="lang-btn">FR</a>
         </div>
         <button class="mobile-menu-btn" aria-label="Menu">
             <span></span>
@@ -100,54 +101,36 @@
 
     <section class="page-hero">
         <div class="page-hero-content">
-            <a href="./" class="hero-cta">
+            <a href="./" class="back-link">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
                 Back to Manual Index
             </a>
-            <p class="page-hero-tagline education">Section 2</p>
-            <h1>Main Page</h1>
+            <p class="page-hero-tagline education">Section 1</p>
+            <h1>Terms of Use (Inline Test)</h1>
         </div>
     </section>
 
     <section class="about">
         <div class="about-inner">
             <div class="about-content" style="display: block;">
-                <h3>Features on the Main Page:</h3>
+                <p>When you access the Dental Hygiene Test Bank web app, you can see the 'Terms of Use' page, and when you acknowledge and agree to it, you can access the Dental Hygiene Test Bank web app.</p>
                 
-                <p><strong>1. Access m2ea Circle Homepage</strong><br>
-                You can access the m2ea Circle homepage at <a href="https://www.m2eacircle.com/" target="_blank">https://www.m2eacircle.com/</a></p>
-                
-                <p><strong>2. Check Your Progress Summary</strong><br>
-                View an overview of your learning progress across all subjects.</p>
-                
-                <p><strong>3. Start Your Test</strong><br>
-                Click on any subject from each lecture to begin testing.</p>
-                
-                <p><strong>4. Save Progress During the Test</strong><br>
-                Your progress can be saved at any time during testing.</p>
-                
-                <p><strong>5. Check Progress and History Details</strong><br>
-                Review detailed information about your performance and past tests.</p>
-                
-                <p><strong>6. Review Terms of Use</strong><br>
-                Access and review the Terms of Use at any time.</p>
-            </div>
+                <p>You don't have to log in to the Dental Hygiene Test Bank web app, so the 'Terms of Use' must be checked on each device. For example, if you already checked the 'Terms of Use' from your laptop, but if you access it from your cell phone, you should check it again.</p>
 
-            <div style="text-align: center;"><img src="screenshots/2.Main_Page.png" alt="2. Main_Page" class="screenshot-thumb" onclick="openModal(this)"></div>
+                <img src="screenshots/1.Terms_of_Use.png" 
+                     alt="1. Terms of Use" 
+                     class="screenshot-thumb" 
+                     onclick="openLightbox(this)">
                 <p class="screenshot-caption">Click image to view full size</p>
+                
+                <p style="color: red; font-weight: bold;">This is the INLINE VERSION for testing. If this works but the regular page doesn't, it's a JavaScript loading issue.</p>
             </div>
 
-            <div style="margin-top: 3rem; display: flex; justify-content: space-between; gap: 1rem;">
-                <a href="terms-of-use.html" class="hero-cta">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                    Previous: Terms of Use
-                </a>
-                <a href="test-lesson-board-exam.html" class="hero-cta">
-                    Next: Test Lesson & Board Exam
+            <div style="margin-top: 3rem; text-align: center;">
+                <a href="main-page.html" class="hero-cta">
+                    Next: Main Page
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -155,6 +138,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="imageModal" class="modal" onclick="closeLightbox()">
+        <span class="modal-close" onclick="closeLightbox()">&times;</span>
+        <img class="modal-content" id="modalImage" onclick="event.stopPropagation()">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
 
     <footer>
         <div class="footer-inner">
@@ -168,44 +158,50 @@
 
     <script src="../../../script.js"></script>
     
-
-    <!-- Lightbox Modal -->
-    <div id="imageModal" class="modal" onclick="closeModal()">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div class="modal-caption" id="modalCaption"></div>
-    </div>
-
-
+    <!-- Inline Lightbox Script -->
     <script>
-        function openModal(img) {
+        console.log('Inline lightbox script starting...');
+        
+        function openLightbox(img) {
+            console.log('openLightbox called with:', img);
             var modal = document.getElementById("imageModal");
             var modalImg = document.getElementById("modalImage");
             var captionText = document.getElementById("modalCaption");
-            if (modal && modalImg && captionText) {
-                modal.style.display = "block";
-                modalImg.src = img.src;
-                modalImg.alt = img.alt;
-                captionText.innerHTML = img.alt;
-                document.body.style.overflow = "hidden";
+            
+            if (!modal || !modalImg || !captionText) {
+                console.error('Modal elements not found');
+                alert('Error: Modal elements not found. Check console.');
+                return;
             }
+            
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            modalImg.alt = img.alt;
+            captionText.innerHTML = img.alt;
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Modal opened successfully');
         }
-        function closeModal() {
+
+        function closeLightbox() {
+            console.log('closeLightbox called');
             var modal = document.getElementById("imageModal");
             if (modal) {
                 modal.style.display = "none";
-                document.body.style.overflow = "auto";
+                document.body.style.overflow = 'auto';
+                console.log('Modal closed successfully');
             }
         }
-        document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape" || e.key === "Esc") closeModal();
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            var modalImg = document.getElementById("modalImage");
-            if (modalImg) {
-                modalImg.addEventListener("click", function(e) { e.stopPropagation(); });
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' || event.key === 'Esc') {
+                closeLightbox();
             }
         });
+
+        console.log('Inline lightbox script loaded successfully');
+        console.log('openLightbox function type:', typeof openLightbox);
     </script>
 </body>
 </html>
