@@ -75,7 +75,7 @@
             border-radius: 4px;
         }
     </style>
-
+    
 </head>
 <body>
     <nav id="navbar">
@@ -117,14 +117,11 @@
                 <p>When you access the Dental Hygiene Test Bank web app, you can see the 'Terms of Use' page, and when you acknowledge and agree to it, you can access the Dental Hygiene Test Bank web app.</p>
                 
                 <p>You don't have to log in to the Dental Hygiene Test Bank web app, so the 'Terms of Use' must be checked on each device. For example, if you already checked the 'Terms of Use' from your laptop, but if you access it from your cell phone, you should check it again.</p>
+
+                <img src="screenshots/1.Terms_of_Use.png" alt="1. Terms of Use" class="screenshot-thumb" onclick="openModal(this)">
+                <p class="screenshot-caption">Click image to view full size</p>
             </div>
 
-            <center><img src="screenshots/1.Terms_of_Use.png" 
-                 alt="1. Terms of Use" 
-                 class="screenshot-thumb" 
-                 onclick="openModal(this)">
-            </center>
-            
             <div style="margin-top: 3rem; text-align: center;">
                 <a href="main-page.html" class="hero-cta">
                     Next: Main Page
@@ -143,59 +140,9 @@
         <div class="modal-caption" id="modalCaption"></div>
     </div>
 
-     <script>
-        // Screenshot Lightbox Functionality
-        function openModal(img) {
-            console.log('openModal called'); // Debug
-            var modal = document.getElementById("imageModal");
-            var modalImg = document.getElementById("modalImage");
-            var captionText = document.getElementById("modalCaption");
-            
-            if (modal && modalImg && captionText) {
-                modal.style.display = "block";
-                modalImg.src = img.src;
-                modalImg.alt = img.alt;
-                captionText.innerHTML = img.alt;
-                document.body.style.overflow = 'hidden';
-                console.log('Modal opened'); // Debug
-            } else {
-                console.error('Modal elements not found'); // Debug
-            }
-        }
-
-        function closeModal() {
-            console.log('closeModal called'); // Debug
-            var modal = document.getElementById("imageModal");
-            if (modal) {
-                modal.style.display = "none";
-                document.body.style.overflow = 'auto';
-                console.log('Modal closed'); // Debug
-            }
-        }
-
-        // Close on ESC key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' || event.key === 'Esc') {
-                closeModal();
-            }
-        });
-
-        // Prevent modal close when clicking on the image
-        document.addEventListener('DOMContentLoaded', function() {
-            var modalContent = document.getElementById("modalImage");
-            if (modalContent) {
-                modalContent.addEventListener('click', function(event) {
-                    event.stopPropagation();
-                });
-            }
-        });
-
-        console.log('Lightbox script loaded'); // Debug
-    </script>
-    
     <footer>
         <div class="footer-inner">
-            <p class="footer-copy">© 2025 m2ea Labs. All rights reserved.</p>
+            <p class="footer-copy">© 2025 m2ea Circle. All rights reserved.</p>
             <ul class="footer-links">
                 <li><a href="../../../privacy.html">Privacy Policy</a></li>
                 <li><a href="../../../terms.html">Terms of Service</a></li>
@@ -204,6 +151,37 @@
     </footer>
 
     <script src="../../../script.js"></script>
+    
 
+    <script>
+        function openModal(img) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            var captionText = document.getElementById("modalCaption");
+            if (modal && modalImg && captionText) {
+                modal.style.display = "block";
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                captionText.innerHTML = img.alt;
+                document.body.style.overflow = "hidden";
+            }
+        }
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            if (modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape" || e.key === "Esc") closeModal();
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            var modalImg = document.getElementById("modalImage");
+            if (modalImg) {
+                modalImg.addEventListener("click", function(e) { e.stopPropagation(); });
+            }
+        });
+    </script>
 </body>
 </html>
