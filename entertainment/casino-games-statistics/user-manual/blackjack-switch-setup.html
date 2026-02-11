@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Switch — Game Setup — User Manual</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <style>
+        /* Screenshot Lightbox Styles */
+        .screenshot-thumb {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .screenshot-thumb:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            border-color: #ee6c4d;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            cursor: pointer;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 95%;
+            max-height: 95%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100000;
+        }
+        .modal-close:hover { color: #ee6c4d; }
+        .modal-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="../../../" class="logo">m2ea <span>Circle</span></a>
+        <ul class="nav-links">
+            <li><a href="../../../education/">Education</a></li>
+            <li><a href="../../../health/">Health</a></li>
+            <li><a href="../../">Entertainment</a></li>
+            <li><a href="../../../#contact">Contact</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <a href="blackjack-switch-setup.html" class="lang-btn active">EN</a>
+            <span class="lang-divider">|</span>
+            <a href="blackjack-switch-setup_fr.html" class="lang-btn">FR</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <a href="./" class="hero-cta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Manual Index
+            </a>
+            <p class="page-hero-tagline entertainment">Section 6</p>
+            <h1>Blackjack Switch — Game Setup</h1>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-inner">
+            <div class="about-content" style="display: block;">
+                <h3>Configure Your Game:</h3>
+                
+                <p><strong>1. Select Card Decks' Numbers</strong><br>
+                Choose the number of card decks to use in the game. Blackjack Switch typically uses multiple decks.</p>
+                
+                <p><strong>2. Select AI Players' Numbers</strong><br>
+                Choose how many AI players will join the game. These computer-controlled players will play alongside you at the table.</p>
+                
+                <p><strong>3. Starting Coins</strong><br>
+                Blackjack Switch's default coins are 200. If you lose all your coins, you can't play within 24 hours. After 24 hours, you will receive a new set of 200 coins.</p>
+                
+                <p><strong>4. Start the Game</strong><br>
+                Once you've configured your settings, click to start the game and proceed to the betting phase.</p>
+                
+                <p><strong>5. Return to Game Selection</strong><br>
+                You can move back to the game selection screen if you want to choose a different game or review the rules.</p>
+                
+                <p><strong>What is Blackjack Switch?</strong><br>
+                Blackjack Switch is a unique variation where you play two hands simultaneously and have the option to switch the second card dealt to each hand. This creates interesting strategic opportunities but comes with modified rules to balance the advantage.</p>
+                
+                <p><strong>Important Notes:</strong><br>
+                Make sure to configure your preferred settings before starting. The coin limit is designed to encourage responsible gaming and provides a natural break if you lose your coins.</p>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <img src="screenshots/8.Blackjack_Switch-Game_Setup.png" alt="8. Blackjack Switch - Game Setup" class="screenshot-thumb" onclick="openModal(this)">
+            </div>
+
+            <div style="margin-top: 3rem; display: flex; justify-content: space-between; gap: 1rem;">
+                <a href="blackjack-regular-next-game.html" class="hero-cta">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous: Blackjack Regular Next Game
+                </a>
+                <a href="blackjack-switch-betting.html" class="hero-cta">
+                    Next: Blackjack Switch Betting
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <div class="contact-text fade-in">
+                <h2>Questions about our <em>products</em>?</h2>
+            </div>
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <p class="contact-label">Email</p>
+                    <p class="contact-value"><a href="mailto:m2eacircle@gmail.com">m2eacircle@gmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">Website</p>
+                    <p class="contact-value"><a href="https://m2ealabs.com" target="_blank">m2ealabs.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">Product Portal</p>
+                    <p class="contact-value"><a href="https://m2eacircle.com" target="_blank">m2eacircle.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">© 2025 m2ea Circle. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="../../../privacy.html">Privacy Policy</a></li>
+                <li><a href="../../../terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../../../script.js"></script>
+
+    <!-- Lightbox Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <script>
+        function openModal(img) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            var captionText = document.getElementById("modalCaption");
+            if (modal && modalImg && captionText) {
+                modal.style.display = "block";
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                captionText.innerHTML = img.alt;
+                document.body.style.overflow = "hidden";
+            }
+        }
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            if (modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape" || e.key === "Esc") closeModal();
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            var modalImg = document.getElementById("modalImage");
+            if (modalImg) {
+                modalImg.addEventListener("click", function(e) { e.stopPropagation(); });
+            }
+        });
+    </script>
+</body>
+</html>
