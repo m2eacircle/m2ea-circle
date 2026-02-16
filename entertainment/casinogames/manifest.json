@@ -1,0 +1,22 @@
+{
+  "name": "Casino Games Statistics - M2EA Circle",
+  "short_name": "Casino Games",
+  "description": "Educational blackjack app with statistical odds display for learning purposes - M2EA Circle Entertainment",
+  "start_url": "/entertainment/casinogames/",
+  "scope": "/entertainment/casinogames/",
+  "display": "standalone",
+  "background_color": "#1e3c72",
+  "theme_color": "#1e3c72",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/entertainment/casinogames/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "games", "entertainment"],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
