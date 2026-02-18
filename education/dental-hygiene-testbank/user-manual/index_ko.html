@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 매뉴얼 — 치과위생사 시험 문제은행</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <style>
+        .screenshot-thumb {
+            max-width: 500px; width: 100%; height: auto; margin: 1.5rem 0;
+            border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer;
+            transition: all 0.3s ease; display: block;
+        }
+        .screenshot-thumb:hover { transform: scale(1.02); box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-color: #3d5a80; }
+        .modal { display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); cursor: pointer; }
+        .modal-content { margin: auto; display: block; max-width: 95%; max-height: 95%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .modal-close { position: absolute; top: 20px; right: 40px; color: #fff; font-size: 50px; font-weight: bold; cursor: pointer; z-index: 100000; }
+        .modal-close:hover { color: #ee6c4d; }
+        .modal-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 1rem; text-align: center; background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="../../../index_ko.html" class="logo">m2ea <span>Circle</span></a>
+        <ul class="nav-links">
+            <li><a href="../../index_ko.html">교육</a></li>
+            <li><a href="../../../health/index_ko.html">건강</a></li>
+            <li><a href="../../../entertainment/index_ko.html">엔터테인먼트</a></li>
+            <li><a href="../../../index_ko.html#contact">연락처</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <a href="index.html" class="lang-btn">EN</a>
+            <span class="lang-divider">|</span>
+            <a href="index_fr.html" class="lang-btn">FR</a>
+            <span class="lang-divider">|</span>
+            <a href="index_ko.html" class="lang-btn active">KO</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <a href="../index_ko.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                시험 문제은행으로 돌아가기
+            </a>
+            <p class="page-hero-tagline education">사용자 매뉴얼</p>
+            <h1><em>치과위생사 시험 문제은행</em> 사용 방법</h1>
+            <p class="page-hero-description">치과위생사 시험 문제은행 웹 앱을 탐색하고 학습 경험을 극대화하는 방법을 알아보세요.</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title">매뉴얼 목차</h2>
+        </div>
+        <div class="products-grid">
+            <a href="terms-of-use_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 6h24c2 0 4 2 4 4v28c0 2-2 4-4 4H12c-2 0-4-2-4-4V10c0-2 2-4 4-4z"/>
+                        <path d="M16 14h16M16 22h16M16 30h10"/>
+                        <circle cx="34" cy="34" r="4" fill="currentColor" stroke="none"/>
+                        <path d="M32 34l1.5 1.5 3-3" stroke="#3d5a80" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <h3>1. 이용약관</h3>
+                <p>이용약관 및 기기별 확인 사항 이해하기.</p>
+            </a>
+            <a href="main-page_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="6" y="8" width="36" height="28" rx="2"/>
+                        <path d="M6 16h36"/>
+                        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                        <circle cx="16" cy="12" r="1.5" fill="currentColor"/>
+                        <circle cx="20" cy="12" r="1.5" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3>2. 메인 페이지</h3>
+                <p>홈 페이지 탐색, 진도 확인 및 테스트 시작하기.</p>
+            </a>
+            <a href="test-lesson-board-exam_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="10" y="6" width="28" height="36" rx="2"/>
+                        <path d="M16 14h16M16 22h16M16 30h10"/>
+                        <path d="M32 30l2 2 4-4" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>3. 레슨 테스트 및 국가고시</h3>
+                <p>주제 선택 레슨 시작 및 사례 연구 포함 국가고시 시작하기.</p>
+            </a>
+            <a href="test-screen_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="8" y="8" width="32" height="32" rx="2"/>
+                        <circle cx="24" cy="18" r="4"/>
+                        <path d="M14 32c0-5.5 4.5-10 10-10s10 4.5 10 10"/>
+                        <path d="M38 14l-4 4"/>
+                    </svg>
+                </div>
+                <h3>4. 테스트 화면</h3>
+                <p>타이머, 진도 추적, 답변 제출 및 AI 지원.</p>
+            </a>
+            <a href="pause_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="24" cy="24" r="16"/>
+                        <rect x="18" y="16" width="4" height="16" rx="1" fill="currentColor"/>
+                        <rect x="26" y="16" width="4" height="16" rx="1" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3>5. 일시정지</h3>
+                <p>테스트 일시정지, 진도 저장 또는 주제 선택으로 돌아가기.</p>
+            </a>
+            <a href="flag_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M10 8v32"/>
+                        <path d="M10 8c8 0 12 4 20 0v16c-8 4-12 0-20 0z" fill="currentColor" stroke="none" opacity="0.7"/>
+                    </svg>
+                </div>
+                <h3>6. 플래그</h3>
+                <p>복습할 문제에 표시하고 표시된 항목 관리하기.</p>
+            </a>
+            <a href="save-progress_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 8h24c2 0 4 2 4 4v28l-16-8-16 8V12c0-2 2-4 4-4z"/>
+                    </svg>
+                </div>
+                <h3>7. 진도 저장</h3>
+                <p>현재 테스트를 저장하여 나중에 계속하기.</p>
+            </a>
+            <a href="test-completion_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="24" cy="24" r="16"/>
+                        <path d="M16 24l6 6 12-12" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>8. 테스트 완료</h3>
+                <p>테스트 완료 후 결과 및 답변 검토하기.</p>
+            </a>
+            <a href="study-mode_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 12h24v24H12z"/>
+                        <path d="M12 20h24M20 12v24"/>
+                        <circle cx="28" cy="28" r="6"/>
+                        <path d="M28 25v3l2 2"/>
+                    </svg>
+                </div>
+                <h3>9. 학습 모드</h3>
+                <p>시간 제한 없이 유연하게 학습하기.</p>
+            </a>
+            <a href="progress-history_ko.html" class="product-card education fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="8" y="10" width="32" height="28" rx="2"/>
+                        <path d="M8 18h32"/>
+                        <path d="M16 26l4 4 8-8"/>
+                    </svg>
+                </div>
+                <h3>10. 진도 및 기록</h3>
+                <p>성취도 추적 및 과거 테스트 결과 검토하기.</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- contact start -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <div class="contact-text fade-in">
+                <h2>저희 <em>제품</em>에 대한 질문이 있으신가요?</h2>
+            </div>
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <p class="contact-label">이메일</p>
+                    <p class="contact-value"><a href="mailto:m2eacircle@gmail.com">m2eacircle@gmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">웹사이트</p>
+                    <p class="contact-value"><a href="https://m2ealabs.com" target="_blank">m2ealabs.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">제품 포털</p>
+                    <p class="contact-value"><a href="https://m2eacircle.com" target="_blank">m2eacircle.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer><div class="footer-inner"><p class="footer-copy">© 2025 m2ea Labs. 모든 권리 보유.</p><ul class="footer-links"><li><a href="../../../privacy_ko.html">개인정보처리방침</a></li><li><a href="../../../terms_ko.html">이용약관</a></li></ul></div></footer>
+    <script src="../../../script.js"></script>
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+    <script>
+        function openModal(img) {
+            var modal = document.getElementById("imageModal");
+            var modalImg = document.getElementById("modalImage");
+            var captionText = document.getElementById("modalCaption");
+            if (modal && modalImg && captionText) {
+                modal.style.display = "block"; modalImg.src = img.src; modalImg.alt = img.alt;
+                captionText.innerHTML = img.alt; document.body.style.overflow = "hidden";
+            }
+        }
+        function closeModal() {
+            var modal = document.getElementById("imageModal");
+            if (modal) { modal.style.display = "none"; document.body.style.overflow = "auto"; }
+        }
+        document.addEventListener("keydown", function(e) { if (e.key === "Escape" || e.key === "Esc") closeModal(); });
+        document.addEventListener("DOMContentLoaded", function() {
+            var modalImg = document.getElementById("modalImage");
+            if (modalImg) { modalImg.addEventListener("click", function(e) { e.stopPropagation(); }); }
+        });
+    </script>
+</body>
+</html>

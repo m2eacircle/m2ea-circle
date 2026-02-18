@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 매뉴얼 — 카지노 게임 통계</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <style>
+        .screenshot-thumb {
+            max-width: 500px; width: 100%; height: auto; margin: 1.5rem 0;
+            border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer;
+            transition: all 0.3s ease; display: block;
+        }
+        .screenshot-thumb:hover { transform: scale(1.02); box-shadow: 0 6px 12px rgba(0,0,0,0.15); border-color: #ee6c4d; }
+        .modal { display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); cursor: pointer; }
+        .modal-content { margin: auto; display: block; max-width: 95%; max-height: 95%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .modal-close { position: absolute; top: 20px; right: 40px; color: #fff; font-size: 50px; font-weight: bold; cursor: pointer; z-index: 100000; }
+        .modal-close:hover { color: #ee6c4d; }
+        .modal-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 1rem; text-align: center; background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="../../../" class="logo">m2ea <span>Circle</span></a>
+        <ul class="nav-links">
+            <li><a href="../../../education/">교육</a></li>
+            <li><a href="../../../health/">건강</a></li>
+            <li><a href="../../">엔터테인먼트</a></li>
+            <li><a href="../../../#contact">연락처</a></li>
+        </ul>
+        <div class="lang-switcher">
+            <a href="index.html" class="lang-btn">EN</a>
+            <span class="lang-divider">|</span>
+            <a href="index_fr.html" class="lang-btn">FR</a>
+            <span class="lang-divider">|</span>
+            <a href="index_ko.html" class="lang-btn active">KO</a>
+        </div>
+        <button class="mobile-menu-btn" aria-label="메뉴"><span></span><span></span><span></span></button>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <a href="../index_ko.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                카지노 게임 통계로 돌아가기
+            </a>
+            <p class="page-hero-tagline entertainment">사용자 매뉴얼</p>
+            <h1><em>카지노 게임 통계</em> 사용 방법</h1>
+            <p class="page-hero-description">카지노 게임 통계 앱을 탐색하고 경험을 극대화하는 방법을 알아보세요.</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title">매뉴얼 목차</h2>
+        </div>
+        <div class="products-grid">
+            <a href="terms-of-use_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 6h24c2 0 4 2 4 4v28c0 2-2 4-4 4H12c-2 0-4-2-4-4V10c0-2 2-4 4-4z"/>
+                        <path d="M16 14h16M16 22h16M16 30h10"/>
+                        <circle cx="34" cy="34" r="4" fill="currentColor" stroke="none"/>
+                        <path d="M32 34l1.5 1.5 3-3" stroke="#ee6c4d" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <h3>1. 이용약관</h3>
+                <p>이용약관 및 기기별 확인 사항 이해하기.</p>
+            </a>
+            <a href="main-page_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="6" y="8" width="36" height="28" rx="2"/>
+                        <path d="M6 16h36"/>
+                        <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                        <circle cx="16" cy="12" r="1.5" fill="currentColor"/>
+                        <circle cx="20" cy="12" r="1.5" fill="currentColor"/>
+                    </svg>
+                </div>
+                <h3>2. 메인 페이지</h3>
+                <p>홈 페이지 탐색, 게임 선택 및 규칙 확인하기.</p>
+            </a>
+            <a href="blackjack-regular-setup_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="8" y="12" width="16" height="24" rx="2"/>
+                        <rect x="24" y="12" width="16" height="24" rx="2"/>
+                        <path d="M12 18h8M12 22h8M28 18h8M28 22h8"/>
+                    </svg>
+                </div>
+                <h3>3. 일반 블랙잭 — 설정</h3>
+                <p>일반 블랙잭을 위한 게임 설정 구성하기.</p>
+            </a>
+            <a href="blackjack-regular-gameplay_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="10" y="6" width="28" height="36" rx="2"/>
+                        <path d="M16 14h16M16 22h16M16 30h10"/>
+                        <circle cx="32" cy="32" r="6"/>
+                        <path d="M32 29v3l2 2"/>
+                    </svg>
+                </div>
+                <h3>4. 일반 블랙잭 — 게임플레이</h3>
+                <p>베팅, 핸드 플레이 및 게임 결과.</p>
+            </a>
+            <a href="blackjack-regular-next-game_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="24" cy="24" r="16"/>
+                        <path d="M20 16l8 8-8 8" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>5. 일반 블랙잭 — 다음 게임</h3>
+                <p>계속 플레이하고 게임 로그 확인하기.</p>
+            </a>
+            <a href="blackjack-switch-setup_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="8" y="12" width="16" height="24" rx="2"/>
+                        <rect x="24" y="12" width="16" height="24" rx="2"/>
+                        <path d="M16 24h16" stroke-width="2"/>
+                        <path d="M22 20l-4 4 4 4M26 28l4-4-4-4"/>
+                    </svg>
+                </div>
+                <h3>6. 블랙잭 스위치 — 설정</h3>
+                <p>블랙잭 스위치를 위한 게임 설정 구성하기.</p>
+            </a>
+            <a href="blackjack-switch-betting_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="24" cy="24" r="16"/>
+                        <path d="M24 14v10l6 6"/>
+                    </svg>
+                </div>
+                <h3>7. 블랙잭 스위치 — 베팅</h3>
+                <p>베팅 및 선택적 슈퍼 매치 사이드 베팅하기.</p>
+            </a>
+            <a href="blackjack-switch-gameplay_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="6" y="10" width="16" height="24" rx="2"/>
+                        <rect x="26" y="10" width="16" height="24" rx="2"/>
+                        <path d="M14 22h20"/>
+                        <path d="M20 16l-4 6 4 6M28 28l4-6-4-6"/>
+                    </svg>
+                </div>
+                <h3>8. 블랙잭 스위치 — 게임플레이</h3>
+                <p>카드를 교환하고 전략적으로 핸드 플레이하기.</p>
+            </a>
+            <a href="blackjack-switch-next-game_ko.html" class="product-card entertainment fade-in">
+                <div class="product-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="24" cy="24" r="16"/>
+                        <path d="M16 24l6 6 12-12" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>9. 블랙잭 스위치 — 다음 게임</h3>
+                <p>계속 플레이하고 게임 로그 확인하기.</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <div class="contact-text fade-in">
+                <h2>저희 <em>제품</em>에 대한 질문이 있으신가요?</h2>
+            </div>
+            <div class="contact-info fade-in">
+                <div class="contact-item">
+                    <p class="contact-label">이메일</p>
+                    <p class="contact-value"><a href="mailto:m2eacircle@gmail.com">m2eacircle@gmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">웹사이트</p>
+                    <p class="contact-value"><a href="https://m2ealabs.com" target="_blank">m2ealabs.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-label">제품 포털</p>
+                    <p class="contact-value"><a href="https://m2eacircle.com" target="_blank">m2eacircle.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <p class="footer-copy">© 2025 m2ea Circle. 모든 권리 보유.</p>
+            <ul class="footer-links">
+                <li><a href="../../../privacy_ko.html">개인정보처리방침</a></li>
+                <li><a href="../../../terms_ko.html">이용약관</a></li>
+                <li><a href="../../../education/">교육</a></li>
+                <li><a href="../../../health/">건강</a></li>
+                <li><a href="../../">엔터테인먼트</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../../../script.js"></script>
+    <script src="../../../cookie-consent.js"></script>
+</body>
+</html>
