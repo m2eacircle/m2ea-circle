@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npm run clean && npm run copy",
     "clean": "rimraf dist",
-    "copy": "copyfiles -u 0 \"**/*\" dist",
+    "copy": "copyfiles -u 0 -e \"node_modules/**\" -e \"dist/**\" \"**/*\" dist",
     "deploy": "npm run build && npm run upload",
     "upload": "echo 'Upload dist/ contents to /public_html/education/dailyenglish/ via your FTP/SSH client'",
     "start": "serve . -p 3000",
