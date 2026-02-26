@@ -1,0 +1,33 @@
+{
+  "name": "daily-english",
+  "version": "1.0.0",
+  "description": "Daily English — ONE Expression per DAY. Learn one English expression per day through your favorite TV shows.",
+  "private": true,
+  "homepage": "/public_html/education/dailyenglish",
+  "scripts": {
+    "build": "npm run clean && npm run copy",
+    "clean": "rimraf dist",
+    "copy": "copyfiles -u 0 \"**/*\" dist",
+    "deploy": "npm run build && npm run upload",
+    "upload": "echo 'Upload dist/ contents to /public_html/education/dailyenglish/ via your FTP/SSH client'",
+    "start": "serve . -p 3000",
+    "preview": "serve dist -p 3001"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.5",
+    "serve": "^14.2.3"
+  },
+  "keywords": [
+    "english",
+    "learning",
+    "pwa",
+    "education",
+    "daily-english"
+  ],
+  "author": "m2ea Labs / m2ea Circle",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
