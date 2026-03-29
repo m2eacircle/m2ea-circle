@@ -151,6 +151,9 @@
   });
 </script>
 <script>
+  /* Season availability — set to true to unlock this season */
+  var SEASON_AVAILABLE = true;
+
   var SEASON_NUM    = 1;
   var EPISODE_COUNT = 24;
   var EP_ICONS      = ["&#9749;","&#127909;","&#127917;","&#127183;","&#11088;","&#127925;","&#127939;","&#128161;","&#127769;","&#127873;","&#127829;","&#128188;","&#128682;","&#127802;","&#127908;","&#128241;","&#127754;","&#127969;","&#127919;","&#127752;","&#127914;","&#127757;","&#128171;","&#127926;","&#127881;"];
@@ -172,6 +175,9 @@
     }
   }
 
+  /* Episodes unlocked for this season — update to open more */
+  var AVAILABLE_EPISODES = new Set([1, 2]);
+
   function buildEpisodeGrid() {
     var grid = document.getElementById("episodeGrid");
     if (!grid) return;
@@ -185,23 +191,31 @@
       var label  = "S" + SEASON_NUM + "E" + e;
 
       /* Build card using DOM API — no innerHTML string quoting issues */
-      var card = document.createElement("a");
-      card.className = "episode-card";
-      card.href = url;
+      var isAvailable = AVAILABLE_EPISODES.has(e);
+      var card = document.createElement(isAvailable ? "a" : "div");
+      card.className = "episode-card" + (isAvailable ? "" : " locked");
+      if (isAvailable) card.href = url;
 
-      var bmBtn = document.createElement("button");
-      bmBtn.className = "bm-corner";
-      bmBtn.setAttribute("data-bm-id", bmId);
-      bmBtn.title = t('bm.bookmark');
-      bmBtn.innerHTML = "&#128278;";
-      (function(sn, en) {
-        bmBtn.addEventListener("click", function(evt) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          handleEpBookmark(sn, en);
-        });
-      })(SEASON_NUM, e);
-      card.appendChild(bmBtn);
+      if (isAvailable) {
+        var bmBtn = document.createElement("button");
+        bmBtn.className = "bm-corner";
+        bmBtn.setAttribute("data-bm-id", bmId);
+        bmBtn.title = t('bm.bookmark');
+        bmBtn.innerHTML = "&#128278;";
+        (function(sn, en) {
+          bmBtn.addEventListener("click", function(evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            handleEpBookmark(sn, en);
+          });
+        })(SEASON_NUM, e);
+        card.appendChild(bmBtn);
+      } else {
+        var lockBadge = document.createElement("div");
+        lockBadge.className = "ep-lock-badge";
+        lockBadge.innerHTML = "&#128274;";
+        card.appendChild(lockBadge);
+      }
 
       var img = document.createElement("img");
       img.className = "ep-card-img";
@@ -237,6 +251,18 @@
   }
 
   window.addEventListener("DOMContentLoaded", function() {
+    /* ── Season availability guard ── */
+    if (!SEASON_AVAILABLE) {
+      var overlay = document.createElement('div');
+      overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#0d1b2e;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;';
+      overlay.innerHTML =
+        '<div style="font-size:3rem;margin-bottom:1rem;">&#128274;</div>'
+        + '<div style="font-size:1.3rem;font-weight:900;color:#38bdf8;margin-bottom:0.5rem;">Coming Soon</div>'
+        + '<div style="font-size:0.9rem;color:#6b87aa;margin-bottom:2rem;">This season is not available yet.<br>Check back soon!</div>'
+        + '<button onclick="history.back()" style="background:#38bdf8;color:#0d1b2e;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;font-weight:800;cursor:pointer;">&#9664; Go Back</button>';
+      document.body.appendChild(overlay);
+      return;
+    }
     checkTermsGuard();
     buildEpisodeGrid();
   });
