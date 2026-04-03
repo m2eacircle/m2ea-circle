@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <!-- Home Pages -->
   <url>
     <loc>https://www.m2eacircle.com/</loc>
@@ -8,13 +9,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.m2eacircle.com/index_fr.html</loc>
+    <loc>https://www.m2eacircle.com/index_ko.html</loc>
     <lastmod>2025-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Education Category -->
+  <!-- Education -->
   <url>
     <loc>https://www.m2eacircle.com/education/</loc>
     <lastmod>2025-01-31</lastmod>
@@ -22,27 +23,13 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.m2eacircle.com/education/index_fr.html</loc>
+    <loc>https://www.m2eacircle.com/education/index_ko.html</loc>
     <lastmod>2025-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Health Category -->
-  <url>
-    <loc>https://www.m2eacircle.com/health/</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/health/index_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Entertainment Category -->
+  <!-- Entertainment -->
   <url>
     <loc>https://www.m2eacircle.com/entertainment/</loc>
     <lastmod>2025-01-31</lastmod>
@@ -50,190 +37,10 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.m2eacircle.com/entertainment/index_fr.html</loc>
+    <loc>https://www.m2eacircle.com/entertainment/index_ko.html</loc>
     <lastmod>2025-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-
-  <!-- Dental Hygiene Test Bank Landing -->
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/index_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- User Manual Index -->
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/index_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- User Manual Sections - English -->
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/terms-of-use.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/main-page.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/test-lesson-board-exam.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/test-screen.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/pause.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/flag.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/save-progress.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/test-completion.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/study-mode.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/progress-history.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- User Manual Sections - French -->
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/terms-of-use_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/main-page_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/test-lesson-board-exam_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/test-screen_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/pause_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/flag_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/save-progress_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/test-completion_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/study-mode_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/education/dental-hygiene-testbank/user-manual/progress-history_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Casino Games Statistics Landing -->
-  <url>
-    <loc>https://www.m2eacircle.com/entertainment/casino-games-statistics/</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/entertainment/casino-games-statistics/index_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Casino Games Statistics User Manual Index -->
-  <url>
-    <loc>https://www.m2eacircle.com/entertainment/casino-games-statistics/user-manual/</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.m2eacircle.com/entertainment/casino-games-statistics/user-manual/index_fr.html</loc>
-    <lastmod>2025-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Legal Pages -->
@@ -244,7 +51,7 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.m2eacircle.com/privacy_fr.html</loc>
+    <loc>https://www.m2eacircle.com/privacy_ko.html</loc>
     <lastmod>2025-01-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -256,9 +63,10 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.m2eacircle.com/terms_fr.html</loc>
+    <loc>https://www.m2eacircle.com/terms_ko.html</loc>
     <lastmod>2025-01-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
 </urlset>
