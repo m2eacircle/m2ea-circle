@@ -1,17 +1,20 @@
-const CACHE_NAME = 'dental-testbank-v1';
+const CACHE_NAME = 'dental-testbank-v3';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
   '/favicon.svg',
-  '/favicon-16x16.svg',
-  '/favicon-32x32.svg',
-  '/apple-touch-icon.svg'
+  '/icon-192x192.png',
+  '/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(cache =>
+      Promise.allSettled(
+        urlsToCache.map(url => cache.add(url).catch(e => console.warn('Cache miss:', url, e)))
+      )
+    )
   );
   self.skipWaiting();
 });
