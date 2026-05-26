@@ -11,18 +11,45 @@
   <meta name="apple-mobile-web-app-title" content="Hidden K-Drama Stories">
   <style>
     /* ── K-Drama card accent colours ────────────────────── */
-    .show-card[data-drama="guardian"] { --card-accent: #7c5cbf; }
-    .show-card[data-drama="glory"]    { --card-accent: #b83232; }
-    .show-card[data-drama="aouad"]    { --card-accent: #3d9e56; }
+    .show-card[data-drama="guardian"]       { --card-accent: #7c5cbf; }
+    .show-card[data-drama="glory"]          { --card-accent: #b83232; }
+    .show-card[data-drama="tangerines"]     { --card-accent: #e97c2f; }
+    .show-card[data-drama="hospital-playlist"] { --card-accent: #3b82f6; }
+    .show-card[data-drama="reply-1988"]     { --card-accent: #d97706; }
+    .show-card[data-drama="my-mister"]      { --card-accent: #64748b; }
+    .show-card[data-drama="attorney-woo"]   { --card-accent: #0891b2; }
+    .show-card[data-drama="kingdom"]        { --card-accent: #7c3aed; }
+    .show-card[data-drama="itaewon-class"]  { --card-accent: #dc2626; }
+    .show-card[data-drama="squid-game"]     { --card-accent: #e11d48; }
+    .show-card[data-drama="mr-sunshine"]    { --card-accent: #b45309; }
+    .show-card[data-drama="prison-playbook"]{ --card-accent: #065f46; }
 
-    .show-card[data-drama="guardian"]:hover { border-color: #7c5cbf; box-shadow: 0 8px 32px rgba(124,92,191,0.3); }
-    .show-card[data-drama="glory"]:hover    { border-color: #b83232; box-shadow: 0 8px 32px rgba(184,50,50,0.3); }
-    .show-card[data-drama="aouad"]:hover    { border-color: #3d9e56; box-shadow: 0 8px 32px rgba(61,158,86,0.3); }
+    .show-card[data-drama="guardian"]:hover       { border-color: #7c5cbf; box-shadow: 0 8px 32px rgba(124,92,191,0.3); }
+    .show-card[data-drama="glory"]:hover          { border-color: #b83232; box-shadow: 0 8px 32px rgba(184,50,50,0.3); }
+    .show-card[data-drama="tangerines"]:hover     { border-color: #e97c2f; box-shadow: 0 8px 32px rgba(233,124,47,0.3); }
+    .show-card[data-drama="hospital-playlist"]:hover { border-color: #3b82f6; box-shadow: 0 8px 32px rgba(59,130,246,0.3); }
+    .show-card[data-drama="reply-1988"]:hover     { border-color: #d97706; box-shadow: 0 8px 32px rgba(217,119,6,0.3); }
+    .show-card[data-drama="my-mister"]:hover      { border-color: #64748b; box-shadow: 0 8px 32px rgba(100,116,139,0.3); }
+    .show-card[data-drama="attorney-woo"]:hover   { border-color: #0891b2; box-shadow: 0 8px 32px rgba(8,145,178,0.3); }
+    .show-card[data-drama="kingdom"]:hover        { border-color: #7c3aed; box-shadow: 0 8px 32px rgba(124,58,237,0.3); }
+    .show-card[data-drama="itaewon-class"]:hover  { border-color: #dc2626; box-shadow: 0 8px 32px rgba(220,38,38,0.3); }
+    .show-card[data-drama="squid-game"]:hover     { border-color: #e11d48; box-shadow: 0 8px 32px rgba(225,29,72,0.3); }
+    .show-card[data-drama="mr-sunshine"]:hover    { border-color: #b45309; box-shadow: 0 8px 32px rgba(180,83,9,0.3); }
+    .show-card[data-drama="prison-playbook"]:hover{ border-color: #065f46; box-shadow: 0 8px 32px rgba(6,95,70,0.3); }
 
     /* ── Show banner gradients ──────────────────────────── */
-    .guardian-banner { background: linear-gradient(135deg, #ede9fe 0%, #c4b8e8 50%, #ddd6fe 100%); }
-    .glory-banner    { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #fce7f3 100%); }
-    .aouad-banner    { background: linear-gradient(135deg, #dcfce7 0%, #a7f3d0 50%, #d1fae5 100%); }
+    .guardian-banner        { background: linear-gradient(135deg, #ede9fe 0%, #c4b8e8 50%, #ddd6fe 100%); }
+    .glory-banner           { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #fce7f3 100%); }
+    .tangerines-banner      { background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 50%, #fdba74 100%); }
+    .hospital-playlist-banner { background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 50%, #dbeafe 100%); }
+    .reply-1988-banner      { background: linear-gradient(135deg, #fffbeb 0%, #fde68a 50%, #fcd34d 100%); }
+    .my-mister-banner       { background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #e2e8f0 100%); }
+    .attorney-woo-banner    { background: linear-gradient(135deg, #ecfeff 0%, #a5f3fc 50%, #cffafe 100%); }
+    .kingdom-banner         { background: linear-gradient(135deg, #f5f3ff 0%, #ddd6fe 50%, #ede9fe 100%); }
+    .itaewon-class-banner   { background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 50%, #ffe4e6 100%); }
+    .squid-game-banner      { background: linear-gradient(135deg, #fff1f2 0%, #fda4af 50%, #fecdd3 100%); }
+    .mr-sunshine-banner     { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%); }
+    .prison-playbook-banner { background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 50%, #d1fae5 100%); }
 
     .banner-emoji-large {
       font-size: 5rem;
@@ -309,13 +336,13 @@
       <span class="show-badge coming-badge">Coming Soon</span>
     </div>
 
-    <!-- ALL OF US ARE DEAD — Coming Soon -->
-    <div class="show-card disabled" data-drama="aouad" title="Coming soon — study content in preparation">
-      <div class="show-card-banner aouad-banner" style="position:relative;overflow:hidden;">
-        <img src="images/all-of-us-are-dead.jpg" alt="All of Us Are Dead"
+    <!-- WHEN LIFE GIVES YOU TANGERINES — Coming Soon -->
+    <div class="show-card disabled" data-drama="tangerines" title="Coming soon — study content in preparation">
+      <div class="show-card-banner tangerines-banner" style="position:relative;overflow:hidden;">
+        <img src="images/tangerines.jpg" alt="When Life Gives You Tangerines"
           style="filter:grayscale(20%) brightness(0.85);"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🧟</div>
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🍊</div>
         <div class="show-card-overlay"></div>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
           <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
@@ -324,8 +351,206 @@
         </div>
       </div>
       <div class="show-card-body">
-        <div class="show-card-title" style="color:var(--muted);">All of Us Are Dead</div>
-        <div class="show-card-title-kr">지금 우리 학교는</div>
+        <div class="show-card-title" style="color:var(--muted);">When Life Gives You Tangerines</div>
+        <div class="show-card-title-kr">폭싹 속았수다</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- HOSPITAL PLAYLIST — Coming Soon -->
+    <div class="show-card disabled" data-drama="hospital-playlist" title="Coming soon — study content in preparation">
+      <div class="show-card-banner hospital-playlist-banner" style="position:relative;overflow:hidden;">
+        <img src="images/hospital-playlist.jpg" alt="Hospital Playlist"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🏥</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Hospital Playlist</div>
+        <div class="show-card-title-kr">슬기로운 의사생활</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- REPLY 1988 — Coming Soon -->
+    <div class="show-card disabled" data-drama="reply-1988" title="Coming soon — study content in preparation">
+      <div class="show-card-banner reply-1988-banner" style="position:relative;overflow:hidden;">
+        <img src="images/reply-1988.jpg" alt="Reply 1988"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">📻</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Reply 1988</div>
+        <div class="show-card-title-kr">응답하라 1988</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- MY MISTER — Coming Soon -->
+    <div class="show-card disabled" data-drama="my-mister" title="Coming soon — study content in preparation">
+      <div class="show-card-banner my-mister-banner" style="position:relative;overflow:hidden;">
+        <img src="images/my-mister.jpg" alt="My Mister"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🌧️</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">My Mister</div>
+        <div class="show-card-title-kr">나의 아저씨</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- EXTRAORDINARY ATTORNEY WOO — Coming Soon -->
+    <div class="show-card disabled" data-drama="attorney-woo" title="Coming soon — study content in preparation">
+      <div class="show-card-banner attorney-woo-banner" style="position:relative;overflow:hidden;">
+        <img src="images/attorney-woo.jpg" alt="Extraordinary Attorney Woo"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🐋</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Extraordinary Attorney Woo</div>
+        <div class="show-card-title-kr">이상한 변호사 우영우</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- KINGDOM — Coming Soon -->
+    <div class="show-card disabled" data-drama="kingdom" title="Coming soon — study content in preparation">
+      <div class="show-card-banner kingdom-banner" style="position:relative;overflow:hidden;">
+        <img src="images/kingdom.jpg" alt="Kingdom"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">⚔️</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Kingdom</div>
+        <div class="show-card-title-kr">킹덤</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- ITAEWON CLASS — Coming Soon -->
+    <div class="show-card disabled" data-drama="itaewon-class" title="Coming soon — study content in preparation">
+      <div class="show-card-banner itaewon-class-banner" style="position:relative;overflow:hidden;">
+        <img src="images/itaewon-class.jpg" alt="Itaewon Class"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🍺</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Itaewon Class</div>
+        <div class="show-card-title-kr">이태원 클라쓰</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- SQUID GAME — Coming Soon -->
+    <div class="show-card disabled" data-drama="squid-game" title="Coming soon — study content in preparation">
+      <div class="show-card-banner squid-game-banner" style="position:relative;overflow:hidden;">
+        <img src="images/squid-game.jpg" alt="Squid Game"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">🦑</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Squid Game</div>
+        <div class="show-card-title-kr">오징어 게임</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- MR. SUNSHINE — Coming Soon -->
+    <div class="show-card disabled" data-drama="mr-sunshine" title="Coming soon — study content in preparation">
+      <div class="show-card-banner mr-sunshine-banner" style="position:relative;overflow:hidden;">
+        <img src="images/mr-sunshine.jpg" alt="Mr. Sunshine"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">☀️</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Mr. Sunshine</div>
+        <div class="show-card-title-kr">미스터 션샤인</div>
+        <div class="show-card-meta">Study content in preparation — stay tuned!</div>
+      </div>
+      <span class="show-badge coming-badge">Coming Soon</span>
+    </div>
+
+    <!-- PRISON PLAYBOOK — Coming Soon -->
+    <div class="show-card disabled" data-drama="prison-playbook" title="Coming soon — study content in preparation">
+      <div class="show-card-banner prison-playbook-banner" style="position:relative;overflow:hidden;">
+        <img src="images/prison-playbook.jpg" alt="Prison Playbook"
+          style="filter:grayscale(20%) brightness(0.85);"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">⚾</div>
+        <div class="show-card-overlay"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;
+            padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;
+            border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; Coming Soon</span>
+        </div>
+      </div>
+      <div class="show-card-body">
+        <div class="show-card-title" style="color:var(--muted);">Prison Playbook</div>
+        <div class="show-card-title-kr">슬기로운 감빵생활</div>
         <div class="show-card-meta">Study content in preparation — stay tuned!</div>
       </div>
       <span class="show-badge coming-badge">Coming Soon</span>
@@ -413,9 +638,7 @@ function applyPageLang() {
   var eyebrow = document.querySelector('.home-hero-eyebrow');
   if (eyebrow) eyebrow.textContent = isKo ? '✨ K-드라마 뒷이야기 & 트리비아' : '✨ K-Drama Backstories & Trivia';
   var gloryMeta  = document.querySelector('.show-card[data-show="glory"] .show-card-meta');
-  var aouadMeta  = document.querySelector('.show-card[data-show="aouad"] .show-card-meta');
   if (gloryMeta)  gloryMeta.textContent  = isKo ? '준비 중 — 곧 업데이트됩니다!' : 'Study content in preparation — stay tuned!';
-  if (aouadMeta)  aouadMeta.textContent  = isKo ? '준비 중 — 곧 업데이트됩니다!' : 'Study content in preparation — stay tuned!';
 }
 
 window.addEventListener('DOMContentLoaded', function() {

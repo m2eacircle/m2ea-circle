@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Playlist &mdash; Hidden K-Drama Stories</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .drama-info-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 22px 24px;
+      margin-bottom: 28px; box-shadow: var(--shadow);
+    }
+    .drama-info-card .di-label {
+      font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+    }
+    .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+    .coming-soon-bar {
+      background: rgba(232,36,92,0.07); border: 1.5px solid rgba(232,36,92,0.2);
+      border-radius: var(--radius); padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    }
+    .coming-soon-bar .cs-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
+      border-radius: 20px; padding: 5px 18px;
+      font-size: 0.75rem; font-weight: 700; color: var(--accent);
+      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="btn-topbar-home" onclick="goHome()" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="22" height="22" aria-label="Home">
+  <circle cx="50" cy="50" r="49" fill="white" stroke="#ccc" stroke-width="1"/>
+  <path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>
+  <path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>
+  <circle cx="50" cy="30" r="10" fill="#CD2E3A"/>
+  <circle cx="50" cy="70" r="10" fill="#003478"/>
+</svg></button>
+    <div class="topbar-logo">
+      <span class="logo-live">Hidden</span>
+      <div class="logo-dot"></div>
+      <span class="logo-korea">K-Drama Stories</span>
+    </div>
+  </div>
+  <div class="topbar-right" id="topbar-lang-wrap"></div>
+</header>
+
+<main>
+<div class="page-wrap">
+
+  <nav class="nav-row">
+    <button class="btn-nav home" onclick="goHome()">&#127968; <span id="nav-home">Home</span></button>
+    <button class="btn-nav" onclick="history.back()">&#9664; <span id="nav-back">Back</span></button>
+  </nav>
+
+  <nav class="breadcrumb">
+    <a href="../../index.html">Hidden K-Drama Stories</a>
+    <span class="sep">&#8250;</span>
+    <span class="current" id="bc-drama">Hospital Playlist</span>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-thumb">
+      <img src="../../images/hospital-playlist.jpg" alt="Hospital Playlist"
+        onerror="this.style.display='none';this.parentElement.innerHTML='🏥';this.parentElement.style.cssText='display:flex;align-items:center;justify-content:center;font-size:3rem;';">
+    </div>
+    <div class="page-header-info">
+      <div class="page-header-title" id="hdr-title">Hospital Playlist</div>
+      <div class="page-header-meta" id="hdr-meta">24 Episodes &middot; 2020–2021 &middot; Medical Drama</div>
+    </div>
+  </div>
+
+  <!-- Coming Soon notice — EN -->
+  <div class="coming-soon-bar" id="cs-en" data-lang-en>
+    <div class="cs-badge">&#128679; Coming Soon</div>
+    <p>We are currently preparing study content for <strong>Hospital Playlist</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
+  </div>
+
+  <!-- Coming Soon notice — KO -->
+  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
+    <div class="cs-badge">&#128679; 준비중</div>
+    <p><strong>슬기로운 의사생활</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
+  </div>
+
+  <!-- EN description -->
+  <div class="drama-info-card" id="desc-en" data-lang-en>
+    <div class="di-label">&#127916; About This Drama</div>
+    <div class="di-desc"><strong>Hospital Playlist</strong> is a 2020–2021 tvN drama following five doctor friends who have known each other since medical school. Set in a fictional Seoul hospital, it balances heartfelt patient stories with the warmth of deep friendship, a band that plays together, and the everyday moments that make life meaningful.</div>
+  </div>
+
+  <!-- KO description -->
+  <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
+    <div class="di-label">&#127916; 드라마 소개</div>
+    <div class="di-desc"><strong>슬기로운 의사생활</strong>은 의대 동기로 만나 20년 넘게 우정을 이어온 다섯 의사의 이야기를 담은 tvN 드라마입니다. 감동적인 환자 사연과 따뜻한 우정, 밴드 활동과 일상의 소소한 행복을 유머와 감성으로 풀어내며 큰 사랑을 받았습니다.</div>
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer" id="lk-footer">
+  <div class="footer-copy">&copy; 2025 m2ea Labs. All rights reserved.</div>
+  <div><a class="footer-terms" href="../../terms.html">Terms of Use / &#51060;&#50857;&#50557;&#44288;</a></div>
+</footer>
+
+<script src="../../js/app.js"></script>
+<script>
+
+  function goHome() { window.location.href = '../../index.html'; }
+
+  function applyPageLang() {
+    var isKo = getLang() === 'ko';
+    document.documentElement.lang = isKo ? 'ko' : 'en';
+    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
+    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
+    document.getElementById('bc-drama').textContent  = isKo ? '슬기로운 의사생활' : 'Hospital Playlist';
+    document.getElementById('hdr-title').textContent = isKo ? '슬기로운 의사생활' : 'Hospital Playlist';
+    document.getElementById('hdr-meta').textContent  = isKo ? '24화 · 2020–2021 · 의학 드라마' : '24 Episodes · 2020–2021 · Medical Drama';
+    document.querySelectorAll('[data-lang-en]').forEach(function(el) { el.style.display = isKo ? 'none' : ''; });
+    document.querySelectorAll('[data-lang-ko]').forEach(function(el) { el.style.display = isKo ? '' : 'none'; });
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    injectTermsModal();
+    document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
+    applyPageLang();
+    applyLang();
+  });
+
+</script>
+</body>
+</html>
