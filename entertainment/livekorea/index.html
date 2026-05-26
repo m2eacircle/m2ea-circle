@@ -9,6 +9,8 @@
   <meta name="theme-color" content="#ff2d78">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Hidden K-Drama Stories">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <style>
     /* ── K-Drama card accent colours ────────────────────── */
     .show-card[data-drama="guardian"]       { --card-accent: #7c5cbf; }
@@ -148,11 +150,17 @@
 <!-- ── TOPBAR ──────────────────────────────────────────────── -->
 <header class="topbar">
   <div class="topbar-left">
-    <button class="btn-topbar-home" onclick="window.location.reload()" title="Home">🏠</button>
+    <button class="btn-topbar-home" onclick="window.location.reload()" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="22" height="22" aria-label="Home">
+  <circle cx="50" cy="50" r="49" fill="white" stroke="#ccc" stroke-width="1"/>
+  <path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>
+  <path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>
+  <circle cx="50" cy="30" r="10" fill="#CD2E3A"/>
+  <circle cx="50" cy="70" r="10" fill="#003478"/>
+</svg></button>
     <div class="topbar-logo">
-      <span class="logo-live">Hidden</span>
+      <span class="logo-live">K-Drama</span>
       <div class="logo-dot"></div>
-      <span class="logo-korea">K-Drama Stories</span>
+      <span class="logo-korea">Trivia</span>
     </div>
   </div>
   <div class="topbar-right" id="topbar-lang-wrap">
@@ -655,6 +663,167 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+</script>
+
+<script>
+/* ── Service Worker registration ─────────────────────── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+
+/* ── Install Popup ────────────────────────────────────── */
+(function() {
+  var DISMISS_KEY = 'lk_install_dismissed';
+  var SHOW_DELAY  = 5000;
+
+  var i18n = {
+    en: {
+      title:    'Hidden K-Drama Stories',
+      sub:      'Add to Home Screen',
+      body:     'Install this app for instant access — no App Store needed.',
+      ios1:     '① Tap the <strong>Share</strong> button <span style="font-size:1.1em">⬆</span> in Safari',
+      ios2:     '② Select <strong>"Add to Home Screen"</strong>',
+      ios3:     '③ Tap <strong>"Add"</strong> — done!',
+      install:  'Install App',
+      later:    'Not now'
+    },
+    ko: {
+      title:    '히든 K-드라마 스토리',
+      sub:      '홈 화면에 추가',
+      body:     '앱처럼 빠르게 실행하세요 — 앱 스토어 없이 바로 설치!',
+      ios1:     '① Safari 하단 <strong>공유</strong> 버튼 <span style="font-size:1.1em">⬆</span> 탭',
+      ios2:     '② <strong>"홈 화면에 추가"</strong> 선택',
+      ios3:     '③ <strong>"추가"</strong> 탭 — 완료!',
+      install:  '앱 설치',
+      later:    '나중에'
+    }
+  };
+
+  function isIos()        { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+  function isSafariBrowser() { return /safari/i.test(navigator.userAgent) && !/chrome|crios|fxios/i.test(navigator.userAgent); }
+  function isStandalone() { return navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches; }
+  function wasDismissed() { try { return !!localStorage.getItem(DISMISS_KEY); } catch(e) { return false; } }
+  function setDismissed() { try { localStorage.setItem(DISMISS_KEY, '1'); } catch(e) {} }
+
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  function taegeukSVG() {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="44" height="44">'
+      + '<rect width="100" height="100" rx="22" fill="#1a0a12"/>'
+      + '<circle cx="50" cy="50" r="34" fill="none"/>'
+      + '<path d="M50,16 A34,34 0 0,1 50,84 A17,17 0 0,1 50,50 A17,17 0 0,0 50,16 Z" fill="#CD2E3A"/>'
+      + '<path d="M50,16 A34,34 0 0,0 50,84 A17,17 0 0,0 50,50 A17,17 0 0,1 50,16 Z" fill="#003478"/>'
+      + '<circle cx="50" cy="25.5" r="8.5" fill="#CD2E3A"/>'
+      + '<circle cx="50" cy="74.5" r="8.5" fill="#003478"/>'
+      + '</svg>';
+  }
+
+  function showPopup() {
+    var lang = (typeof getLang === 'function') ? getLang() : 'en';
+    var t    = i18n[lang] || i18n.en;
+    var ios  = isIos();
+
+    var el = document.createElement('div');
+    el.id  = 'lkInstallPopup';
+    el.style.cssText = [
+      'position:fixed','bottom:20px','left:50%',
+      'transform:translateX(-50%) translateY(140px)',
+      'width:min(400px,calc(100vw - 28px))',
+      'background:var(--card)','border:1.5px solid var(--border)',
+      'border-radius:18px',
+      'box-shadow:0 8px 40px rgba(0,0,0,0.22),0 2px 8px rgba(0,0,0,0.12)',
+      'padding:20px','z-index:9999',
+      'transition:transform 0.42s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s',
+      'opacity:0','font-family:inherit'
+    ].join(';');
+
+    var stepsHtml = ios ? (
+      '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;'
+      + 'padding:12px 14px;margin-bottom:16px;font-size:0.82rem;color:var(--text);line-height:2;">'
+      + '<div>' + t.ios1 + '</div>'
+      + '<div>' + t.ios2 + '</div>'
+      + '<div>' + t.ios3 + '</div>'
+      + '</div>'
+    ) : '';
+
+    var primaryBtn = ios
+      ? '<button id="lkInstallOk" style="flex:1;padding:10px 0;border-radius:10px;border:none;'
+        + 'background:linear-gradient(135deg,var(--accent),#d91a60);color:#fff;'
+        + 'font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">✓ Got it</button>'
+      : '<button id="lkInstallOk" style="flex:1;padding:10px 0;border-radius:10px;border:none;'
+        + 'background:linear-gradient(135deg,var(--accent),#d91a60);color:#fff;'
+        + 'font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">' + t.install + '</button>';
+
+    el.innerHTML =
+      '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">'
+      +   taegeukSVG()
+      +   '<div style="flex:1;min-width:0;">'
+      +     '<div style="font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--text);line-height:1.2;">' + t.title + '</div>'
+      +     '<div style="font-size:0.76rem;color:var(--muted);margin-top:2px;">' + t.sub + '</div>'
+      +   '</div>'
+      +   '<button id="lkInstallX" style="background:none;border:none;cursor:pointer;color:var(--muted);'
+      +     'font-size:1.4rem;line-height:1;padding:4px 6px;border-radius:6px;">&times;</button>'
+      + '</div>'
+      + '<div style="font-size:0.84rem;color:var(--muted);line-height:1.65;margin-bottom:14px;">' + t.body + '</div>'
+      + stepsHtml
+      + '<div style="display:flex;gap:10px;">'
+      +   '<button id="lkInstallLater" style="flex:1;padding:10px 0;border-radius:10px;'
+      +     'background:var(--card2);color:var(--muted);border:1px solid var(--border);'
+      +     'font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;">' + t.later + '</button>'
+      +   primaryBtn
+      + '</div>';
+
+    document.body.appendChild(el);
+
+    /* animate in */
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      el.style.transform  = 'translateX(-50%) translateY(0)';
+      el.style.opacity    = '1';
+    }); });
+
+    function hide(dismiss) {
+      el.style.transform = 'translateX(-50%) translateY(140px)';
+      el.style.opacity   = '0';
+      if (dismiss) setDismissed();
+      setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 500);
+    }
+
+    document.getElementById('lkInstallX').onclick     = function() { hide(true); };
+    document.getElementById('lkInstallLater').onclick  = function() { hide(true); };
+    document.getElementById('lkInstallOk').onclick     = function() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function() { hide(true); });
+      } else {
+        hide(true);
+      }
+    };
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    if (isStandalone()) return;          /* already installed */
+    if (wasDismissed()) return;          /* user dismissed before */
+    if (isIos() && !isSafariBrowser()) return;  /* iOS but not Safari — can't install */
+
+    /* Wait for terms agreement AND delay before showing */
+    setTimeout(function() {
+      if (isIos() || deferredPrompt) {
+        showPopup();
+      } else {
+        /* Android/Chrome: wait for beforeinstallprompt if not yet fired */
+        window.addEventListener('beforeinstallprompt', function() {
+          showPopup();
+        }, { once: true });
+      }
+    }, SHOW_DELAY);
+  });
+})();
 </script>
 </body>
 </html>

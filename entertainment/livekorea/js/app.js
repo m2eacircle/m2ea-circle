@@ -296,7 +296,7 @@ function buildTopbar(homeUrl) {
   root.innerHTML =
     '<div class="topbar-left">'
     + '<button class="btn-topbar-home" onclick="window.location.href=\'' + (homeUrl||'index.html') + '\'" title="Home" aria-label="Home">🏠</button>'
-    + '<div class="topbar-logo"><span class="logo-live">Hidden</span><div class="logo-dot"></div><span class="logo-korea">K-Drama Stories</span></div>'
+    + '<div class="topbar-logo"><span class="logo-live">K-Drama</span><div class="logo-dot"></div><span class="logo-korea">Trivia</span></div>'
     + '</div>'
     + '<div class="topbar-right">'
     + buildLangToggle()
