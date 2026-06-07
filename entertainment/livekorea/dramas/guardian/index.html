@@ -70,9 +70,21 @@
       background: var(--card2); color: var(--muted);
       border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
     }
-    @media (max-width: 500px) {
-      .story-thumb { width: 80px; min-width: 80px; }
-      .story-thumb img { width: 80px; }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
     }
   </style>
 </head>
