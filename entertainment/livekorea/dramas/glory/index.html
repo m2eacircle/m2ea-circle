@@ -13,31 +13,79 @@
     }
     .drama-info-card .di-label {
       font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
-    .drama-info-card .di-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-    .di-tag {
-      background: var(--card2); border: 1px solid var(--border); border-radius: 20px;
-      padding: 3px 12px; font-size: 0.74rem; font-weight: 600; color: var(--muted);
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .di-tag.accent { background: rgba(232,36,92,0.08); border-color: rgba(232,36,92,0.25); color: var(--accent); }
-    .coming-soon-bar {
-      background: rgba(232,36,92,0.07);
-      border: 1.5px solid rgba(232,36,92,0.2);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      text-align: center;
-      margin-bottom: 24px;
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .coming-soon-bar .cs-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
-      border-radius: 20px; padding: 5px 18px;
-      font-size: 0.75rem; font-weight: 700; color: var(--accent);
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
     }
-    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -81,39 +129,333 @@
     </div>
     <div class="page-header-info">
       <div class="page-header-title" id="hdr-title">The Glory</div>
-      <div class="page-header-meta" id="hdr-meta">16 Episodes &middot; 2022&ndash;2023 &middot; Thriller Drama</div>
+      <div class="page-header-meta" id="hdr-meta">17 YouTube Shorts &middot; 2022&ndash;2023 &middot; Thriller Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-glory"
+          onclick="toggleBookmark('show','show-glory','&#127797; The Glory','dramas/glory/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Coming Soon notice — EN -->
-  <div class="coming-soon-bar" id="cs-en" data-lang-en>
-    <div class="cs-badge">&#128679; Coming Soon</div>
-    <p>We are currently preparing study content for <strong>The Glory</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
-  </div>
-
-  <!-- Coming Soon notice — KO -->
-  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
-    <div class="cs-badge">&#128679; 준비중</div>
-    <p><strong>더 글로리</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
-  </div>
-
-  <!-- EN description -->
   <div class="drama-info-card" id="desc-en" data-lang-en>
     <div class="di-label">&#127916; About This Drama</div>
     <div class="di-desc">
-      <strong>The Glory</strong> is a 2022&ndash;2023 Netflix Korean thriller drama starring Song Hye-kyo and Lee Do-hyun. Moon Dong-eun (Song Hye-kyo) suffered severe school bullying and violence as a teenager. After years of meticulous planning, she returns as an adult — as the homeroom teacher of her tormentor's child — to execute her long-awaited revenge.<br><br>
+      <strong>The Glory</strong> is a 2022&ndash;2023 Netflix Korean thriller drama starring Song Hye-kyo and Lee Do-hyun. Moon Dong-eun (Song Hye-kyo) suffered severe school bullying and violence as a teenager. After years of meticulous planning, she returns as an adult &mdash; as the homeroom teacher of her tormentor's child &mdash; to execute her long-awaited revenge.<br><br>
       The drama is praised for its sharp screenplay, Song Hye-kyo's powerful transformation, and its unflinching portrayal of the lasting damage caused by school violence. It became one of the most-watched Korean dramas on Netflix globally.
     </div>
-</div>
+  </div>
 
-  <!-- KO description -->
   <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
     <div class="di-label">&#127916; 드라마 소개</div>
     <div class="di-desc">
       <strong>더 글로리</strong>는 2022&ndash;2023년 넷플릭스에서 공개된 스릴러 드라마입니다. 송혜교와 이도현이 주연을 맡았으며, 학창 시절 심각한 학교 폭력을 당한 문동은(송혜교)이 수년간 치밀하게 계획을 세운 끝에 가해자의 자녀 담임 선생님으로 돌아와 복수를 실행하는 이야기입니다.<br><br>
       날카로운 각본, 송혜교의 강렬한 연기 변신, 학교 폭력의 상흔을 직시하는 묘사로 큰 호평을 받았습니다. 넷플릭스 역대 한국 드라마 중 가장 많이 시청된 작품 중 하나입니다.
     </div>
-</div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 17 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="Compared to Park Chan-wook's Lady Vengeance" onerror="this.style.display='none';this.parentElement.innerHTML='&#127916;';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 17</div>
+        <div class="story-title-en" data-lang-en>Fans Compared This Revenge Tale &mdash; and Its Poster &mdash; to Park Chan-wook's "Lady Vengeance"</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">이 복수극, 포스터까지 박찬욱의 〈친절한 금자씨〉를 닮았다</div>
+        <div class="story-body-en" data-lang-en>The story of a woman left with irreparable wounds by a past event who sets out for revenge &mdash; together with the overall premise and the way she is aided by various people she met in the past &mdash; led some viewers to think of Park Chan-wook's film "Lady Vengeance" (친절한 금자씨). In one of the posters, Song Hye-kyo's pose and expression also closely echo how Lee Young-ae's character Lee Geum-ja was portrayed almost like a saint on the "Lady Vengeance" poster.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">과거의 사건 때문에 씻을 수 없는 상처를 입은 한 여성의 복수극이라는 이야기와 전체적인 설정과 과거 만났던 여러 인물들의 조력을 받는다는 점에서 박찬욱의 영화 〈친절한 금자씨〉가 떠오른다는 의견이 나온다. 위의 포스터 중 하나에서 송혜교가 취하고 있는 포즈와 표정도 친절한 금자씨의 포스터에서 이영애가 분한 이금자가 성녀처럼 표현된 것과 굉장히 유사하다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="A line of dialogue explained a real art-world tax-evasion scheme" onerror="this.style.display='none';this.parentElement.innerHTML='&#128176;';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 17</div>
+        <div class="story-title-en" data-lang-en>One Line of Dialogue Secretly Explained a Real Art-World Tax-Evasion Scheme</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">대사 한 마디로 설명된 그림을 이용한 탈세의 실제 수법</div>
+        <div class="story-body-en" data-lang-en>One of Lee Sa-ra's lines is, "There's a world of people paying comprehensive income tax that you &mdash; who only pay earned-income tax &mdash; know nothing about." It sounds like she's merely flaunting a "world of the rich," but it can actually be read as a tax-evasion method. The scheme: Jae-jun buys a painting under a corporate name, and Sa-ra returns the money &mdash; minus tax &mdash; in cash or through a nominee account. Her "shipping not included" remark means she can't take nothing at all, so she keeps the "shipping fee" as the painting's real price. Sa-ra appears to make no profit after expenses, but she actually raises both her own market value and the painting's price, then sells works to ordinary buyers at a price close to what Jae-jun paid. Many dramas mention "using art for tax evasion or slush funds" without explaining how &mdash; here a single line lays out the whole method.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">극중 이사라 대사 중 "근로소득세 내는 넌 모르는 이 종합소득세 내는 세계가 있단다." 라는 대사가 나온다. 얼핏 들으면 '재력을 과시하는 것, 소위 부자들의 세계가 있다.' 정도로 들리지만 탈세 등에 사용되는 방법으로 해석이 가능하다고 한다. 방법은 재준이 법인 명의로 그림을 구매하면 사라는 세금을 제하고 현금이나 차명 계좌로 돌려주는 방식이다. 배송비 별도라는 건 사라도 아예 안받을 순 없으니 배송비를 그림값으로 받겠다 라고 보면 된다. 이렇게 되면 경비를 제하고 돈을 돌려준 사라는 이익이 없는 것처럼 보이지만 오히려 그로 인해 몸값과 그림값을 올리고 일반인들에게는 재준이 구매해 준 가격과 비슷하게 측정해서 그림을 파는 식이다. '그림으로 탈세나 비자금을 만든다'라는 대사들은 여러 드라마에서 나오지만 정확한 방법에 대해서는 설명하지 않는데 대사 한 마디가 여러 가지를 설명해준 것이라고 볼 수 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="Real weather presenters reviewed Lim Ji-yeon's accuracy" onerror="this.style.display='none';this.parentElement.innerHTML='&#127780;';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 17</div>
+        <div class="story-title-en" data-lang-en>Real Weather Presenters Reviewed the Drama &mdash; and Praised Lim Ji-yeon's Accuracy</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">실제 기상캐스터들이 본 〈더 글로리〉, 임지연은 진짜 같았다</div>
+        <div class="story-body-en" data-lang-en>Former weather presenters Kim Ga-young and Ahn Hye-kyung weighed in on the drama's premise that someone else writes the forecast scripts for Park Yeon-jin (Lim Ji-yeon). In reality, they explained, everything from commissioning the CG to gathering material and writing the script falls on a single presenter &mdash; who sometimes even handles viewer-submitted photos, music, wardrobe and props. Even so, they praised Lim Ji-yeon's casting as perfect, saying she looked like a real weather presenter.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">기상캐스터 출신인 김가영과 안혜경은 '더 글로리'에서 임지연이 연기한 박연진의 기상캐스터 원고를 다른 이가 대신 써준다는 설정에 대해, 실제로는 CG 의뢰부터 취재와 원고 작성까지는 오롯이 캐스터 한 명의 몫이며 때로는 제보 사진, 음악과 의상, 소품까지도 해결해야할 때도 있다라고 설명하면서도, 임지연의 캐스팅이 완벽해서 진짜 기상캐스터 같다고 칭찬을 했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="Why the writer chose an adults-only rating" onerror="this.style.display='none';this.parentElement.innerHTML='&#9878;';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 17</div>
+        <div class="story-title-en" data-lang-en>Why the Writer Deliberately Chose an Adults-Only Rating</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">김은숙 작가가 일부러 청소년 관람불가를 택한 이유</div>
+        <div class="story-body-en" data-lang-en>At the production press conference, writer Kim Eun-sook addressed the adults-only rating: "Beyond the violence, Dong-eun's revenge is carried out through private retribution, not the justice system. Because I don't condone private retribution, I couldn't depict it lightly, so I chose the adults-only rating," adding, "I hope adults will watch and judge for themselves." Apart from Son Myeong-o, the perpetrators' wealth, power and social standing far outstripped ordinary people's, so the protagonist knew from the start that ordinary force or the law had limits &mdash; and seems to have set her ultimate goal as "social death," making it impossible for them to live openly for the rest of their lives. Cutting a few more scenes might have allowed a 15+ rating, but the writer appears never to have considered one.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">김은숙 작가는 제작발표회에서 청소년 관람불가 등급을 받게 된 부분에 대해 "폭력성도 폭력성이지만 작중 동은의 복수는 사법체계의 도움이 아닌, 사적제재에 의해 이뤄진다. 나는 사적제재를 옹호하지 않는 입장이기에 이에 대한 묘사를 가볍게 할 수 없어서 청소년 관람불가 등급을 선택한 것"이라 밝히면서 "성인 분들께선 보시고 옳은 판단을 주셨으면 좋겠다"라고 첨언했다. 손명오를 제외하면 가해자들의 재력과 권력, 사회적인 입지가 일반인들에 비해 압도적이었기 때문에 주인공은 일반적인 무력이나 법으로 심판하는 것은 한계가 있음을 처음부터 인지하고 있었고, 주인공은 최종 목표를 '사회적 죽음'(남은 평생을 더 이상 떳떳하게 살 수 없도록 하는 것)으로 잡은 것으로 보인다. 몇몇 장면을 더 편집하면 15세도 가능할 수 있겠지만, 작가는 처음부터 15세 관람가를 고려하지 않은 것으로 보인다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="The violence was shown at maximum intensity on purpose" onerror="this.style.display='none';this.parentElement.innerHTML='&#127909;';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 17</div>
+        <div class="story-title-en" data-lang-en>The Brutal Violence Was Shown at "Maximum Intensity" &mdash; On Purpose</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">잔혹한 폭력을 '최대치'로 보여준 건 의도된 연출이었다</div>
+        <div class="story-body-en" data-lang-en>Kim Eun-sook knew that the more intense the violence, the higher the barrier to entry, so after much deliberation with the director she decided to show it at the maximum possible level &mdash; because the story could only move forward if viewers vicariously felt the victims' pain and shared their outrage. More importantly, it was about showing the painful reality of exactly what suffering the perpetrators wanted their victims to endure, so they chose not to turn the camera away or leave it to sound alone.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">김은숙 작가는 폭력의 수위가 높을수록 진입 장벽이 높아진다는 것을 알았기에 감독과 함께 고민을 많이 하다가 가능한 최대치의 수위로 보여주기로 결정했는데, 피해자들의 고통을 시청자들이 대리로나마 느끼며 함께 분통해야 이후 이야기가 진행될 수 있기 때문이었다. 더 중요했던 것은 가해자들이 피해자가 어떤 고통을 받기를 원하는지 괴롭지만 현실을 보여주는 것이라서 카메라를 돌리지 않고, 소리로만 짐작하지 않게 했다고 한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="The title echoes a hotel from Mr. Sunshine" onerror="this.style.display='none';this.parentElement.innerHTML='&#127976;';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 17</div>
+        <div class="story-title-en" data-lang-en>The Title Echoes a Hotel From the Writer's Earlier Drama "Mr. Sunshine"</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">제목은 김은숙의 전작 〈미스터 션샤인〉 속 호텔 이름과 닮았다</div>
+        <div class="story-body-en" data-lang-en>In Kim Eun-sook's earlier work "Mr. Sunshine," the name of a hotel owned by one of the lead characters is strikingly similar to the title of this drama.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">김은숙의 전작 〈미스터 션샤인〉에서 주연 중 한 명이 소유한 호텔 이름과 드라마 제목이 유사하다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="The dark material left even the cast and writer drained" onerror="this.style.display='none';this.parentElement.innerHTML='&#127917;';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 17</div>
+        <div class="story-title-en" data-lang-en>The Dark Material Left Even the Cast &mdash; and the Writer &mdash; Shaken</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">무거운 소재에 배우도 작가도 힘들어했다</div>
+        <div class="story-body-en" data-lang-en>The actors all gave outstanding performances, but the heavy subject matter took a physical and mental toll on many of them. Shin Ye-eun, who played young Park Yeon-jin, said that even knowing it was acting she momentarily thought "What am I doing?", and that the hair-iron scene gave her trauma severe enough to cause nightmares. Kim Hieora (Lee Sa-ra) stayed so on edge even after filming wrapped that she told Lim Ji-yeon they should avoid such roles for a while. Even Kim Eun-sook wasn't exempt &mdash; she said switching from bright scenes to dark ones left her feeling drained. Park Yoon-hee, who played Kim Jong-moon, admitted to ruining several takes, and said in an interview, "It's bitter that, because of some unconscionable teachers, students have nowhere to turn for help from school violence," noting he'd met such corrupt teachers many times. (Born in 1967, his school days fell in the 1970s&ndash;80s, when corporal punishment was taken for granted &mdash; which says it all.)</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">배우들이 다들 뛰어난 연기력을 보여줬지만 드라마의 주제가 주제다 보니 상당수의 배우들이 육체적 및 정신적으로 힘들어하는 모습을 보였다. 어린 박연진 역을 맡은 신예은은 연기인 걸 알면서도 순간 '나 뭐하는 거지?'라는 생각을 했다고 했으며 고데기 장면을 촬영했을때 악몽까지 꿨을 정도로 트라우마가 심했다고 밝혔다. 이사라 역의 김히어라는 촬영이 끝나고도 예민하고 날카로워져서, 박연진 역의 임지연에게 당분간은 이런 역할 하지 말자고 말했다고 한다. 심지어 이 작품을 쓴 김은숙도 예외가 아니었는데, 계속 밝은 씬을 쓰다가 어두운 씬을 쓰면 뭔가 피폐해진 느낌이 든다고 한다. 김종문 역을 맡은 박윤희는 촬영을 하면서 여러 번 NG를 낸 적이 있다고 직접 언급했으며 인터뷰에서는 "일부 몰지각한 교사들로 인해 학생들이 학교폭력으로부터 도움을 청할 곳이 없는 현실이 씁쓸하다."고 말했으며 본인도 이런 부패교사를 여러 번 만난 적이 있다고 했다. 참고로, 박윤희는 1967년생으로 그가 학창시절을 보냈던 시기가 1970~1980년대였고, 그때는 체벌이 당연시되었던 시기였으니 말 다했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="The child actors look uncannily like their adult counterparts" onerror="this.style.display='none';this.parentElement.innerHTML='&#128103;';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 17</div>
+        <div class="story-title-en" data-lang-en>The Child Actors Look Uncannily Like Their Adult Counterparts</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">아역과 성인 배우의 싱크로율이 소름 돋는다</div>
+        <div class="story-body-en" data-lang-en>The resemblance between the adult actors and the child actors who played their younger selves is remarkably high. The pairs singled out as looking especially alike are Bae Kang-hee and Kim Hieora as Lee Sa-ra, and Ahn So-yo and Lee Seo-young as Kim Gyeong-ran.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">성인 역 배우들과 아역 배우들의 싱크로율이 매우 높다. 그 중에서도 매우 닮았다고 평가받는 건 이사라 역의 배강희와 김히어라, 김경란 역의 안소요와 이서영.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep9.jpg" alt="Song Hye-kyo's first Netflix original and a reunion" onerror="this.style.display='none';this.parentElement.innerHTML='&#11088;';">
+        <span class="story-num-badge">#9</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 9 / 17</div>
+        <div class="story-title-en" data-lang-en>Song Hye-kyo's First Netflix Original &mdash; and a Reunion 6 Years in the Making</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">송혜교의 첫 넷플릭스 오리지널, 그리고 6년 만의 재회</div>
+        <div class="story-body-en" data-lang-en>Song Hye-kyo reunites with writer Kim Eun-sook for the first time in about six years and eight months since 2016's "Descendants of the Sun," and makes her first-ever appearance in a Netflix original drama.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">송혜교는 김은숙과 2016년 〈태양의 후예〉 이후 약 6년 8개월 만에 재회하며, 처음으로 넷플릭스 오리지널 드라마에 출연한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep10.jpg" alt="Her first revenge drama after a rare flop" onerror="this.style.display='none';this.parentElement.innerHTML='&#128481;';">
+        <span class="story-num-badge">#10</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 10 / 17</div>
+        <div class="story-title-en" data-lang-en>Expectations Were Low &mdash; Her First Revenge Drama After a Rare Flop</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">로맨스의 대가가 처음 쓴 복수극, 공개 전 기대치는 낮았다</div>
+        <div class="story-body-en" data-lang-en>This is the first work Kim Eun-sook wrote after the failure of "The King: Eternal Monarch" &mdash; following six consecutive smash hits since "Secret Garden" (2010) &mdash; and the first revenge drama from a writer who had specialized in romantic comedy. As a result, right up until release, expectations were unusually low for a Kim Eun-sook project.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">시크릿 가든(2010)의 흥행 이후 6연속 대흥행을 기록하던 김은숙 작가가 〈더 킹 : 영원의 군주〉의 실패 이후 처음으로 집필하는 작품이자, 로맨스 코미디 장르에 특화되어 있던 김은숙 작가가 집필하는 첫 복수극이다. 이에 따라 공개 전까지만 해도 김은숙 작품 치고는 기대치가 상당히 낮은 작품이었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep11.jpg" alt="A plot detail that doesn't add up about co-ed classmates" onerror="this.style.display='none';this.parentElement.innerHTML='&#127979;';">
+        <span class="story-num-badge">#11</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 11 / 17</div>
+        <div class="story-title-en" data-lang-en>A Plot Detail That Doesn't Quite Add Up: Co-Ed Classmates That Couldn't Exist</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">설정 오류? 그 시절엔 없었던 남녀공학 동창</div>
+        <div class="story-body-en" data-lang-en>Shin Yeong-jun and Kim Jong-moon are described as Hong Yeong-ae's middle-school classmates. But when Hong Yeong-ae was a teenager, co-ed schools effectively didn't exist in Korea. Her exact birth year is unknown, but inferring from her daughter Park Yeon-jin being born in 1987, the premise that she had male classmates she knew as a teen doesn't quite hold up. Neighborhood friends, perhaps&hellip;</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">신영준, 김종문은 홍영애의 중학교 동창이다. 그러나 홍영애가 청소년이었을 시절에는 대한민국에 남녀공학이 없다고 보면 된다. 홍영애가 정확히 몇년생인지는 알 수 없으나 자녀인 박연진이 87년생인것으로 유추했을 때 홍영애에게 청소년 시절에 알던 남자 동창이 있다는 설정은 맞지 않다. 동네 친구면 모를까…</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep12.jpg" alt="These two co-starred in Beyond Evil but never share a scene here" onerror="this.style.display='none';this.parentElement.innerHTML='&#128121;';">
+        <span class="story-num-badge">#12</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 12 / 17</div>
+        <div class="story-title-en" data-lang-en>These Two Co-Starred in "Beyond Evil" &mdash; But Never Share a Scene Here</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈괴물〉에 함께 나왔던 두 배우, 〈더 글로리〉에선 접점이 없다</div>
+        <div class="story-body-en" data-lang-en>Lee Do-hyun and Kim Hieora previously appeared together in the drama "Beyond Evil." Unlike in that show, however, they have no direct interaction in The Glory.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이도현과 김히어라는 드라마 〈괴물〉 에 함께 출연했었다. 그러나 괴물에서와 달리, 더 글로리에서는 직접적인 접점은 없다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep13.jpg" alt="A hidden Sweet Home Easter egg" onerror="this.style.display='none';this.parentElement.innerHTML='&#127968;';">
+        <span class="story-num-badge">#13</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 13 / 17</div>
+        <div class="story-title-en" data-lang-en>A Hidden "Sweet Home" Easter Egg Nods to Lee Do-hyun's Last Netflix Role</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">극 중 러그에 숨겨진 'Sweet Home' 이스터에그</div>
+        <div class="story-body-en" data-lang-en>Lee Do-hyun appears in a Netflix original drama for the first time in two years since "Sweet Home." And as an Easter egg, the phrase "Sweet Home" appears on a rug within the show.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이도현은 〈스위트홈〉 이후 2년 만에 넷플릭스 오리지널 드라마에 출연한다. 그리고 극중 러그에 Sweet home 이라는 문구가 이스터에그로 등장한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep14.jpg" alt="The church daughter character sparked backlash and soul-searching" onerror="this.style.display='none';this.parentElement.innerHTML='&#9962;';">
+        <span class="story-num-badge">#14</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 14 / 17</div>
+        <div class="story-title-en" data-lang-en>The "Church Daughter" Character Sparked Backlash &mdash; and Soul-Searching</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">'교회 딸' 캐릭터를 둘러싼 논란과 자성의 목소리</div>
+        <div class="story-body-en" data-lang-en>The "church daughter" character Lee Sa-ra drew thinly veiled displeasure from Protestant media and figures (pastors, professors). They criticized her line, "I've already repented to God and been forgiven," as an ignorant, inaccurate depiction of Christian sentiment, and objected to the church being used as one of the codes accompanying school violence. The public often responded cynically &mdash; that the critics had no intention of fixing past wrongs and were merely blaming the drama, worrying first about the church's image and evangelism. Conversely, other Protestant figures and churches voiced self-reflection, saying the faith should examine its current standing to correct such perceptions; and since Kim Eun-sook portrayed Protestantism positively in "Mr. Sunshine," this appears to be an in-story depiction rather than a reflection of her personal views.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이사라라는 '교회 딸' 캐릭터의 존재를 두고 개신교 언론사와 개신교 관련 인사 (목사, 교수 등)들은 에둘러 불쾌한 심기를 드러냈다. 또한 이사라의 작중 대사인 "나는 이미 하나님한테 회개하고 용서받았어"라는 대사를 두고 기독교 정서를 알지 못하고 잘못된 묘사를 했다고 비난하였으며, 학교폭력을 사용하는 코드의 하나로 꼭 교회를 사용해야 했느냐며 불쾌함을 드러냈다. 그러나 대중들은 이런 반응에 대해서 "본인들 지금까지 잘못해 온 거 고칠 생각은 없고 드라마 탓만 하면서 드라마 때문에 교회 이미지 나빠져서 전도 안 될까 그 걱정부터 먼저 하고 있네?" 라는 냉소적인 반응도 많다. 이와 반대로 다른 개신교 인사나 교회에서는 이런 개신교에 대한 국민적 인식을 바로잡기 위해서 현재 개신교의 위치를 반성해야한다고 자성의 목소리도 나오며 실제로 김은숙 작가는 전작 미스터 션샤인에서는 개신교를 긍정적 묘사하였기 때문에 극중 묘사일 뿐 김은숙 작가의 개신교에 대한 생각을 반영하지 않는 것으로 보인다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep15.jpg" alt="Lim Ji-yeon's first-ever villain and a reunion 8 years later" onerror="this.style.display='none';this.parentElement.innerHTML='&#128520;';">
+        <span class="story-num-badge">#15</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 15 / 17</div>
+        <div class="story-title-en" data-lang-en>Lim Ji-yeon's First-Ever Villain &mdash; and a Reunion 8 Years Later</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">임지연의 첫 악역, 그리고 8년 만의 모녀 재회</div>
+        <div class="story-body-en" data-lang-en>Lim Ji-yeon appears in a Netflix original drama in consecutive months, following Part 2 of "Money Heist: Korea &mdash; Joint Economic Area," and takes on a villain role for the first time. She also reunites with Son Ji-na for the first time in about eight years since "Obsessed," playing a mother-daughter pair together for the second time.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">임지연은 〈종이의 집: 공동경제구역〉 파트 2에 이어 같은 달에 연이어 넷플릭스 오리지널 드라마에 출연하며, 처음으로 악역에 도전한다. 또한, 손지나와 〈인간중독〉 이후 약 8년 만에 재회하며, 두 번째로 모녀 사이로 협업한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep16.jpg" alt="Nearly every car onscreen is a Genesis" onerror="this.style.display='none';this.parentElement.innerHTML='&#128663;';">
+        <span class="story-num-badge">#16</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 16 / 17</div>
+        <div class="story-title-en" data-lang-en>Spot the Sponsor: Nearly Every Car Onscreen Is a Genesis</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">협찬의 흔적 &mdash; 쏘나타 빼곤 전부 제네시스다</div>
+        <div class="story-body-en" data-lang-en>For the cars, Hyundai Motor was confirmed as a sponsor, and the Hyundai Sonata, G90, G80, GV60 and others appear in the show. Apart from the Sonata, they're all Genesis models.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">자동차의 경우, 현대자동차의 협찬을 한 것으로 확인되었으며, 현대 쏘나타, G90, G80, GV60 등이 작중에서 등장한다. 쏘나타를 제외하면 모두 제네시스다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep17.jpg" alt="Off-camera, the vicious rivals are actually close friends" onerror="this.style.display='none';this.parentElement.innerHTML='&#128247;';">
+        <span class="story-num-badge">#17</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 17 / 17</div>
+        <div class="story-title-en" data-lang-en>Off-Camera, the Vicious Rivals Are Actually Close Friends</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">살벌한 극과 달리, 실제론 둘도 없이 친한 배우들</div>
+        <div class="story-body-en" data-lang-en>Onscreen they're desperate to tear each other apart &mdash; cruel and frightening &mdash; but in reality the actors apparently grew very close while filming, with "over-immersion antidote" photos frequently popping up on their social media. Behind-the-scenes videos posted on YouTube also show everyone warmly looking out for one another on set. Unlike the show's chilling atmosphere, the cast became great friends, and their bright off-camera moments help break the over-immersion.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">작품 안에서는 서로가 서로를 못 잡아먹어 안달이고, 잔혹하고 무서운 모습을 보여주지만 실제로는 촬영하면서 매우 친해진 것인지 배우들의 SNS에 소위 과몰입 방지짤이 자주 올라오고 있다. 유튜브에도 촬영중 영상이 올라왔는데, 다들 촬영장에서 훈훈하게 서로 배려하는 모습이다. 드라마 속의 살벌한 분위기와는 다르게 배우들끼리 많이 친해지고 비하인드에서는 밝은 모습을 보여줘서 과몰입을 방지해준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  </div>
 
 </div>
 </main>
@@ -125,26 +467,35 @@
 
 <script src="../../js/app.js"></script>
 <script>
-
   function goHome() { window.location.href = '../../index.html'; }
 
   function applyPageLang() {
     var isKo = getLang() === 'ko';
     document.documentElement.lang = isKo ? 'ko' : 'en';
-    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
-    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
-    document.getElementById('bc-drama').textContent  = isKo ? '더 글로리' : 'The Glory';
-    document.getElementById('hdr-title').textContent = isKo ? '더 글로리' : 'The Glory';
-    document.getElementById('hdr-meta').textContent  = isKo ? '16화 · 2022–2023 · 스릴러 드라마' : '16 Episodes · 2022–2023 · Thriller Drama';
+    document.getElementById('nav-home').textContent     = isKo ? '홈' : 'Home';
+    document.getElementById('nav-back').textContent     = isKo ? '뒤로' : 'Back';
+    document.getElementById('bc-drama').textContent     = isKo ? '더 글로리' : 'The Glory';
+    document.getElementById('hdr-title').textContent    = isKo ? '더 글로리' : 'The Glory';
+    document.getElementById('hdr-meta').textContent     = isKo ? '유튜브 쇼츠 17개 · 2022–2023 · 스릴러 드라마' : '17 YouTube Shorts · 2022–2023 · Thriller Drama';
+    document.getElementById('bm-label').textContent     = isKo ? '저장' : 'Bookmark';
+    document.getElementById('bm-bar-title').textContent = isKo ? '북마크' : 'Your Bookmarks';
+    document.getElementById('shorts-label').innerHTML   = isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 17개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 17 Stories';
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
     injectTermsModal();
     document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
     applyPageLang();
     applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
   });
-
 </script>
 </body>
 </html>
