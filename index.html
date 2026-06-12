@@ -1,154 +1,725 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>m2ea Circle — Product Portal</title>
-    <link rel="canonical" href="https://www.m2eacircle.com/">
-    <link rel="alternate" hreflang="en" href="https://www.m2eacircle.com/">
-    <link rel="alternate" hreflang="fr" href="https://www.m2eacircle.com/index_fr.html">
-    <link rel="alternate" hreflang="ko" href="https://www.m2eacircle.com/index_ko.html">
-    <link rel="alternate" hreflang="x-default" href="https://www.m2eacircle.com/">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hidden K-Drama Stories — Untold backstories, trivia &amp; secrets behind your favourite K-Dramas.">
+  <title>Hidden K-Drama Stories</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="theme-color" content="#ff2d78">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Hidden K-Drama Stories">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <style>
+    /* ── K-Drama card accent colours ────────────────────── */
+    .show-card[data-drama="guardian"]       { --card-accent: #7c5cbf; }
+    .show-card[data-drama="glory"]          { --card-accent: #b83232; }
+    .show-card[data-drama="tangerines"]     { --card-accent: #e97c2f; }
+    .show-card[data-drama="hospital-playlist"] { --card-accent: #3b82f6; }
+    .show-card[data-drama="reply-1988"]     { --card-accent: #d97706; }
+    .show-card[data-drama="my-mister"]      { --card-accent: #64748b; }
+    .show-card[data-drama="attorney-woo"]   { --card-accent: #0891b2; }
+    .show-card[data-drama="kingdom"]        { --card-accent: #7c3aed; }
+    .show-card[data-drama="itaewon-class"]  { --card-accent: #dc2626; }
+    .show-card[data-drama="squid-game"]     { --card-accent: #e11d48; }
+    .show-card[data-drama="mr-sunshine"]    { --card-accent: #b45309; }
+    .show-card[data-drama="prison-playbook"]{ --card-accent: #065f46; }
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5701429538019796"
-         crossorigin="anonymous">
-    </script>
+    .show-card[data-drama="guardian"]:hover       { border-color: #7c5cbf; box-shadow: 0 8px 32px rgba(124,92,191,0.3); }
+    .show-card[data-drama="glory"]:hover          { border-color: #b83232; box-shadow: 0 8px 32px rgba(184,50,50,0.3); }
+    .show-card[data-drama="tangerines"]:hover     { border-color: #e97c2f; box-shadow: 0 8px 32px rgba(233,124,47,0.3); }
+    .show-card[data-drama="hospital-playlist"]:hover { border-color: #3b82f6; box-shadow: 0 8px 32px rgba(59,130,246,0.3); }
+    .show-card[data-drama="reply-1988"]:hover     { border-color: #d97706; box-shadow: 0 8px 32px rgba(217,119,6,0.3); }
+    .show-card[data-drama="my-mister"]:hover      { border-color: #64748b; box-shadow: 0 8px 32px rgba(100,116,139,0.3); }
+    .show-card[data-drama="attorney-woo"]:hover   { border-color: #0891b2; box-shadow: 0 8px 32px rgba(8,145,178,0.3); }
+    .show-card[data-drama="kingdom"]:hover        { border-color: #7c3aed; box-shadow: 0 8px 32px rgba(124,58,237,0.3); }
+    .show-card[data-drama="itaewon-class"]:hover  { border-color: #dc2626; box-shadow: 0 8px 32px rgba(220,38,38,0.3); }
+    .show-card[data-drama="squid-game"]:hover     { border-color: #e11d48; box-shadow: 0 8px 32px rgba(225,29,72,0.3); }
+    .show-card[data-drama="mr-sunshine"]:hover    { border-color: #b45309; box-shadow: 0 8px 32px rgba(180,83,9,0.3); }
+    .show-card[data-drama="prison-playbook"]:hover{ border-color: #065f46; box-shadow: 0 8px 32px rgba(6,95,70,0.3); }
+
+    /* ── Show banner gradients ──────────────────────────── */
+    .guardian-banner        { background: linear-gradient(135deg, #ede9fe 0%, #c4b8e8 50%, #ddd6fe 100%); }
+    .glory-banner           { background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #fce7f3 100%); }
+    .tangerines-banner      { background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 50%, #fdba74 100%); }
+    .hospital-playlist-banner { background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 50%, #dbeafe 100%); }
+    .reply-1988-banner      { background: linear-gradient(135deg, #fffbeb 0%, #fde68a 50%, #fcd34d 100%); }
+    .my-mister-banner       { background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 50%, #e2e8f0 100%); }
+    .attorney-woo-banner    { background: linear-gradient(135deg, #ecfeff 0%, #a5f3fc 50%, #cffafe 100%); }
+    .kingdom-banner         { background: linear-gradient(135deg, #f5f3ff 0%, #ddd6fe 50%, #ede9fe 100%); }
+    .itaewon-class-banner   { background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 50%, #ffe4e6 100%); }
+    .squid-game-banner      { background: linear-gradient(135deg, #fff1f2 0%, #fda4af 50%, #fecdd3 100%); }
+    .mr-sunshine-banner     { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%); }
+    .prison-playbook-banner { background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 50%, #d1fae5 100%); }
+
+    .banner-emoji-large {
+      font-size: 5rem;
+      opacity: 0.5;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ── Stats strip ─────────────────────────────────────── */
+    .stats-strip {
+      display: flex;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+    .stat-item {
+      flex: 1;
+      padding: 16px 12px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 420px) {
+      .stat-num { font-size: 1.15rem; }
+      .stat-label { font-size: 0.65rem; }
+    }
+
+    /* ── How it works strip ──────────────────────────────── */
+    .how-strip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 36px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .how-step {
+      flex: 1;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .how-step-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .how-step-text { flex: 1; }
+    .how-step-title { font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .how-step-sub { font-size: 0.74rem; color: var(--muted); line-height: 1.4; }
+
+    /* ── Korean script hero decoration ──────────────────── */
+    .kr-decoration {
+      position: absolute;
+      right: 20px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(255,45,120,0.05);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 <body>
-    <nav id="navbar">
-        <a href="index.html" class="logo">m2ea <span>Circle</span></a>
-        <ul class="nav-links">
-            <li><a href="education/">Education</a></li>
-            <li><a href="entertainment/">Entertainment</a></li>
-            <li><a href="#contact">Contact</a></li>
+
+<!-- ── TOPBAR ──────────────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="btn-topbar-home" onclick="window.location.reload()" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="22" height="22" aria-label="Home">
+  <circle cx="50" cy="50" r="49" fill="white" stroke="#ccc" stroke-width="1"/>
+  <path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>
+  <path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>
+  <circle cx="50" cy="30" r="10" fill="#CD2E3A"/>
+  <circle cx="50" cy="70" r="10" fill="#003478"/>
+</svg></button>
+    <div class="topbar-logo">
+      <span class="logo-live">K-Drama</span>
+      <div class="logo-dot"></div>
+      <span class="logo-korea">Trivia</span>
+    </div>
+  </div>
+  <div class="topbar-right" id="topbar-lang-wrap">
+    <!-- Lang toggle injected by JS -->
+  </div>
+</header>
+
+
+<!-- =====================================================
+     TERMS OF USE OVERLAY
+====================================================== -->
+<div class="terms-overlay visible" id="termsOverlay">
+  <div class="terms-wrap">
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle" role="group" aria-label="Language / 언어 선택">
+      <button class="lang-btn" id="btn-en" onclick="setOverlayLang('en')" aria-pressed="false">
+        <span class="lang-flag">🇺🇸</span> EN
+      </button>
+      <button class="lang-btn active" id="btn-ko" onclick="setOverlayLang('ko')" aria-pressed="true">
+        <span class="lang-flag">🇰🇷</span> KO
+      </button>
+    </div>
+
+    <!-- ── ENGLISH TERMS ── -->
+    <div class="lang-content" id="content-en">
+      <div class="terms-hero">
+        <span class="terms-hero-icon">🎬</span>
+        <div class="terms-hero-title"><span class="accent">Live</span> Korean</div>
+        <div class="terms-hero-sub">by m2ea Labs &mdash; Please read and agree to our Terms of Use to continue</div>
+      </div>
+
+      <div class="terms-card">
+        <div class="terms-card-title">👋 Welcome</div>
+        <p>Welcome to <strong>Hidden K-Drama Stories</strong> — learn Korean the fun way through real YouTube Shorts from your favourite K-dramas. Each short connects to a natural Korean expression used in the show.</p>
+        <p>Please read the Terms of Use carefully before using the app.</p>
+      </div>
+
+      <div class="terms-card">
+        <div class="terms-card-title">📌 Terms of Use</div>
+        <ul class="terms-list">
+          <li>This app is for <strong>personal study purposes only</strong>. All video content rights belong to their respective copyright owners. If any rights holder requests removal, content may be taken down without prior notice.</li>
+          <li>You <strong>may not use this content for any commercial, redistribution, or other non-personal purpose</strong>. Use is strictly limited to personal Korean language study.</li>
+          <li>All study notes and language explanations <strong>may contain errors or inaccuracies</strong>. All content represents the opinion of <strong>m2ea Labs</strong>. If you disagree with any explanation, your interpretation may be correct — always use your own judgment.</li>
+          <li>YouTube Shorts embedded in this app <strong>may include ads served by YouTube</strong>. These are not controlled by m2ea Labs.</li>
         </ul>
-        <div class="lang-switcher">
-            <a href="index.html" class="lang-btn active">EN</a>
-            <span class="lang-divider">|</span>
-            <a href="index_ko.html" class="lang-btn">KO</a>
-        </div>
-        <button class="mobile-menu-btn" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
+      </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <p class="hero-tagline">m2ea Labs Product Portal</p>
-            <h1>Discover our <em>products</em> & applications</h1>
-            <p class="hero-description">Explore our collection of websites and mobile applications designed to support your learning and entertainment needs.</p>
-            <a href="#domains" class="hero-cta">
-                Browse Products
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-    </section>
+      <div class="terms-card">
+        <div class="terms-card-title">ℹ️ About Hidden K-Drama Stories</div>
+        <p>Hidden K-Drama Stories brings you the untold backstories, production secrets, and fascinating trivia behind the K-Dramas you love.</p>
+        <p>This app covers: <strong>Guardian: The Lonely and Great God</strong>, <strong>The Glory</strong>, and <strong>All of Us Are Dead</strong>. More dramas coming soon.</p>
+        <p>Operated by <strong>m2ea Labs</strong> as a language study project. All video content remains the property of its original owners.</p>
+      </div>
 
-    <section class="domains" id="domains">
-        <div class="section-header">
-            <span class="section-number">01</span>
-            <h2 class="section-title">Product Categories</h2>
-        </div>
-        
-        <div class="domains-grid">
-            <a href="education/" class="domain-card education fade-in">
-                <svg class="domain-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M4 18L24 8l20 10-20 10L4 18z"/>
-                    <path d="M10 21v12c0 0 6 5 14 5s14-5 14-5V21"/>
-                    <path d="M40 18v14"/>
-                </svg>
-                <h3>Education</h3>
-                <p>Test preparation tools, study companions, and certification prep applications to support your learning journey.</p>
-                <span class="domain-card-link">
-                    View Products
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </span>
-            </a>
+      <div class="terms-check-wrap" onclick="handleCheckClick('en', event)">
+        <input type="checkbox" id="agreeCheck-en" onchange="onCheckChange('en')" aria-label="Agree to Terms of Use">
+        <label for="agreeCheck-en">
+          I have read and fully agree to the <strong>Terms of Use</strong> above.
+          I understand this app is for personal study only and all video rights belong to their respective owners.
+        </label>
+      </div>
+      <button class="btn-agree" id="btnAgree-en" onclick="agreeAndEnter()" disabled aria-disabled="true">
+        Agree &amp; Start Learning ▶
+      </button>
+    </div><!-- /content-en -->
 
-            <a href="entertainment/" class="domain-card entertainment fade-in">
-                <svg class="domain-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <circle cx="24" cy="24" r="18"/>
-                    <path d="M20 16l12 8-12 8V16z"/>
-                </svg>
-                <h3>Entertainment</h3>
-                <p>Casual games, relaxation apps, and interactive experiences for fun and enjoyment.</p>
-                <span class="domain-card-link">
-                    View Products
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </span>
-            </a>
-        </div>
-    </section>
+    <!-- ── KOREAN TERMS ── -->
+    <div class="lang-content visible ko-text" id="content-ko">
+      <div class="terms-hero">
+        <span class="terms-hero-icon">🎬</span>
+        <div class="terms-hero-title"><span class="accent">Live</span> Korean</div>
+        <div class="terms-hero-sub">by m2ea Labs &mdash; 이용약관을 읽고 동의하신 후 앱을 사용하실 수 있습니다</div>
+      </div>
 
-    <section class="about" id="about">
-        <div class="about-inner">
-            <div class="section-header">
-                <span class="section-number">02</span>
-                <h2 class="section-title">About m2ea Circle</h2>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-left fade-in">
-                    <h2>Your gateway to <em>m2ea products</em></h2>
-                    <p>m2ea Circle is the official product portal for m2ea Labs.</p>
-                </div>
-                <div class="about-right fade-in">
-                    <p>This portal provides easy access to all our websites and mobile applications across <em>Education</em> and <em>Entertainment</em> categories.</p>
-                    <p>Each product is designed with the same philosophy that guides m2ea Labs: creating technology that genuinely improves daily life through thoughtful design and continuous innovation.</p>
-                    <p>Explore our products and find the tools that best support your needs.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="terms-card">
+        <div class="terms-card-title">👋 환영합니다</div>
+        <p><strong>Hidden K-Drama Stories</strong>에 오신 것을 환영합니다. 좋아하는 K-드라마의 YouTube 쇼츠를 통해 자연스러운 한국어 표현을 재미있게 배울 수 있습니다.</p>
+        <p>앱을 이용하시기 전에 아래 이용약관을 주의 깊게 읽어주시기 바랍니다.</p>
+      </div>
 
-    <section class="contact" id="contact">
-        <div class="contact-inner">
-            <div class="contact-text fade-in">
-                <h2>Questions about our <em>products</em>?</h2>
-            </div>
-            <div class="contact-info fade-in">
-                <div class="contact-item">
-                    <p class="contact-label">Email</p>
-                    <p class="contact-value"><a href="mailto:m2eacircle@gmail.com">m2eacircle@gmail.com</a></p>
-                </div>
-                <div class="contact-item">
-                    <p class="contact-label">Website</p>
-                    <p class="contact-value"><a href="https://m2ealabs.com" target="_blank">m2ealabs.com</a></p>
-                </div>
-                <div class="contact-item">
-                    <p class="contact-label">Product Portal</p>
-                    <p class="contact-value"><a href="https://m2eacircle.com" target="_blank">m2eacircle.com</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="terms-card">
+        <div class="terms-card-title">📌 이용약관</div>
+        <ul class="terms-list">
+          <li>이 앱은 <strong>개인 학습 목적으로만</strong> 사용 가능합니다. 모든 영상 콘텐츠의 저작권은 각 원저작자에게 있으며, 저작권자의 요청 시 <strong>예고 없이 콘텐츠가 삭제될 수 있습니다.</strong></li>
+          <li>이 콘텐츠는 <strong>상업적 이용, 재배포 및 기타 비개인적 목적으로 사용할 수 없습니다.</strong> 개인 한국어 학습 목적에 한해서만 이용 가능합니다.</li>
+          <li>모든 학습 내용과 언어 설명은 <strong>오류나 부정확한 정보를 포함할 수 있습니다.</strong> 모든 내용은 <strong>m2ea Labs의 의견</strong>입니다. 다른 해석이 있다면 여러분이 맞을 수 있습니다.</li>
+          <li>앱에 삽입된 YouTube 쇼츠에는 <strong>YouTube가 제공하는 광고가 포함될 수 있습니다.</strong> 이는 m2ea Labs와 무관합니다.</li>
+        </ul>
+      </div>
 
-    <footer>
-        <div class="footer-inner">
-            <p class="footer-copy">© 2025 m2ea Circle. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="privacy.html">Privacy Policy</a></li>
-                <li><a href="terms.html">Terms of Service</a></li>
-                <li><a href="education/">Education</a></li>
-                <li><a href="entertainment/">Entertainment</a></li>
-            </ul>
-        </div>
-    </footer>
+      <div class="terms-card">
+        <div class="terms-card-title">ℹ️ 앱 소개</div>
+        <p>Hidden K-Drama Stories는 여러분이 사랑하는 K-드라마 속 숨겨진 이야기와 제작 비화를 전합니다.</p>
+        <p>현재 제공 드라마: <strong>도깨비 (쓸쓸하고 찬란하神)</strong>, <strong>더 글로리</strong>, <strong>지금 우리 학교는</strong>. 더 많은 드라마가 추가될 예정입니다.</p>
+        <p>이 앱은 <strong>m2ea Labs</strong>에서 한국어 학습 프로젝트로 운영합니다. 모든 영상 콘텐츠의 저작권은 원저작자에게 있습니다.</p>
+      </div>
 
-    <script src="script.js"></script>
-    <script src="cookie-consent.js"></script>
+      <div class="terms-check-wrap" onclick="handleCheckClick('ko', event)">
+        <input type="checkbox" id="agreeCheck-ko" onchange="onCheckChange('ko')" aria-label="이용약관에 동의합니다">
+        <label for="agreeCheck-ko">
+          위의 <strong>이용약관</strong>을 모두 읽었으며 이에 동의합니다.
+          본 앱이 개인 학습 목적으로만 사용 가능하며, 모든 영상 저작권은 원저작자에게 있음을 이해합니다.
+        </label>
+      </div>
+      <button class="btn-agree" id="btnAgree-ko" onclick="agreeAndEnter()" disabled aria-disabled="true">
+        동의하고 학습 시작하기 ▶
+      </button>
+    </div><!-- /content-ko -->
+
+  </div><!-- /terms-wrap -->
+</div><!-- /termsOverlay -->
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+<main id="mainContent">
+<div class="page-wrap">
+
+  <!-- Home Hero -->
+  <div class="home-hero" style="position:relative;overflow:hidden;">
+    <div class="kr-decoration">한국어</div>
+    <div class="home-hero-eyebrow">✨ K-Drama Backstories &amp; Trivia</div>
+    <h1 data-i18n="home.hero.title">🎬 <span class="hero-accent">Hidden</span> K-Drama Stories</h1>
+    <p data-i18n="home.hero.sub">Untold backstories, behind-the-scenes secrets, and fascinating trivia from your favourite K-Dramas.</p>
+  </div>
+
+  <!-- Bookmark Bar -->
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span>🔖</span>
+      <span>Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <!-- Shows Grid -->
+  <div class="section-label" data-i18n="home.shows.label">📺 Dramas</div>
+  <!-- Shows Grid -->
+  <!-- Cards below are generated automatically by renderShowGrid() from the
+       LK_DRAMAS list defined in the script near the bottom of this file.
+       To activate / deactivate a drama, edit active:true/false there. -->
+  <div class="show-grid" id="show-grid"></div>
+
+</div><!-- /page-wrap -->
+</main><!-- /mainContent -->
+
+
+<!-- ── FOOTER ───────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-copy">© 2025 m2ea Labs. All rights reserved.</div>
+  <div><a class="footer-terms" href="terms.html">Terms of Use / 이용약관</a></div>
+</footer>
+
+
+<script src="js/app.js"></script>
+
+<!-- ============================================================
+     DRAMA LIST  —  EDIT HERE to manage the home page.
+
+       active: true   -> card is clickable and links to the drama page
+       active: false  -> card is greyed-out with a "Coming Soon" badge
+
+     The order in this list is the order shown on the page.
+     To add a drama: copy a line, set its id (must match the folder name
+     under /dramas/ and the banner image /images/<id>.jpg), and fill in
+     the titles. Optional fields per drama:
+       href      custom link            (default: dramas/<id>/index.html)
+       image     custom banner image    (default: images/<id>.jpg)
+       metaEn / metaKr   subtitle text  (coming-soon cards use a default line)
+       badgeEn / badgeKr corner badge on active cards (omit = no badge)
+     ============================================================ -->
+<script>
+var LK_DRAMAS = [
+  { id:'guardian',          active:true,  emoji:'🌊',
+    titleEn:'Guardian: The Lonely and Great God', titleKr:'쓸쓸하고 찬란하神 – 도깨비',
+    metaEn:'24 YouTube Shorts · Fantasy Romance', metaKr:'유튜브 쇼츠 24개 · 판타지 로맨스',
+    badgeEn:'🔥 Popular', badgeKr:'🔥 인기' },
+
+  { id:'glory',             active:true,  emoji:'🥀',
+    titleEn:'The Glory', titleKr:'더 글로리',
+    metaEn:'17 YouTube Shorts · Thriller Drama', metaKr:'유튜브 쇼츠 17개 · 스릴러 드라마',
+    badgeEn:'✨ New', badgeKr:'✨ 신규' },
+
+  { id:'tangerines',        active:true, emoji:'🍊',
+    titleEn:'When Life Gives You Tangerines', titleKr:'폭싹 속았수다' },
+
+  { id:'hospital-playlist', active:true, emoji:'🏥',
+    titleEn:'Hospital Playlist', titleKr:'슬기로운 의사생활' },
+
+  { id:'reply-1988',        active:true, emoji:'📻',
+    titleEn:'Reply 1988', titleKr:'응답하라 1988' },
+
+  { id:'my-mister',         active:false, emoji:'🌧️',
+    titleEn:'My Mister', titleKr:'나의 아저씨' },
+
+  { id:'attorney-woo',      active:false, emoji:'🐋',
+    titleEn:'Extraordinary Attorney Woo', titleKr:'이상한 변호사 우영우' },
+
+  { id:'kingdom',           active:false, emoji:'⚔️',
+    titleEn:'Kingdom', titleKr:'킹덤' },
+
+  { id:'itaewon-class',     active:false, emoji:'🍺',
+    titleEn:'Itaewon Class', titleKr:'이태원 클라쓰' },
+
+  { id:'squid-game',        active:false, emoji:'🦑',
+    titleEn:'Squid Game', titleKr:'오징어 게임' },
+
+  { id:'mr-sunshine',       active:false, emoji:'☀️',
+    titleEn:'Mr. Sunshine', titleKr:'미스터 션샤인' },
+
+  { id:'prison-playbook',   active:false, emoji:'⚾',
+    titleEn:'Prison Playbook', titleKr:'슬기로운 감빵생활' },
+];
+</script>
+<script>
+
+/* ── Topbar lang toggle (main page) ──────────────────────── */
+document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
+
+/* ── Render the drama cards from the LK_DRAMAS list ──────────
+   You normally never need to touch this — edit LK_DRAMAS above
+   to change which dramas are active. This just draws the cards. */
+function lkEsc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderShowGrid() {
+  var grid = document.getElementById('show-grid');
+  if (!grid || typeof LK_DRAMAS === 'undefined') return;
+  var lang = (typeof getLang === 'function') ? getLang() : 'en';
+  var isKo = (lang === 'ko');
+  var defMetaEn = 'Study content in preparation — stay tuned!';
+  var defMetaKo = '학습 콘텐츠 준비 중 — 곧 공개됩니다!';
+  var comingSoon = isKo ? '준비 중' : 'Coming Soon';
+
+  grid.innerHTML = '';
+
+  LK_DRAMAS.forEach(function(d) {
+    var img   = d.image || ('images/' + d.id + '.jpg');
+    var href  = d.href  || ('dramas/' + d.id + '/index.html');
+    var titleEn = d.titleEn || '';
+    var titleKr = d.titleKr || '';
+    var meta = d.active
+      ? ((isKo ? (d.metaKr || d.metaEn) : (d.metaEn || d.metaKr)) || '')
+      : (isKo ? (d.metaKr || defMetaKo) : (d.metaEn || defMetaEn));
+
+    var card;
+
+    if (d.active) {
+      card = document.createElement('a');
+      card.className = 'show-card';
+      card.href = href;
+      card.setAttribute('data-drama', d.id);
+
+      var badge = isKo ? (d.badgeKr || d.badgeEn) : (d.badgeEn || d.badgeKr);
+      card.innerHTML =
+          '<button class="bm-corner" data-bm-id="show-' + d.id + '" title="Bookmark">🔖</button>'
+        + '<div class="show-card-banner ' + d.id + '-banner">'
+        +   '<img src="' + img + '" alt="' + lkEsc(titleEn) + '"'
+        +     ' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
+        +   '<div class="banner-emoji-large" style="display:none;">' + (d.emoji || '') + '</div>'
+        +   '<div class="show-card-overlay"></div>'
+        + '</div>'
+        + '<div class="show-card-body">'
+        +   '<div class="show-card-title">' + lkEsc(titleEn) + '</div>'
+        +   '<div class="show-card-title-kr">' + lkEsc(titleKr) + '</div>'
+        +   '<div class="show-card-meta">' + lkEsc(meta) + '</div>'
+        + '</div>'
+        + (badge ? '<span class="show-badge">' + lkEsc(badge) + '</span>' : '');
+
+      var bm = card.querySelector('.bm-corner');
+      if (bm) {
+        bm.addEventListener('click', function(ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          toggleBookmark('show', 'show-' + d.id,
+            (d.emoji ? d.emoji + ' ' : '') + titleEn, href);
+        });
+      }
+    } else {
+      card = document.createElement('div');
+      card.className = 'show-card disabled';
+      card.setAttribute('data-drama', d.id);
+      card.setAttribute('title', 'Coming soon — study content in preparation');
+
+      card.innerHTML =
+          '<div class="show-card-banner ' + d.id + '-banner" style="position:relative;overflow:hidden;">'
+        +   '<img src="' + img + '" alt="' + lkEsc(titleEn) + '"'
+        +     ' style="filter:grayscale(20%) brightness(0.85);"'
+        +     ' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">'
+        +   '<div class="banner-emoji-large" style="display:none;filter:grayscale(30%) brightness(0.7);">' + (d.emoji || '') + '</div>'
+        +   '<div class="show-card-overlay"></div>'
+        +   '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">'
+        +     '<span style="background:rgba(255,255,255,0.92);color:var(--accent2);font-size:0.75rem;font-weight:800;'
+        +       'padding:6px 16px;border-radius:20px;letter-spacing:1.2px;text-transform:uppercase;'
+        +       'border:1px solid var(--border2);backdrop-filter:blur(4px);">&#128679; ' + lkEsc(comingSoon) + '</span>'
+        +   '</div>'
+        + '</div>'
+        + '<div class="show-card-body">'
+        +   '<div class="show-card-title" style="color:var(--muted);">' + lkEsc(titleEn) + '</div>'
+        +   '<div class="show-card-title-kr">' + lkEsc(titleKr) + '</div>'
+        +   '<div class="show-card-meta">' + lkEsc(meta) + '</div>'
+        + '</div>'
+        + '<span class="show-badge coming-badge">' + lkEsc(comingSoon) + '</span>';
+    }
+
+    grid.appendChild(card);
+  });
+
+  if (typeof syncBookmarkButtons === 'function') syncBookmarkButtons();
+}
+
+renderShowGrid();
+
+/* ── Language override for Terms overlay ─────────────────── */
+function setOverlayLang(lang) {
+  saveLang(lang);
+  document.getElementById('content-en').classList.toggle('visible', lang === 'en');
+  document.getElementById('content-ko').classList.toggle('visible', lang === 'ko');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+  document.getElementById('btn-en').setAttribute('aria-pressed', String(lang === 'en'));
+  document.getElementById('btn-ko').setAttribute('aria-pressed', String(lang === 'ko'));
+  document.documentElement.lang = lang;
+  mirrorCheckboxState();
+}
+
+function mirrorCheckboxState() {
+  var lang = getLang();
+  var cbEn = document.getElementById('agreeCheck-en');
+  var cbKo = document.getElementById('agreeCheck-ko');
+  var checked = lang === 'ko' ? cbKo.checked : cbEn.checked;
+  cbEn.checked = checked;
+  cbKo.checked = checked;
+  setAgreeBtnsState(checked);
+}
+
+function setAgreeBtnsState(checked) {
+  ['en', 'ko'].forEach(function(l) {
+    var btn = document.getElementById('btnAgree-' + l);
+    btn.classList.toggle('enabled', checked);
+    btn.disabled = !checked;
+    btn.setAttribute('aria-disabled', String(!checked));
+  });
+}
+
+function handleCheckClick(lang, e) {
+  var checkId = 'agreeCheck-' + lang;
+  if (e.target.id !== checkId && e.target.tagName !== 'INPUT') {
+    var cb = document.getElementById(checkId);
+    cb.checked = !cb.checked;
+    mirrorCheckboxState();
+  }
+}
+
+function onCheckChange() { mirrorCheckboxState(); }
+
+function agreeAndEnter() {
+  var lang = getLang();
+  var cb = document.getElementById('agreeCheck-' + lang);
+  if (!cb.checked) return;
+  setAgreed();
+  document.getElementById('termsOverlay').classList.remove('visible');
+  document.getElementById('mainContent').classList.add('visible');
+  document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
+  applyLang();
+  renderBookmarkBar();
+  syncBookmarkButtons();
+}
+
+/* ── Init ─────────────────────────────────────────────────── */
+function applyPageLang() {
+  var isKo = getLang() === 'ko';
+  document.documentElement.lang = isKo ? 'ko' : 'en';
+  var eyebrow = document.querySelector('.home-hero-eyebrow');
+  if (eyebrow) eyebrow.textContent = isKo ? '✨ K-드라마 뒷이야기 & 트리비아' : '✨ K-Drama Backstories & Trivia';
+  /* Re-draw the drama cards in the selected language */
+  if (typeof renderShowGrid === 'function') renderShowGrid();
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  injectTermsModal();
+  if (hasAgreed()) {
+    document.getElementById('termsOverlay').classList.remove('visible');
+    document.getElementById('mainContent').classList.add('visible');
+    document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
+    applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
+  } else {
+    setOverlayLang(getLang());
+  }
+});
+
+</script>
+
+<script>
+/* ── Service Worker registration ─────────────────────── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  });
+}
+
+/* ── Install Popup ────────────────────────────────────── */
+(function() {
+  var DISMISS_KEY = 'lk_install_dismissed';
+  var SHOW_DELAY  = 5000;
+
+  var i18n = {
+    en: {
+      title:    'Hidden K-Drama Stories',
+      sub:      'Add to Home Screen',
+      body:     'Install this app for instant access — no App Store needed.',
+      ios1:     '① Tap the <strong>Share</strong> button <span style="font-size:1.1em">⬆</span> in Safari',
+      ios2:     '② Select <strong>"Add to Home Screen"</strong>',
+      ios3:     '③ Tap <strong>"Add"</strong> — done!',
+      install:  'Install App',
+      later:    'Not now'
+    },
+    ko: {
+      title:    '히든 K-드라마 스토리',
+      sub:      '홈 화면에 추가',
+      body:     '앱처럼 빠르게 실행하세요 — 앱 스토어 없이 바로 설치!',
+      ios1:     '① Safari 하단 <strong>공유</strong> 버튼 <span style="font-size:1.1em">⬆</span> 탭',
+      ios2:     '② <strong>"홈 화면에 추가"</strong> 선택',
+      ios3:     '③ <strong>"추가"</strong> 탭 — 완료!',
+      install:  '앱 설치',
+      later:    '나중에'
+    }
+  };
+
+  function isIos()        { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+  function isSafariBrowser() { return /safari/i.test(navigator.userAgent) && !/chrome|crios|fxios/i.test(navigator.userAgent); }
+  function isStandalone() { return navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches; }
+  function wasDismissed() { try { return !!localStorage.getItem(DISMISS_KEY); } catch(e) { return false; } }
+  function setDismissed() { try { localStorage.setItem(DISMISS_KEY, '1'); } catch(e) {} }
+
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  function taegeukSVG() {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="44" height="44">'
+      + '<rect width="100" height="100" rx="22" fill="#1a0a12"/>'
+      + '<circle cx="50" cy="50" r="34" fill="none"/>'
+      + '<path d="M50,16 A34,34 0 0,1 50,84 A17,17 0 0,1 50,50 A17,17 0 0,0 50,16 Z" fill="#CD2E3A"/>'
+      + '<path d="M50,16 A34,34 0 0,0 50,84 A17,17 0 0,0 50,50 A17,17 0 0,1 50,16 Z" fill="#003478"/>'
+      + '<circle cx="50" cy="25.5" r="8.5" fill="#CD2E3A"/>'
+      + '<circle cx="50" cy="74.5" r="8.5" fill="#003478"/>'
+      + '</svg>';
+  }
+
+  function showPopup() {
+    var lang = (typeof getLang === 'function') ? getLang() : 'en';
+    var t    = i18n[lang] || i18n.en;
+    var ios  = isIos();
+
+    var el = document.createElement('div');
+    el.id  = 'lkInstallPopup';
+    el.style.cssText = [
+      'position:fixed','bottom:20px','left:50%',
+      'transform:translateX(-50%) translateY(140px)',
+      'width:min(400px,calc(100vw - 28px))',
+      'background:var(--card)','border:1.5px solid var(--border)',
+      'border-radius:18px',
+      'box-shadow:0 8px 40px rgba(0,0,0,0.22),0 2px 8px rgba(0,0,0,0.12)',
+      'padding:20px','z-index:9999',
+      'transition:transform 0.42s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s',
+      'opacity:0','font-family:inherit'
+    ].join(';');
+
+    var stepsHtml = ios ? (
+      '<div style="background:var(--card2);border:1px solid var(--border);border-radius:10px;'
+      + 'padding:12px 14px;margin-bottom:16px;font-size:0.82rem;color:var(--text);line-height:2;">'
+      + '<div>' + t.ios1 + '</div>'
+      + '<div>' + t.ios2 + '</div>'
+      + '<div>' + t.ios3 + '</div>'
+      + '</div>'
+    ) : '';
+
+    var primaryBtn = ios
+      ? '<button id="lkInstallOk" style="flex:1;padding:10px 0;border-radius:10px;border:none;'
+        + 'background:linear-gradient(135deg,var(--accent),#d91a60);color:#fff;'
+        + 'font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">✓ Got it</button>'
+      : '<button id="lkInstallOk" style="flex:1;padding:10px 0;border-radius:10px;border:none;'
+        + 'background:linear-gradient(135deg,var(--accent),#d91a60);color:#fff;'
+        + 'font-size:0.85rem;font-weight:700;cursor:pointer;font-family:inherit;">' + t.install + '</button>';
+
+    el.innerHTML =
+      '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">'
+      +   taegeukSVG()
+      +   '<div style="flex:1;min-width:0;">'
+      +     '<div style="font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:800;color:var(--text);line-height:1.2;">' + t.title + '</div>'
+      +     '<div style="font-size:0.76rem;color:var(--muted);margin-top:2px;">' + t.sub + '</div>'
+      +   '</div>'
+      +   '<button id="lkInstallX" style="background:none;border:none;cursor:pointer;color:var(--muted);'
+      +     'font-size:1.4rem;line-height:1;padding:4px 6px;border-radius:6px;">&times;</button>'
+      + '</div>'
+      + '<div style="font-size:0.84rem;color:var(--muted);line-height:1.65;margin-bottom:14px;">' + t.body + '</div>'
+      + stepsHtml
+      + '<div style="display:flex;gap:10px;">'
+      +   '<button id="lkInstallLater" style="flex:1;padding:10px 0;border-radius:10px;'
+      +     'background:var(--card2);color:var(--muted);border:1px solid var(--border);'
+      +     'font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;">' + t.later + '</button>'
+      +   primaryBtn
+      + '</div>';
+
+    document.body.appendChild(el);
+
+    /* animate in */
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      el.style.transform  = 'translateX(-50%) translateY(0)';
+      el.style.opacity    = '1';
+    }); });
+
+    function hide(dismiss) {
+      el.style.transform = 'translateX(-50%) translateY(140px)';
+      el.style.opacity   = '0';
+      if (dismiss) setDismissed();
+      setTimeout(function() { if (el.parentNode) el.parentNode.removeChild(el); }, 500);
+    }
+
+    document.getElementById('lkInstallX').onclick     = function() { hide(true); };
+    document.getElementById('lkInstallLater').onclick  = function() { hide(true); };
+    document.getElementById('lkInstallOk').onclick     = function() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function() { hide(true); });
+      } else {
+        hide(true);
+      }
+    };
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    if (isStandalone()) return;          /* already installed */
+    if (wasDismissed()) return;          /* user dismissed before */
+    if (isIos() && !isSafariBrowser()) return;  /* iOS but not Safari — can't install */
+
+    /* Wait for terms agreement AND delay before showing */
+    setTimeout(function() {
+      if (isIos() || deferredPrompt) {
+        showPopup();
+      } else {
+        /* Android/Chrome: wait for beforeinstallprompt if not yet fired */
+        window.addEventListener('beforeinstallprompt', function() {
+          showPopup();
+        }, { once: true });
+      }
+    }, SHOW_DELAY);
+  });
+})();
+</script>
 </body>
 </html>
