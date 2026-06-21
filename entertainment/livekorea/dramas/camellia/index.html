@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When the Camellia Blooms &mdash; Hidden K-Drama Stories</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .drama-info-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 22px 24px;
+      margin-bottom: 28px; box-shadow: var(--shadow);
+    }
+    .drama-info-card .di-label {
+      font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
+    }
+    .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
+    }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="btn-topbar-home" onclick="goHome()" title="Home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="22" height="22" aria-label="Home">
+  <circle cx="50" cy="50" r="49" fill="white" stroke="#ccc" stroke-width="1"/>
+  <path d="M50,10 A40,40 0 0,1 50,90 A20,20 0 0,1 50,50 A20,20 0 0,0 50,10 Z" fill="#CD2E3A"/>
+  <path d="M50,10 A40,40 0 0,0 50,90 A20,20 0 0,0 50,50 A20,20 0 0,1 50,10 Z" fill="#003478"/>
+  <circle cx="50" cy="30" r="10" fill="#CD2E3A"/>
+  <circle cx="50" cy="70" r="10" fill="#003478"/>
+</svg></button>
+    <div class="topbar-logo">
+      <span class="logo-live">K-Drama</span>
+      <div class="logo-dot"></div>
+      <span class="logo-korea">Trivia</span>
+    </div>
+  </div>
+  <div class="topbar-right" id="topbar-lang-wrap"></div>
+</header>
+
+<main>
+<div class="page-wrap">
+
+  <nav class="nav-row">
+    <button class="btn-nav home" onclick="goHome()">&#127968; <span id="nav-home">Home</span></button>
+    <button class="btn-nav" onclick="history.back()">&#9664; <span id="nav-back">Back</span></button>
+  </nav>
+
+  <nav class="breadcrumb">
+    <a href="../../index.html">Hidden K-Drama Stories</a>
+    <span class="sep">&#8250;</span>
+    <span class="current" id="bc-drama">When the Camellia Blooms</span>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-thumb">
+      <img src="../../images/camellia.jpg" alt="When the Camellia Blooms"
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#fff1f2,#fda4af)';this.parentElement.innerHTML='&#127802;';">
+    </div>
+    <div class="page-header-info">
+      <div class="page-header-title" id="hdr-title">When the Camellia Blooms</div>
+      <div class="page-header-meta" id="hdr-meta">2019 &middot; Romance Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-camellia"
+          onclick="toggleBookmark('show','show-camellia','&#127802; When the Camellia Blooms','dramas/camellia/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="drama-info-card" id="desc-en" data-lang-en>
+    <div class="di-label">&#127916; About This Drama</div>
+    <div class="di-desc">
+      <strong>When the Camellia Blooms</strong> is a 2019 KBS Korean drama starring Gong Hyo-jin and Kang Ha-neul. Set in the fictional seaside town of Ongsan, it follows Dong-baek, a single mother who runs a bar-restaurant called Camellia, and Hwang Yong-sik, a warmhearted local police officer who falls for her.<br><br>
+      Blending romance, comedy, small-town warmth, and a tense serial-killer mystery, it became one of Korea&#39;s most acclaimed and award-winning dramas.
+    </div>
+  </div>
+
+  <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
+    <div class="di-label">&#127916; 드라마 소개</div>
+    <div class="di-desc">
+      <strong>동백꽃 필 무렵</strong>은 2019년 KBS에서 방영된 드라마로, 공효진과 강하늘이 주연을 맡았습니다. 가상의 바닷가 마을 옹산을 배경으로, '카멜리아'라는 가게를 운영하는 싱글맘 동백과 그녀에게 반한 마음 따뜻한 동네 순경 황용식의 이야기를 그립니다.<br><br>
+      로맨스와 코미디, 정겨운 동네 정서, 그리고 긴장감 넘치는 연쇄살인 미스터리를 엮어내며 한국에서 크게 호평받고 많은 상을 받은 드라마 중 하나가 되었습니다.
+    </div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts</div>
+  <div id="storiesList">
+
+  <div class="drama-info-card" style="text-align:center; padding:34px 24px;">
+    <div class="di-label">&#127916; Coming Soon</div>
+    <div class="di-desc" data-lang-en>The hidden stories for this drama are being prepared. Please check back soon!</div>
+    <div class="di-desc" data-lang-ko style="display:none;">이 드라마의 숨은 이야기를 준비 중입니다. 곧 공개됩니다!</div>
+  </div>
+
+  </div>
+
+</div>
+</main>
+
+<footer class="site-footer" id="lk-footer">
+  <div class="footer-copy">&copy; 2025 m2ea Labs. All rights reserved.</div>
+  <div><a class="footer-terms" href="../../terms.html">Terms of Use / &#51060;&#50857;&#50557;&#44288;</a></div>
+</footer>
+
+<script src="../../js/app.js"></script>
+<script>
+  function goHome() { window.location.href = '../../index.html'; }
+
+  function applyPageLang() {
+    var isKo = getLang() === 'ko';
+    document.documentElement.lang = isKo ? 'ko' : 'en';
+    // null-safe helpers: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every lookup to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '동백꽃 필 무렵' : 'When the Camellia Blooms');
+    setTxt('hdr-title',    isKo ? '동백꽃 필 무렵' : 'When the Camellia Blooms');
+    setTxt('hdr-meta',     isKo ? '2019 · 로맨스 드라마' : '2019 · Romance Drama');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠'
+      : '&#127381; YouTube Shorts');
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
+    injectTermsModal();
+    document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
+    applyPageLang();
+    applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
+  });
+</script>
+</body>
+</html>
