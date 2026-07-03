@@ -18,6 +18,7 @@
     .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 18px rgba(255,0,0,0.4); }
     .btn-youtube.pending { background: var(--card2); color: var(--muted); border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6; }
     .placeholder-slot { opacity: 0.45; border-style: dashed; }
+    .expr-speaker { font-size: 0.72rem; font-weight: 800; color: var(--accent2); letter-spacing: 0.5px; margin-bottom: 7px; }
   </style>
 </head>
 <body>
@@ -54,7 +55,7 @@
         <div class="page-header-meta">Ross and Monica's grandmother dies — twice. Chandler is mistaken for gay.</div>
         <div class="page-header-actions">
           <button class="btn-bm" data-bm-id="episode-friends-s1e8"
-            onclick="toggleBookmark('episode','episode-friends-s1e8','📋 Friends S1E8','friends/episodes/season1/s1e8.html')">
+            onclick="toggleBookmark('episode','episode-friends-s1e8','📋 Friends S1E8','friends/episodes/s1e8.html')">
             <span data-i18n="bm.episode">&#128278; Bookmark Episode</span>
           </button>
         </div>
@@ -77,27 +78,190 @@
 <script src="../../../js/i18n.js"></script>
 <script src="../../../js/app.js"></script>
 <script>
-  /* ================================================================
-     EPISODE DATA — edit this object to update expressions
-     ----------------------------------------------------------------
-     Each expression has:
-       phrase       : the English expression
-       partOfSpeech : e.g. 'idiom', 'phrasal verb', 'expression'
-       meaning      : your explanation
-       example      : an example sentence
-       context      : scene context (optional, can be empty '')
-       youtubeUrl   : paste YouTube link here when ready
-     ----------------------------------------------------------------
-     The page shows 15 slots. Add up to 15 objects in expressions[].
-     Empty slots show as "Coming Soon" placeholders automatically.
-  ================================================================ */
   var EP_DATA = {
-    available: false,
     title: 'The One Where Nana Dies Twice',
     description: 'Ross and Monica\'s grandmother dies — twice. Chandler is mistaken for gay.',
     expressions: [
-    {phrase:'Out of it',partOfSpeech:'expression',meaning:'Feeling confused, not fully conscious, or unable to think clearly.',example:'"I only slept four hours — I\'ve been completely out of it all day."',context:'Describing someone who is drowsy or disoriented.',youtubeUrl:'https://www.youtube.com/watch?v=REPLACE_S1E8X1'},
-    {phrase:'Give off a vibe',partOfSpeech:'expression',meaning:'To project a certain feeling, impression, or energy to others.',example:'"That new café really gives off a cozy, relaxed vibe."',context:'The impression or feeling someone projects to others.',youtubeUrl:'https://www.youtube.com/watch?v=REPLACE_S1E8X2'}
+    {
+      phrase: 'Can you believe she actually thought that?',
+      partOfSpeech: 'expression',
+      speaker: 'Chandler',
+      meaning: '\"Can you believe\" opens a rhetorical question — it doesn\'t expect an answer but invites the listener to share in the speaker\'s astonishment. \"She actually thought that\" uses \"actually\" as an intensifier of disbelief: it emphasises that the thing really, genuinely happened, which makes it feel even more unbelievable. Together it is one of the most natural ways to express shared outrage in English.',
+      meaning_ko: '\"Can you believe\"는 수사적 질문을 여는 표현으로 답을 기대하지 않고 듣는 사람에게 화자의 놀라움을 함께 느끼자고 초대합니다. \"She actually thought that\"에서 \"actually\"는 불신의 강조어입니다: 그 일이 진짜, 실제로 일어났다는 것을 강조하며 더욱 믿기지 않게 만듭니다. 합쳐서 영어에서 공분을 표현하는 가장 자연스러운 방법 중 하나입니다.',
+      example: 'A: \"She submitted my report under her own name.\" B: \"Can you believe she actually thought that was okay?\"',
+      example_ko: 'A: \"내 보고서를 자기 이름으로 제출했어.\" B: \"그게 괜찮다고 진짜 생각한 거야? 믿겨?\"',
+      context: 'Chandler says this immediately after his colleague Shelly leaves, stunned that she genuinely assumed he was gay and tried to set him up with a man. His tone is more bewildered than angry — and his friends\' honest response of \"Um, yeah, actually\" is what sets the whole episode\'s central question in motion.',
+      context_ko: '동료 쉘리가 자리를 뜬 직후 찬들러가 그녀가 진짜로 자신이 게이라고 생각하고 남자와 소개팅을 주선하려 했다는 사실에 어안이 벙벙해서 하는 말. 그의 어조는 화가 났다기보다 당황한 것에 가깝고 — 친구들의 솔직한 반응 \"어, 사실, 응\"이 에피소드 전체의 핵심 질문을 시작시킵니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X1'
+    },
+    {
+      phrase: 'You have a quality.',
+      partOfSpeech: 'expression',      speaker: 'Monica',
+
+      meaning: 'Said when someone has a distinct but hard-to-define characteristic — an intangible "something" about them. "A quality" is deliberately vague: it acknowledges the existence of a trait without being able to name it precisely. The humor here is that Chandler keeps pressing for details and never gets a satisfying answer.',
+      meaning_ko: '누군가에게 독특하지만 정의하기 어려운 특성, 즉 그들에게 있는 무형의 "뭔가"가 있을 때 쓰는 표현입니다. "A quality"는 의도적으로 모호합니다. 특성의 존재는 인정하지만 정확하게 이름을 붙일 수 없는 것입니다. 여기서 웃음 포인트는 찬들러가 계속 설명을 요구하지만 결코 만족스러운 답을 얻지 못한다는 것입니다.',
+      example: 'A: "What is it about him that makes people think that?" B: "I don\'t know. He just has... a quality."',
+      example_ko: 'A: "사람들이 그렇게 생각하게 만드는 게 뭔데?" B: "모르겠어. 그냥... 뭔가 있어."',
+      context: 'Multiple friends — Monica, Phoebe, even Joey — tell Chandler this is why people assume he\'s gay. When Chandler sarcasm-drips, "Good. I was worried you were gonna be vague about this," it\'s one of the episode\'s best lines. The phrase becomes a running joke throughout the whole episode.',
+      context_ko: '모니카, 피비, 심지어 조이까지 여러 친구들이 사람들이 찬들러가 게이라고 생각하는 이유가 이것이라고 말하는 장면. 찬들러가 비꼬며 "다행이야. 혹시 모호하게 말할까봐 걱정했잖아"라고 하는 것이 에피소드 최고의 대사 중 하나입니다. 이 표현은 에피소드 전체에 걸친 반복 농담이 됩니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X2'
+    },
+    {
+      phrase: 'She\'s not quite.',
+      partOfSpeech: 'expression',      speaker: 'Ross',
+
+      meaning: '"Not quite" means "not fully" or "not yet" — it signals that something hasn\'t completely reached the expected state. In this darkly comic moment, it is used to gently clarify that Nana, who was declared dead, is in fact still alive. The understatement makes it even more surreal and funny.',
+      meaning_ko: '"Not quite"는 "완전히 그렇지 않다" 또는 "아직 아니다"를 의미하며, 무언가가 예상된 상태에 완전히 도달하지 않았음을 나타냅니다. 이 어둡고 코믹한 순간에는 사망 선고를 받은 나나가 사실 아직 살아있다는 것을 부드럽게 명확히 하기 위해 쓰입니다. 절제된 표현이 더욱 초현실적이고 웃기게 만듭니다.',
+      example: 'A: "Is the project done?" B: "Not quite. We\'re about 90% there."',
+      example_ko: 'A: "프로젝트 끝났어?" B: "거의 다 됐어. 90% 정도?"',
+      context: 'Ross has just fallen into Nana\'s hospital bed after saying goodbye, and she suddenly grabs him. He returns to the waiting room to inform the family: "You know how the nurse said Nana had passed? Well... she\'s not quite." The bewildered response from the family, and the nurse\'s deadpan "This almost never happens," is perfectly timed comedy.',
+      context_ko: '로스가 작별 인사를 하다가 나나의 병원 침대로 넘어졌는데, 그녀가 갑자기 그를 잡는 장면. 그는 가족들이 기다리는 방으로 돌아와 알립니다: "간호사가 나나가 돌아가셨다고 했잖아요? 근데... 아직은 아니에요." 가족들의 당황한 반응과 간호사의 무표정한 "이런 일은 거의 없어요"가 완벽하게 타이밍이 맞는 코미디입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X3'
+    },
+    {
+      phrase: 'No one ever really goes.',
+      partOfSpeech: 'expression',
+      speaker: 'Phoebe',
+      meaning: 'A gentle belief that people who die don\'t completely disappear — they remain present in some form, whether in memory, feeling, or spirit. \"Ever really\" is a double intensifier: \"ever\" means at any point in time, and \"really\" emphasises the totality of the departure. Together they make the claim stronger than just \"no one goes\" — insisting that no one ever truly, completely leaves.',
+      meaning_ko: '\"Ever really\"는 이중 강조 표현입니다. \"Ever\"는 어느 때든, \"really\"는 완전히 떠남의 전체성을 강조합니다. 이 문장은 죽은 사람들이 완전히 사라지지 않는다는 부드러운 믿음을 표현합니다 — 기억이든, 감정이든, 영혼이든 어떤 형태로든 여전히 곁에 있다는 것입니다. 단순히 \"아무도 가지 않는다\"보다 훨씬 강한 주장으로, 아무도 결코 진정으로 완전히 떠나지 않는다고 말합니다.',
+      example: 'A: \"I still think about my grandmother every single day.\" B: \"Maybe that\'s exactly the point. No one ever really goes.\"',
+      example_ko: 'A: \"지금도 매일 할머니 생각이 나.\" B: \"어쩌면 그게 바로 그 의미야. 아무도 완전히 떠나지 않는 거야.\"',
+      context: 'Phoebe offers this as her quiet counter-belief right after Ross flatly declares \"when you\'re dead, you\'re dead — you\'re worm food.\" She draws on her own loss, saying she sometimes feels her late mother is \"right here, you know?\" The contrast between Ross\'s blunt scientific view and Phoebe\'s gentle spirituality is one of the episode\'s most tender exchanges.',
+      context_ko: '로스가 \"죽으면 그냥 죽은 거야 — 벌레 먹이야\"라고 단호하게 선언한 직후 피비가 조용한 반박 믿음으로 이 말을 하는 장면. 그녀는 자신의 상실을 꺼내며 때때로 돌아가신 어머니가 \"바로 여기, 알잖아?\" 있는 것 같다고 말합니다. 로스의 거친 과학적 태도와 피비의 부드러운 영성 사이의 대비는 에피소드에서 가장 따뜻한 교환 중 하나입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X4'
+    },
+    {
+      phrase: 'She looks so small.',
+      partOfSpeech: 'expression',
+      speaker: 'Ross',
+      meaning: '\"Look\" + adjective describes how someone appears — not just physically but with emotional weight. \"So small\" means Nana looks frail and diminished compared to how Ross remembers her. The word \"so\" intensifies the observation: not just small, but strikingly, heartbreakingly small. Simple sentences like this carry the most weight in English — the fewer the words, the heavier each one lands.',
+      meaning_ko: '\"Look\" + 형용사는 누군가가 어떻게 보이는지 묘사합니다 — 단순히 시각적으로만이 아니라 감정적인 무게를 담아서. \"So small\"은 나나가 로스가 기억하는 것보다 연약하고 쪼그라들어 보인다는 뜻입니다. \"So\"는 강조합니다: 그냥 작은 게 아니라 충격적으로, 마음 아프게 작은 것. 이런 단순한 문장들이 영어에서 가장 큰 무게를 지닐 때가 많습니다 — 단어가 적을수록 하나하나의 무게가 더 크게 느껴집니다.',
+      example: 'A: \"I finally visited my grandfather last weekend.\" B: \"How was it?\" A: \"He looks so small now. I don\'t know when that happened.\"',
+      example_ko: 'A: \"지난 주말에 드디어 할아버지를 뵈러 갔어.\" B: \"어땠어?\" A: \"지금 너무 작아 보여. 언제 이렇게 됐는지 모르겠어.\"',
+      context: 'Ross and Monica stand at Nana\'s hospital bedside for what they believe is the last time. Ross\'s quiet observation — \"She looks so small\" — says everything about what age and illness does to the people we love. Monica simply says \"I know.\" It\'s the episode\'s most genuinely tender moment before the comedy takes hold again.',
+      context_ko: '로스와 모니카가 마지막이 될 것이라 생각하며 나나의 병원 침대 옆에 서는 장면. 로스의 조용한 관찰 — \"너무 작아 보여\" — 은 나이와 병이 우리가 사랑하는 사람들에게 무엇을 하는지를 모두 담아냅니다. 모니카는 단순히 \"알아\"라고 말합니다. 에피소드에서 코미디가 다시 이어지기 전 가장 진심 어린 순간입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X5'
+    },
+    {
+      phrase: 'She\'s present. She\'s back.',
+      partOfSpeech: 'expression',      speaker: 'Ross',
+
+      meaning: 'In a medical context, "present" means alive, conscious, or showing vital signs — as opposed to gone or unresponsive. "She\'s back" means she has returned from the brink of death — her vital signs have resumed. Ross uses these short, clipped sentences because he\'s bewildered himself and doesn\'t quite know how to explain what just happened.',
+      meaning_ko: '의학적 맥락에서 "present"는 살아있거나 의식이 있거나 생체 징후를 보이는 상태를 의미합니다 — 사라졌거나 반응이 없는 것과 반대입니다. "She\'s back"은 그녀가 죽음의 문턱에서 돌아왔다는 것을 의미합니다 — 생체 징후가 재개됐습니다. 로스는 자신도 당황해서 방금 일어난 일을 어떻게 설명해야 할지 모르기 때문에 이 짧고 간결한 문장들을 씁니다.',
+      example: 'A: "I thought the call had dropped." B: "No, no. I\'m here. I\'m present. I\'m back."',
+      example_ko: 'A: "전화가 끊긴 줄 알았어." B: "아니, 아니. 여기 있어. 있어. 돌아왔어."',
+      context: 'Ross tries to explain to the stunned family that Nana is alive again after they had already said their goodbyes. His broken, stunned delivery ("she\'s not quite... she\'s present... she\'s back") perfectly mirrors the absurdity of the situation. The nurse\'s follow-up, "This almost never happens," is perfect deadpan.',
+      context_ko: '이미 작별 인사를 마친 후 로스가 충격받은 가족들에게 나나가 다시 살아있다고 설명하려는 장면. 그의 끊기고 충격받은 전달 방식("아직은 아니에요... 살아계세요... 돌아오셨어요")은 상황의 황당함을 완벽하게 반영합니다. 간호사의 후속 발언 "이런 일은 거의 없어요"는 완벽한 무표정 개그입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X6'
+    },
+    {
+      phrase: 'God, what a great day! What? Weatherwise.',
+      partOfSpeech: 'expression',
+      speaker: 'Phoebe',
+      meaning: '\"Weatherwise\" is added after a pause to clarify what the previous statement referred to — meaning \"in terms of the weather.\" Adding \"-wise\" to a noun is a natural English way of saying \"regarding [noun]\" or \"in terms of [noun].\" Here it\'s a hasty retrofit: Phoebe realises her cheerful exclamation sounds wrong at a funeral and quickly narrows its meaning down to just the sunshine — as if that fixes everything.',
+      meaning_ko: '\"Weatherwise\"는 이전 발언이 무엇을 가리키는지 명확히 하기 위해 잠시 후에 추가됩니다 — \"날씨 면에서\"라는 뜻입니다. 명사에 \"-wise\"를 붙이는 것은 \"~에 관해서\" 또는 \"~의 면에서\"를 표현하는 자연스러운 영어 방식입니다. 여기서는 뒤늦은 수습입니다: 피비가 자신의 명랑한 외침이 장례식에서 이상하게 들린다는 것을 깨닫고 얼른 날씨 하나로만 좁혀버립니다.',
+      example: 'A: \"Everything okay?\" B: \"Yeah, it\'s been great! I mean — workwise. Personally, it\'s been a rough week.\"',
+      example_ko: 'A: \"다 괜찮아?\" B: \"응, 정말 좋았어! 그러니까 — 일 면에서. 개인적으로는 힘든 주였지만.\"',
+      context: 'Phoebe exclaims this at the graveside while everyone else is quiet and grieving — the beautiful sunny weather making her genuinely happy before she catches herself. The hasty \"What? Weatherwise.\" recovery is perfectly Phoebe: completely unfiltered, tactless in the most charming possible way.',
+      context_ko: '다들 조용히 슬퍼하는 묘지에서 피비가 이렇게 외치는 장면 — 맑고 아름다운 날씨에 본능적으로 기분이 좋아졌다가 뒤늦게 깨닫는 것. 황급한 \"뭐? 날씨 면에서\"라는 수습이 완벽하게 피비답습니다: 완전히 거르지 않고, 가장 매력적인 방식으로 눈치 없는.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X7'
+    },
+    {
+      phrase: 'Picking on every little detail.',
+      partOfSpeech: 'expression',      speaker: 'Ross',
+
+      meaning: '"Pick on" someone or something means to repeatedly criticize, find fault with, or single out for criticism. "Picking on every little detail" means criticizing obsessively over minor things — nothing is too small to escape scrutiny. It is the verbal equivalent of being a perfectionist who can never be satisfied.',
+      meaning_ko: '누군가나 무언가를 "pick on"한다는 것은 반복적으로 비판하거나 결점을 찾거나 비판의 대상으로 삼는다는 뜻입니다. "Picking on every little detail"은 사소한 것에 대해 강박적으로 비판하는 것을 의미합니다 — 아무리 작은 것도 비판을 피할 수 없습니다. 결코 만족하지 못하는 완벽주의자의 언어적 동등물입니다.',
+      example: 'A: "How was the review with your boss?" B: "Exhausting. She was picking on every little detail — the font, the margins, everything."',
+      example_ko: 'A: "상사랑 검토 어땠어?" B: "너무 힘들었어. 작은 것 하나하나 다 지적하더라 — 폰트, 여백, 모든 것."',
+      context: 'At the funeral reception, Ross gently confronts his mother about her complicated relationship with Nana, who was "critical of every single thing you say." He then asks whether, if she could do it again, she would tell her the truth about how she felt. The mother\'s answer — that some things are better left unsaid — speaks volumes about the Geller family dynamic.',
+      context_ko: '장례식 피로연에서 로스가 어머니에게 "당신이 하는 모든 것에 비판적이었던" 나나와의 복잡한 관계에 대해 조심스럽게 이야기하는 장면. 그런 다음 만약 다시 할 수 있다면 어떻게 느꼈는지 솔직하게 말했을 것이냐고 묻습니다. 어머니의 대답 — 어떤 것은 말하지 않는 편이 낫다 — 은 겔러 가족의 역학 관계에 대해 많은 것을 말해줍니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X8'
+    },
+    {
+      phrase: 'Well, sure. What with it being her funeral and all.',
+      partOfSpeech: 'expression',
+      speaker: 'Monica',
+      meaning: '\"What with\" introduces a reason or circumstance that explains a situation — similar to \"given that\" or \"considering.\" \"And all\" is a casual tag meaning \"and everything that goes along with that.\" Together they form a dry, understated way to acknowledge the obvious. Monica uses this to agree completely with Phoebe — but with a quiet, exhausted wit that says: of course. It\'s a funeral. What did you expect?',
+      meaning_ko: '\"What with\"는 상황을 설명하는 이유나 사정을 소개합니다 — \"given that(~을 감안하면)\" 또는 \"considering(~을 고려하면)\"과 비슷합니다. \"And all\"은 \"그와 관련된 모든 것\"을 의미하는 캐주얼한 꼬리말입니다. 합쳐서 당연한 것을 건조하게 절제해서 인정하는 방식이 됩니다. 모니카는 이것을 사용해 피비에게 완전히 동의하면서 — 조용하고 지친 재치로: 당연하지. 장례식인데. 무엇을 기대했어?',
+      example: 'A: \"He seemed really nervous at dinner.\" B: \"Well, sure — what with it being his first time meeting the whole family and all.\"',
+      example_ko: 'A: \"저녁 식사 때 되게 긴장한 것 같더라고.\" B: \"뭐, 그렇겠지 — 처음으로 온 가족 만나는 자리잖아, 그 모든 것 다 포함해서.\"',
+      context: 'Phoebe has just said \"Your grandmother would\'ve hated this\" at the wake. Monica\'s response — \"Well, sure. What with it being her funeral and all.\" — is a masterclass in dry delivery. She agrees without hesitation, with the bone-tired acceptance of someone who grew up with Nana\'s complaints: naturally she would have hated it. She hated everything.',
+      context_ko: '피비가 피로연에서 \"할머니가 이걸 싫어하셨을 거야\"라고 말한 직후. 모니카의 반응 — \"뭐, 그렇겠지. 할머니 장례식이잖아, 모든 것 다 포함해서.\" — 은 건조한 전달의 교과서입니다. 그녀는 주저 없이 동의하며, 나나의 불평을 들으며 자란 사람의 뼛속까지 지친 수용이 담겨 있습니다: 당연히 싫어하셨을 거야. 모든 걸 싫어하셨으니까.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X9'
+    },
+    {
+      phrase: 'You\'re watching football at a funeral?',
+      partOfSpeech: 'expression',      speaker: 'Rachel',
+
+      meaning: 'A rhetorical question expressing disbelief and mild outrage at completely inappropriate behaviour. The question doesn\'t expect an answer — it\'s a way of saying "I can\'t believe you would do something so wrong in a setting like this." The specific combination of "football" and "funeral" makes the contrast maximally absurd.',
+      meaning_ko: '완전히 부적절한 행동에 대한 불신과 가벼운 분노를 표현하는 수사적 질문입니다. 이 질문은 답을 기대하지 않습니다 — 이런 상황에서 그런 부적절한 행동을 할 수 있다니 믿을 수 없다는 말의 방식입니다. "축구"와 "장례식"이라는 특정 조합이 대비를 최대한 황당하게 만듭니다.',
+      example: 'A: "Are you on your phone right now? We\'re in a meeting." B: "Are you online shopping in a meeting?"',
+      example_ko: 'A: "지금 핸드폰 보는 거야? 우리 회의 중이잖아." B: "회의 중에 인터넷 쇼핑 하는 거야?"',
+      context: 'Ross has hidden a small radio in his coat to listen to a Giants game during Nana\'s funeral. Rachel discovers it and delivers this line with perfect exasperation. Ross\'s defense — "No, it\'s the pregame" — only makes it funnier, and Monica\'s verdict, "You\'re a frightening, frightening man," is the perfect button.',
+      context_ko: '로스가 나나의 장례식 동안 자이언츠 경기를 듣기 위해 코트 안에 작은 라디오를 숨긴 장면. 레이철이 그것을 발견하고 완벽한 분노로 이 대사를 합니다. 로스의 변명 — "아니, 프리게임이야" — 이 더욱 웃기게 만들고, 모니카의 판결 "당신 정말 무섭고, 무서운 사람이야"가 완벽한 마무리입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X10'
+    },
+    {
+      phrase: 'I love you guys. You guys are the greatest.',
+      partOfSpeech: 'expression',      speaker: 'Ross',
+
+      meaning: '"You guys are the greatest" is a warm, enthusiastic way of saying your group of friends is the best — that you deeply appreciate and value them. Combined with "I love you guys," it is an unselfconscious declaration of affection. In normal circumstances, this would be sweet. In this episode, it\'s said by a heavily medicated Ross, which makes it both funny and genuinely touching.',
+      meaning_ko: '"You guys are the greatest"는 친구 그룹이 최고라는 것, 즉 그들을 깊이 감사하고 소중히 여긴다는 것을 따뜻하고 열정적으로 표현하는 방식입니다. "I love you guys"와 결합하면, 꾸밈없는 애정의 선언이 됩니다. 일반적인 상황에서는 달콤할 것입니다. 이 에피소드에서는 강한 진통제를 먹은 로스가 하는 말이라 웃기면서도 진심으로 감동적입니다.',
+      example: 'A: "We cancelled our plans to help you move." B: "I love you guys. You guys are the greatest."',
+      example_ko: 'A: "우리 약속 취소하고 이사 도와주러 왔어." B: "사랑해 다들. 정말 최고야."',
+      context: 'Ross has taken too many painkillers for his back injury (sustained when he fell into Nana\'s grave) and becomes happily, lovingly loopy at the wake. He proceeds to tell each friend individually how much he loves them, culminating in telling Chandler: "And listen, if you wanna be gay, be gay. It doesn\'t matter to me." It\'s the episode\'s most joyful scene.',
+      context_ko: '로스가 (나나의 무덤에 빠지면서 입은) 허리 부상으로 진통제를 너무 많이 먹고 피로연에서 행복하고 사랑스럽게 정신이 나가는 장면. 그는 친구 한 명 한 명에게 얼마나 사랑하는지 차례로 말하고, 찬들러에게는 이렇게 말합니다: "그리고 있잖아, 게이가 되고 싶으면 게이 되면 돼. 나한테는 상관없어." 에피소드에서 가장 기쁜 장면입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X11'
+    },
+    {
+      phrase: 'If you wanna be gay, be gay.',
+      partOfSpeech: 'expression',      speaker: 'Ross',
+
+      meaning: 'A blunt, accepting declaration meaning "I don\'t care about your sexual orientation and fully support you either way." The directness is what makes it both funny (in context, because Chandler emphatically is not gay) and also genuinely warm — a loopy, medicated declaration of unconditional friendship and acceptance.',
+      meaning_ko: '"당신의 성적 지향에 상관없이 어느 쪽이든 완전히 지지한다"는 직접적이고 수용하는 선언입니다. 직접성이 웃기기도 하고(맥락상 찬들러는 분명히 게이가 아니기 때문에) 진심으로 따뜻하기도 합니다 — 진통제에 취해 정신이 나간 채로 하는 무조건적인 우정과 수용의 선언입니다.',
+      example: 'A: "I just want you to know — whatever you decide about your life, I\'m here for you." B: "If you wanna be gay, be gay — it doesn\'t matter to me."',
+      example_ko: 'A: "그냥 알아줘 — 인생에서 무엇을 결정하든, 나는 여기 있어." B: "게이가 되고 싶으면 게이 되면 돼 — 나한테는 상관없어."',
+      context: 'A medicated Ross\'s grand proclamation to Chandler during the wake is simultaneously the funniest and sweetest moment of the episode. What makes it perfect is that the whole episode has been about Chandler anxiously asking why people think he\'s gay — and here comes Ross, of all people, delivering his own very special, very loving non-answer.',
+      context_ko: '피로연에서 진통제를 먹은 로스가 찬들러에게 선언하는 이 대사는 에피소드에서 동시에 가장 웃기고 가장 달콤한 순간입니다. 완벽한 이유는 에피소드 전체가 찬들러가 왜 사람들이 자신을 게이라고 생각하는지 불안하게 묻는 내용이었고, 바로 로스가 자신만의 매우 특별하고 매우 사랑스러운 비답변을 전달하기 때문입니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X12'
+    },
+    {
+      phrase: 'Just having my worst fear realized.',
+      partOfSpeech: 'expression',
+      speaker: 'Ross',
+      meaning: '\"Having [something] realized\" means that thing is coming true or actually happening. \"My worst fear realized\" means the thing you dreaded most has occurred. Ross delivers this as a magnificent understatement — as if falling into an open grave at his grandmother\'s funeral in front of the entire family is merely a minor inconvenience. The bigger the disaster and the calmer the delivery, the funnier the line.',
+      meaning_ko: '\"Having [something] realized\"는 그것이 현실이 되거나 실제로 일어나고 있다는 뜻입니다. \"My worst fear realized\"는 가장 두려워했던 일이 실제로 일어났다는 것을 의미합니다. 로스는 이것을 최고의 절제어로 전달합니다 — 마치 온 가족이 지켜보는 할머니 장례식에서 열린 무덤 속에 빠진 것이 그저 사소한 불편 정도인 양. 재앙이 클수록 그리고 전달이 더 태연할수록 대사가 더 웃깁니다.',
+      example: 'A: \"How did the presentation go?\" B: \"Oh, just had my worst fear realized — I forgot every single word the moment I stood up.\"',
+      example_ko: 'A: \"발표 어떻게 됐어?\" B: \"오, 그냥 최악의 악몽이 현실이 됐어 — 일어서는 순간 한 마디도 생각이 안 났거든.\"',
+      context: 'Ross has fallen into Nana\'s open grave at the cemetery, injuring his back, while the entire family watches in horror. Friends rush over asking if he\'s okay. He looks up from inside the grave and delivers this with perfect deadpan. It\'s the episode\'s biggest physical comedy moment — and his utter calm makes it even funnier.',
+      context_ko: '온 가족이 공포에 질려 지켜보는 가운데 로스가 묘지에서 나나의 열린 무덤 속으로 빠져 허리를 다치는 장면. 친구들이 괜찮냐고 달려오자 무덤 안에서 올려다보며 이 대사를 완벽한 무표정으로 전달합니다. 에피소드 최고의 피지컬 코미디 순간이며, 완전한 침착함이 더욱 웃기게 만듭니다.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X13'
+    },
+    {
+      phrase: 'She would\'ve told us it\'s the wrong one.',
+      partOfSpeech: 'expression',      speaker: 'Monica',
+
+      meaning: 'A resigned observation about someone who was impossible to please — no matter what choice you made, she would have found fault with it. "Would\'ve" (would have) is the conditional past, used here to imagine what a deceased person\'s reaction would have been. It\'s a gentle, affectionate, and slightly exasperated way to remember someone\'s difficult personality.',
+      meaning_ko: '어떤 선택을 하더라도 항상 결점을 찾아냈을, 만족시키기 불가능한 사람에 대한 체념 어린 관찰입니다. "Would\'ve"(would have)는 조건부 과거로, 돌아가신 분의 반응이 어떠했을지 상상하기 위해 여기서 쓰입니다. 누군가의 어려운 성격을 기억하는 부드럽고 애정 어리며 약간 지친 방식입니다.',
+      example: 'A: "Which dress should we have chosen?" B: "It doesn\'t matter. She would\'ve told us it\'s the wrong one either way."',
+      example_ko: 'A: "어떤 드레스를 골라야 했을까?" B: "상관없어. 어느 쪽이든 틀린 거라고 했을 거야."',
+      context: 'Ross and Monica are at the funeral home trying to choose a dress for Nana\'s burial. No matter what they pick, they know it wouldn\'t have been right. Monica\'s resigned line captures the peculiar tenderness people feel toward difficult relatives after they\'re gone — the mix of exasperation and love.',
+      context_ko: '로스와 모니카가 나나의 장례를 위한 드레스를 고르러 장의사에 가는 장면. 무엇을 고르든 맞지 않았을 것임을 둘 다 알고 있습니다. 모니카의 체념 어린 대사는 어려운 가족이 떠난 후 사람들이 느끼는 독특한 그리움을 포착합니다 — 지침과 사랑의 혼합.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X14'
+    },
+    {
+      phrase: 'I could get a Brian.',
+      partOfSpeech: 'expression',
+      speaker: 'Chandler',
+      meaning: '\"I could get a [person]\" asserts that you are capable of attracting or winning over someone, even when no one asked and even when it\'s unlikely. It\'s a defensive, ego-protecting claim that surfaces when someone implies you can\'t have something — especially something you didn\'t particularly want in the first place. The comedy here is that Chandler is defending his attractiveness to a man he has no interest in, purely to protect his pride.',
+      meaning_ko: '\"I could get a [사람]\"은 아무도 묻지 않았더라도, 또는 가능성이 낮더라도 누군가를 유혹하거나 얻을 수 있다고 주장합니다. 처음에는 원하지도 않았던 것을 가질 수 없다고 누군가가 암시할 때 나오는 방어적이고 자존심을 지키려는 주장입니다. 여기서의 웃음 포인트는 찬들러가 순전히 자존심 때문에 아무 관심도 없는 남자에 대한 자신의 매력을 방어하는 것입니다.',
+      example: 'A: \"That position is way above your level.\" B: \"Above my level? I could get that job. If I really went for it, I could absolutely get it.\"',
+      example_ko: 'A: \"그 자리는 완전히 네 수준 위야.\" B: \"내 수준 위라고? 그 일 할 수 있어. 진짜 도전하면 절대적으로 할 수 있다고.\"',
+      context: 'Lowell has just told Chandler that Brian from Payroll — the handsome colleague Chandler had been curious about — is gay, and way out of his league. Chandler\'s ego fires back instantly: \"I could get a Brian. If I wanted to get a Brian, I could get a Brian.\" He immediately tries to wave at Brian across the room. Brian doesn\'t notice. The perfect final note.',
+      context_ko: '로웰이 찬들러에게 찬들러가 궁금해했던 잘생긴 동료 브라이언이 게이이고 \"완전 당신 수준 밖\"이라고 말한 직후. 찬들러의 자존심이 즉각 반격합니다: \"브라이언 같은 사람 만들 수 있어. 원하면 브라이언 만들 수 있다고.\" 그는 즉시 방 건너편 브라이언에게 손을 흔들려 합니다. 브라이언은 알아채지 못합니다. 완벽한 마지막 음표.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=REPLACE_S1E8X15'
+    }
   ]
   };
 
@@ -108,6 +272,7 @@
   function goHome() { window.location.href = '../../../index.html'; }
 
   function buildExpressions() {
+    var isKo = getLang() === 'ko';
     var dataExprs = EP_DATA.expressions || [];
     var list = document.getElementById('exprList');
     var html = '';
@@ -115,7 +280,7 @@
       var x   = (i < dataExprs.length) ? dataExprs[i] : null;
       var num = i + 1;
       var bmId  = 'expr-s' + S_NUM + 'e' + E_NUM + 'x' + num;
-      var bmUrl = 'friends/episodes/season' + S_NUM + '/s' + S_NUM + 'e' + E_NUM + '.html#slot' + num;
+      var bmUrl = 'friends/episodes/s' + S_NUM + 'e' + E_NUM + '.html#slot' + num;
       if (x) {
         var isLive = x.youtubeUrl && x.youtubeUrl.indexOf('REPLACE') === -1 && x.youtubeUrl.length > 25;
         var ytBtn = isLive
@@ -124,12 +289,19 @@
         var pos = x.partOfSpeech
           ? '<span style="font-size:0.7rem;color:var(--accent3);font-weight:700;margin-left:8px;text-transform:uppercase;letter-spacing:1px">' + escHtml(x.partOfSpeech) + '</span>'
           : '';
+        var meaning = (isKo && x.meaning_ko) ? x.meaning_ko : x.meaning;
+        var example = (isKo && x.example_ko) ? x.example_ko : x.example;
+        var context = (isKo && x.context_ko) ? x.context_ko : x.context;
+        var exprNum = isKo
+          ? ('표현 ' + num + ' &middot; S' + S_NUM + 'E' + E_NUM)
+          : ('Expression ' + num + ' &middot; S' + S_NUM + 'E' + E_NUM);
         html += '<div class="expr-card" id="slot' + num + '">';
-        html += '<div class="expr-num">Expression ' + num + ' &middot; S' + S_NUM + 'E' + E_NUM + '</div>';
+        html += '<div class="expr-num">' + exprNum + '</div>';
         html += '<div class="expr-phrase">&ldquo;' + escHtml(x.phrase) + '&rdquo;' + pos + '</div>';
-        html += '<div class="expr-meaning">' + escHtml(x.meaning) + '</div>';
-        html += '<div class="expr-example">' + escHtml(x.example) + '</div>';
-        if (x.context) html += '<div class="expr-context">&#128205; ' + escHtml(x.context) + '</div>';
+        if (x.speaker) html += '<div class="expr-speaker">&#127939; ' + escHtml(x.speaker) + '</div>';
+        html += '<div class="expr-meaning">' + escHtml(meaning) + '</div>';
+        html += '<div class="expr-example">' + escHtml(example) + '</div>';
+        if (context) html += '<div class="expr-context">&#128205; ' + escHtml(context) + '</div>';
         html += '<div class="expr-actions">' + ytBtn;
         html += '<button class="btn-bm" data-bm-id="' + bmId + '" onclick="handleExprBm(' + num + ')">' + t('bm.bookmark') + '</button>';
         html += '</div></div>';
@@ -147,23 +319,11 @@
   }
 
   function handleExprBm(num) {
-    toggleBookmark('expression','expr-s'+S_NUM+'e'+E_NUM+'x'+num,'💬 S'+S_NUM+'E'+E_NUM+' Expr'+num,'friends/episodes/season'+S_NUM+'/s'+S_NUM+'e'+E_NUM+'.html#slot'+num);
+    toggleBookmark('expression','expr-s'+S_NUM+'e'+E_NUM+'x'+num,'💬 S'+S_NUM+'E'+E_NUM+' Expr'+num,'friends/episodes/s'+S_NUM+'e'+E_NUM+'.html#slot'+num);
   }
 
   window.addEventListener('DOMContentLoaded', function() {
-    /* ── Availability guard ── */
-    if (!EP_DATA.available) {
-      var overlay = document.createElement('div');
-      overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#0d1b2e;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;';
-      overlay.innerHTML =
-        '<div style="font-size:3rem;margin-bottom:1rem;">&#128274;</div>'
-        + '<div style="font-size:1.3rem;font-weight:900;color:#38bdf8;margin-bottom:0.5rem;">Coming Soon</div>'
-        + '<div style="font-size:0.9rem;color:#6b87aa;margin-bottom:2rem;">This episode is not available yet.<br>Check back soon!</div>'
-        + '<button onclick="history.back()" style="background:#38bdf8;color:#0d1b2e;border:none;border-radius:10px;padding:10px 28px;font-size:0.95rem;font-weight:800;cursor:pointer;">&#9664; Go Back</button>';
-      document.body.appendChild(overlay);
-      return;
-    }
-        checkTermsGuard();
+    checkTermsGuard();
     buildExpressions();
     if (window.location.hash) {
       setTimeout(function() {
