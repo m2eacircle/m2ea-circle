@@ -13,21 +13,79 @@
     }
     .drama-info-card .di-label {
       font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
-    .coming-soon-bar {
-      background: rgba(232,36,92,0.07); border: 1.5px solid rgba(232,36,92,0.2);
-      border-radius: var(--radius); padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .coming-soon-bar .cs-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
-      border-radius: 20px; padding: 5px 18px;
-      font-size: 0.75rem; font-weight: 700; color: var(--accent);
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -67,36 +125,538 @@
   <div class="page-header">
     <div class="page-header-thumb">
       <img src="../../images/my-mister.jpg" alt="My Mister"
-        onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';this.parentElement.style.cssText='display:flex;align-items:center;justify-content:center;font-size:3rem;';">
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#f1f5f9,#cbd5e1)';this.parentElement.innerHTML='🌧️';">
     </div>
     <div class="page-header-info">
       <div class="page-header-title" id="hdr-title">My Mister</div>
-      <div class="page-header-meta" id="hdr-meta">16 Episodes &middot; 2018 &middot; Life Drama</div>
+      <div class="page-header-meta" id="hdr-meta">29 YouTube Shorts &middot; 2018 &middot; Life Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-my-mister"
+          onclick="toggleBookmark('show','show-my-mister','🌧️ My Mister','dramas/my-mister/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Coming Soon notice — EN -->
-  <div class="coming-soon-bar" id="cs-en" data-lang-en>
-    <div class="cs-badge">&#128679; Coming Soon</div>
-    <p>We are currently preparing study content for <strong>My Mister</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
-  </div>
-
-  <!-- Coming Soon notice — KO -->
-  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
-    <div class="cs-badge">&#128679; 준비중</div>
-    <p><strong>나의 아저씨</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
-  </div>
-
-  <!-- EN description -->
   <div class="drama-info-card" id="desc-en" data-lang-en>
     <div class="di-label">&#127916; About This Drama</div>
-    <div class="di-desc"><strong>My Mister</strong> is a 2018 IHQ/tvN drama about an unlikely bond between a middle-aged engineer worn down by life and a cold, guarded young woman burdened by debt and hardship. Starring Lee Sun-kyun and IU, it is a quiet, profound meditation on kindness, dignity, and what it means to truly be seen by another person.</div>
+    <div class="di-desc">
+      <strong>My Mister</strong> is a 2018 IHQ/tvN drama about an unlikely bond between a middle-aged engineer worn down by life and a cold, guarded young woman burdened by debt and hardship. Starring Lee Sun-kyun and IU, it is a quiet, profound meditation on kindness, dignity, and what it means to truly be seen by another person.
+    </div>
   </div>
 
-  <!-- KO description -->
   <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
     <div class="di-label">&#127916; 드라마 소개</div>
-    <div class="di-desc"><strong>나의 아저씨</strong>는 삶에 지친 중년 남자와 세상에 마음을 닫은 젊은 여자의 특별한 인연을 담은 2018년 드라마입니다. 이선균과 아이유 주연으로, 진정한 위로와 인간의 존엄성, 그리고 누군가에게 온전히 이해받는다는 것의 의미를 조용하고 깊이 있게 그려냅니다.</div>
+    <div class="di-desc">
+      <strong>나의 아저씨</strong>는 삶에 지친 중년 남자와 세상에 마음을 닫은 젊은 여자의 특별한 인연을 담은 2018년 드라마입니다. 이선균과 아이유 주연으로, 진정한 위로와 인간의 존엄성, 그리고 누군가에게 온전히 이해받는다는 것의 의미를 조용하고 깊이 있게 그려냅니다.
+    </div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 29 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="The K-Drama That Beat Most Hollywood Shows" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 29</div>
+        <div class="story-title-en" data-lang-en>The K-Drama That Beat Most Hollywood Shows</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">웬만한 할리우드 드라마를 이긴 K-드라마</div>
+        <div class="story-body-en" data-lang-en>My Mister is considered one of the greatest Korean dramas ever. It won Best Drama and Best Screenplay at Korea's top TV awards, holds a 9.0 on IMDb, and ranked among its global Top 100. International audiences often rate it even higher than Korean viewers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉는 역대 최고의 한국 드라마 중 하나로 꼽힌다. 한국 최대 시상식에서 최우수 작품상과 극본상을 받았고, IMDb 9.0에 세계 100대 TV 프로그램에도 올랐다. 해외 시청자들은 한국 시청자보다 오히려 더 높은 점수를 주곤 한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="The Drama That Changed IU's Career Forever" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 29</div>
+        <div class="story-title-en" data-lang-en>The Drama That Changed IU's Career Forever</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">아이유의 커리어를 바꾼 드라마</div>
+        <div class="story-body-en" data-lang-en>Before My Mister, IU was a huge star but dismissed as "a singer who acts." Then came Lee Ji-an. Her portrayal of a lonely woman fighting to survive stunned viewers and critics &mdash; subtle, painful, real. Afterward, she was seen as one of Korea's finest actors.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉 이전에도 아이유는 대스타였지만 '연기하는 가수'로 치부되곤 했다. 그러다 이지안이 등장했다. 살아남으려 애쓰는 외로운 여성을 그린 그녀의 연기는 시청자와 평단을 모두 놀라게 했다. 절제되고, 아프고, 지극히 현실적이었다. 이후 그녀는 한국 최고의 배우 중 하나로 인정받았다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="Famous People Around the World Couldn't Stop Praising This Drama" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 29</div>
+        <div class="story-title-en" data-lang-en>Famous People Around the World Couldn't Stop Praising This Drama</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">세계적인 유명인들이 극찬한 드라마</div>
+        <div class="story-body-en" data-lang-en>My Mister moved some of the world's famous artists. Composer Ryuichi Sakamoto said the OST made him cry; author Paulo Coelho praised its writing and psychological depth; actor Sebastian Roché called it unforgettable. Director Hirokazu Kore-eda was so moved he later cast IU in Broker.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉는 세계적 예술가들을 감동시켰다. 작곡가 류이치 사카모토는 OST에 눈물을 흘렸다고 했고, 작가 파울로 코엘료는 각본과 심리 묘사를 극찬했으며, 배우 세바스티앙 로셰는 잊을 수 없는 작품이라 했다. 고레에다 히로카즈 감독은 아이유의 연기에 감동해 훗날 영화 〈브로커〉에 그녀를 캐스팅했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="The Rare K-Drama Hero With an Actual Engineering Job" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 29</div>
+        <div class="story-title-en" data-lang-en>The Rare K-Drama Hero With an Actual Engineering Job</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">진짜 엔지니어 직업을 가진 드문 주인공</div>
+        <div class="story-body-en" data-lang-en>Most K-dramas give characters glamorous jobs in fashion, law, or medicine. But Park Dong-hoon is a structural engineer in building safety &mdash; a profession rarely seen onscreen. The show weaves real engineering into the story without jargon, making its world feel grounded and its people real.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 K-드라마는 인물에게 패션, 법조, 의료 같은 화려한 직업을 준다. 하지만 박동훈은 건축 안전을 다루는 구조 기술자로, 드라마에서 좀처럼 보기 힘든 직업이다. 작품은 어려운 전문 용어 없이 실제 엔지니어링을 이야기에 녹여, 세계와 인물을 현실감 있게 만든다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="Why Everyone Calls Each Other Brother and Sister" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Calls Each Other Brother and Sister</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">왜 서로를 형·오빠·언니·누나라 부를까</div>
+        <div class="story-body-en" data-lang-en>In My Mister, people call non-family members "hyung," "oppa," "unnie," and "noona," which confuses Western viewers since no one's related. In Korea, these titles show closeness, affection, and age hierarchy &mdash; and can feel warmer than a name. Relationships come before individuality, and language reflects that.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉에선 가족이 아닌 사이에도 '형', '오빠', '언니', '누나'라 부른다. 아무도 혈연이 아니라 서구 시청자에겐 헷갈릴 수 있다. 한국에서 이 호칭은 친밀함과 애정, 나이 위계를 나타내며, 때로 이름보다 더 따뜻하게 느껴진다. 관계가 개인보다 앞서고, 언어가 그것을 반영한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="The Workplace Dinner Culture That Shocked Foreign Viewers" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 29</div>
+        <div class="story-title-en" data-lang-en>The Workplace Dinner Culture That Shocked Foreign Viewers</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">외국 시청자를 놀라게 한 회식 문화</div>
+        <div class="story-body-en" data-lang-en>Many viewers were surprised the characters keep spending time after work. In Korea, this is "hoesik" &mdash; company dinner culture where coworkers eat, drink, and bond outside office hours. For decades it was key to being a team member, even affecting promotions. My Mister captures reality.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 해외 시청자는 인물들이 퇴근 후에도 함께 시간을 보내는 데 놀랐다. 한국에선 이를 '회식'이라 부른다. 동료들이 함께 먹고 마시며 근무 시간 밖에서 관계를 쌓는 문화다. 수십 년간 팀의 일원이 되는 중요한 부분으로 여겨졌고, 승진에 영향을 주기도 했다. 〈나의 아저씨〉는 그 현실을 담아낸다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="Why Korean Apartment Buildings Look So Similar" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Korean Apartment Buildings Look So Similar</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 아파트가 다 비슷해 보이는 이유</div>
+        <div class="story-body-en" data-lang-en>Viewers noticed the apartments in My Mister look identical. Modern Korea developed around apartment complexes rather than suburbs &mdash; with limited land and high density, high-rises became the practical solution. Apartment brands came to signal wealth and status, which Koreans recognize instantly. The drama reflects this.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉 속 아파트가 거의 똑같아 보인다고 느낀 시청자가 많다. 현대 한국은 교외 주택가가 아니라 아파트 단지 중심으로 발전했다. 좁은 땅과 높은 인구 밀도 탓에 고층 아파트가 현실적 해법이 됐다. 이후 아파트 브랜드는 부와 지위를 상징하게 됐고, 한국인은 이를 단번에 알아본다. 드라마는 이를 담담히 비춘다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="Why Koreans Rarely Say &quot;I Love You&quot;" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Koreans Rarely Say "I Love You"</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 '사랑해'라고 잘 말하지 않는 이유</div>
+        <div class="story-body-en" data-lang-en>Watching My Mister, you'll notice characters rarely say "I love you." Instead they show affection through actions &mdash; preparing food, waiting, fixing things, or staying beside someone in hard times. Many Koreans express love this way and feel awkward saying it. Care is shown, not spoken.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉를 보면 인물들이 '사랑해'라는 말을 좀처럼 하지 않는다. 대신 행동으로 애정을 보인다. 밥을 차리고, 기다리고, 뭔가를 고쳐주고, 힘든 시간에 곁을 지키는 것. 많은 한국인이 이렇게 사랑을 표현하며 자랐고 말로 하기를 어색해한다. 여기선 사랑이 말이 아니라 행동으로 드러난다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep9.jpg" alt="The Real Meaning of &quot;Ajusshi&quot;" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#9</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 9 / 29</div>
+        <div class="story-title-en" data-lang-en>The Real Meaning of "Ajusshi"</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">'아저씨'의 진짜 의미</div>
+        <div class="story-body-en" data-lang-en>The title My Mister comes from "ajusshi," though the translation isn't perfect. It means a middle-aged man, but can sound respectful, friendly, awkward, or rude. Early on, Ji-an uses it as a label; by the end, ajusshi means not age but trust, comfort, and understanding.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">제목 〈나의 아저씨〉는 '아저씨'에서 왔지만, 그 번역은 완벽하지 않다. 보통 중년 남성을 뜻하지만 상황에 따라 공손하게도, 친근하게도, 어색하게도, 무례하게도 들린다. 초반에 지안은 그저 나이 든 남자를 부르는 말로 쓴다. 하지만 극이 끝날 무렵, 아저씨는 더 이상 나이가 아니라 신뢰와 편안함, 이해를 뜻한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep10.jpg" alt="The Grandmother Story That Reflects Korean Tradition" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#10</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 10 / 29</div>
+        <div class="story-title-en" data-lang-en>The Grandmother Story That Reflects Korean Tradition</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국의 전통을 비추는 할머니 이야기</div>
+        <div class="story-body-en" data-lang-en>Ji-an and her grandmother reflect a once-common Korean family structure, where generations lived together sharing responsibilities and caring for elders. Though smaller homes reduced this, many Koreans see caring for aging parents as the family's duty, not the government's. Their bond shows burden and beauty.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">지안과 할머니는 한때 흔했던 한국의 가족 형태를 보여준다. 여러 세대가 한집에 살며 책임을 나누고 노인을 돌보던 모습이다. 집이 작아지며 줄었지만, 많은 한국인은 여전히 노부모를 모시는 일을 정부가 아닌 가족의 몫으로 여긴다. 두 사람의 관계는 그 전통의 부담과 아름다움을 함께 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep11.jpg" alt="Why Koreans Remove Their Shoes Indoors" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#11</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 11 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Koreans Remove Their Shoes Indoors</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 실내에서 신발을 벗는 이유</div>
+        <div class="story-body-en" data-lang-en>Almost every K-drama shows people removing shoes before entering a home. This comes from "ondol," Korea's traditional floor-heating system: since people sit, eat, and sleep on the floor, outdoor shoes indoors are unhygienic. Homes have a dedicated entry for shoes, and visitors remove them immediately.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">거의 모든 K-드라마에서 집에 들어가기 전 신발을 벗는 모습이 나온다. 이는 바닥으로 열이 올라오는 한국 전통 난방 '온돌'에서 비롯됐다. 사람들이 바닥에 앉고 먹고 자기에, 실내에서 신는 신발은 비위생적으로 여겨진다. 한국 집엔 신발을 벗는 현관이 따로 있고, 손님도 들어서자마자 신발을 벗는다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep12.jpg" alt="Why Soju Appears in Almost Every K-Drama" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#12</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 12 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Soju Appears in Almost Every K-Drama</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">소주가 거의 모든 K-드라마에 나오는 이유</div>
+        <div class="story-body-en" data-lang-en>My Mister features many soju scenes &mdash; Korea's popular drink. For decades, sharing drinks after work was a key way to build trust and friendship, with conversations happening over food and alcohol. Younger Koreans drink less, but a bottle of soju still means honesty and vulnerability.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉엔 한국에서 가장 인기 있는 술, 소주 장면이 많다. 수십 년간 퇴근 후 한잔은 신뢰와 우정을 쌓는 중요한 방식이었고, 중요한 대화는 사무실이 아니라 음식과 술자리에서 오갔다. 요즘 젊은 세대는 덜 마시지만, 소주 한 병은 여전히 솔직함과 진심을 뜻한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep13.jpg" alt="Why Korean Companies Feel Like Families" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#13</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 13 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Korean Companies Feel Like Families</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 회사가 가족처럼 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>For years, Korean companies promoted being one big family &mdash; managers guiding and protecting employees, workers showing loyalty. This fueled industrialization but pressured people to sacrifice time. My Mister portrays it honestly: sometimes work feels supportive, sometimes demanding and suffocating &mdash; a mix of loyalty and obligation.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">오랫동안 한국 회사들은 '한 가족'이라는 개념을 내세웠다. 상사는 직원을 이끌고 보호하고, 직원은 충성으로 답하는 식이다. 이는 빠른 산업화를 도왔지만, 개인 시간을 희생하게 하는 압박도 낳았다. 〈나의 아저씨〉는 이를 솔직히 그린다. 직장은 때로 든든하고, 때로 숨 막힌다. 충성과 의무가 뒤섞인 감정이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep14.jpg" alt="Why Quiet Endurance Is Considered Strength" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#14</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 14 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Quiet Endurance Is Considered Strength</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">조용한 인내가 강함으로 여겨지는 이유</div>
+        <div class="story-body-en" data-lang-en>Many Western dramas celebrate victories and dramatic speeches; My Mister celebrates something different. Its characters keep living, working, and helping others despite pain. In Korean culture, endurance is strength &mdash; quietly surviving hardship is respected. It frames silence and patience as courage, not weakness.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 서구 드라마는 요란한 승리와 극적인 연설을 예찬한다. 〈나의 아저씨〉는 다른 것을 예찬한다. 인물들은 커다란 고통을 안고도 계속 살아가고, 일하고, 남을 돕는다. 한국 문화에서 인내는 그 자체로 강함이며, 고난을 묵묵히 견디는 힘은 깊이 존중받는다. 이 드라마는 침묵과 인내를 나약함이 아니라 용기로 그린다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep15.jpg" alt="Why Koreans Bow So Often" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#15</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 15 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Koreans Bow So Often</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 자주 고개 숙여 인사하는 이유</div>
+        <div class="story-body-en" data-lang-en>In My Mister, characters bow constantly, even among friends. In Korea, bowing isn't only for ceremonies &mdash; it's everyday manners and respect. The depth changes by situation: a small nod between colleagues, a deeper bow for gratitude or respect. Bowing is often automatic, part of life.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉에선 친구나 동료 사이에도 자주 고개 숙여 인사한다. 한국에서 인사는 격식 있는 자리에서만이 아니라 일상의 예의이자 존중이다. 상황과 관계에 따라 숙이는 정도가 달라진다. 동료끼리는 가벼운 목례, 감사나 존경에는 더 깊은 인사. 많은 한국인에게 인사는 거의 자동이며, 그저 일상의 일부다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep16.jpg" alt="The Convenience Store Is More Than a Store" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#16</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 16 / 29</div>
+        <div class="story-title-en" data-lang-en>The Convenience Store Is More Than a Store</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">편의점은 그저 가게가 아니다</div>
+        <div class="story-body-en" data-lang-en>Korean convenience stores differ from Western ones &mdash; not just snacks and drinks. You pay bills, receive packages, withdraw cash, print documents, and eat meals. Many open 24 hours and become neighborhood hubs: students study, workers grab dinner, night owls rely on them &mdash; miniature community centers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 편의점은 서구와 다르다. 그저 간식과 음료를 파는 곳이 아니다. 공과금을 내고, 택배를 받고, 현금을 뽑고, 서류를 출력하고, 끼니까지 해결한다. 상당수가 24시간 열려 동네 생활의 일부가 된다. 학생은 공부하고, 직장인은 저녁을 때우고, 늦은 밤엔 다들 편의점에 기댄다. 작은 동네 커뮤니티 센터인 셈이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep17.jpg" alt="Why Everyone Works So Late" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#17</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 17 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Works So Late</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">다들 늦게까지 일하는 이유</div>
+        <div class="story-body-en" data-lang-en>The long hours in My Mister reflect Korea's late-20th-century growth. For years, staying late signaled dedication and loyalty, and leaving before your manager felt unacceptable. Though laws and culture are improving, many Koreans remember these expectations vividly, and the drama captures the pride and exhaustion.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉 속 긴 근무 시간은 20세기 후반 한국의 급성장을 반영한다. 오랫동안 늦게까지 남는 건 헌신과 충성의 증거였고, 상사보다 먼저 퇴근하는 건 용납되지 않았다. 노동법과 문화가 나아지고 있지만 많은 한국인이 이 분위기를 생생히 기억한다. 드라마는 거기서 온 자부심과 피로를 함께 담는다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep18.jpg" alt="Why Debt Feels Different in Korea" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#18</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 18 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Debt Feels Different in Korea</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국에서 빚이 다르게 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>In Korea, debt carries emotional and social weight beyond money. It affects family, marriage prospects, and reputation, and many feel responsible for protecting their family's honor. That pressure makes debt personal. My Mister shows this through Ji-an &mdash; for many viewers, her story felt uncomfortably real.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국에서 빚은 단순한 돈 문제를 넘어 정서적·사회적 무게를 지닌다. 가족과 혼사, 평판에까지 영향을 주고, 많은 사람이 가족의 명예를 지켜야 한다는 책임까지 느낀다. 그 압박이 빚을 매우 개인적인 것으로 만든다. 〈나의 아저씨〉는 이를 지안을 통해 보여주고, 많은 시청자에게 그 이야기는 불편할 만큼 현실적이었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep19.jpg" alt="Why Silence Means Understanding" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#19</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 19 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Silence Means Understanding</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">침묵이 이해를 뜻하는 이유</div>
+        <div class="story-body-en" data-lang-en>Western viewers feel uneasy when characters sit silently for long. In Korea, silence carries meaning: sitting quietly beside someone without forcing talk signals trust, empathy, and closeness. My Mister uses silence as a powerful tool &mdash; some of its most emotional moments happen with no dialogue.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">서구 시청자는 인물들이 오래 말없이 함께 앉아 있으면 어색해하곤 한다. 한국에서 침묵은 그 자체로 의미를 지닌다. 억지로 대화하지 않고 곁에 조용히 앉아 있는 것만으로 신뢰와 공감, 친밀함을 나타낼 수 있다. 〈나의 아저씨〉는 침묵을 강력한 연출 도구로 쓴다. 가장 감동적인 순간들은 대사 없이 흘러간다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep20.jpg" alt="Why Koreans Ask Your Age So Quickly" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#20</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 20 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Koreans Ask Your Age So Quickly</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 나이를 빨리 묻는 이유</div>
+        <div class="story-body-en" data-lang-en>Foreigners are surprised when Koreans ask their age soon after meeting. In Korea, age shapes language, titles, manners, and expectations &mdash; knowing it helps you speak politely and sets the social relationship. What feels personal elsewhere is practical here, as My Mister shows.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">외국인은 처음 만나자마자 나이를 묻는 한국인에게 자주 놀란다. 한국에선 나이가 언어와 호칭, 예절과 기대치를 좌우한다. 나이를 알면 어떻게 공손히 말하고 어떤 호칭을 쓸지 정하고, 두 사람의 관계도 정해진다. 다른 나라에선 사적으로 느껴질 질문이 한국에선 실용적이다. 〈나의 아저씨〉가 이를 자연스럽게 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep21.jpg" alt="Why Business Cards Require Two Hands" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#21</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 21 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Business Cards Require Two Hands</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">명함을 두 손으로 주고받는 이유</div>
+        <div class="story-body-en" data-lang-en>In Korea, exchanging business cards is more than sharing contact info &mdash; it's a formal introduction and respect. Cards are given and received with both hands, or one hand supported by the other. Pocketing a card without looking seems rude; people pause to read it first.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국에서 명함 교환은 단순한 연락처 공유 이상이다. 격식 있는 소개이자 존중의 표시다. 명함은 두 손으로, 또는 한 손을 다른 손으로 받쳐 주고받는다. 받자마자 보지도 않고 주머니에 넣으면 무례해 보인다. 대신 잠시 찬찬히 읽은 뒤 넣는다. 이런 작은 예절이 한국 비즈니스 문화에서 큰 의미를 지닌다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep22.jpg" alt="Why Korean Has So Many Levels of Politeness" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#22</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 22 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Korean Has So Many Levels of Politeness</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국어에 존댓말 단계가 많은 이유</div>
+        <div class="story-body-en" data-lang-en>Korean changes depending on who you're speaking to. Different speech levels for friends, coworkers, parents, strangers, and superiors &mdash; the same sentence can sound polite, casual, formal, or intimate by ending. As relationships shift, speech shifts. In My Mister, you hear bonds growing closer or colder.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국어는 상대에 따라 달라진다. 친구, 동료, 부모, 낯선 사람, 윗사람에게 쓰는 말투가 각각 다르고, 같은 문장도 어미에 따라 공손하게, 편하게, 격식 있게, 친밀하게 들린다. 관계가 변하면 말투도 변한다. 〈나의 아저씨〉에선 인물들의 말투만 들어도 관계가 가까워지고 멀어지는 걸 느낄 수 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep23.jpg" alt="The Truth About Rooftop Apartments" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#23</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 23 / 29</div>
+        <div class="story-title-en" data-lang-en>The Truth About Rooftop Apartments</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">옥탑방에 관한 진실</div>
+        <div class="story-body-en" data-lang-en>Rooftop apartments look romantic in K-dramas, with city views. In reality, they became popular as cheap housing for low-income people &mdash; scorching in summer, freezing in winter from poor insulation. For students and low-wage workers, they were affordable. My Mister shows both the hardship and freedom.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">옥탑방은 K-드라마에서, 특히 도시 전망과 함께면 낭만적으로 보인다. 하지만 실제로는 형편이 넉넉지 않은 사람들을 위한 값싼 집으로 퍼졌다. 단열이 나빠 여름엔 찌는 듯 덥고 겨울엔 몹시 춥다. 학생과 저소득 노동자에겐 감당할 만한 선택지였다. 〈나의 아저씨〉는 그 고단함과 자유를 모두 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep24.jpg" alt="Why Convenience Store Lunches Are So Popular" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#24</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 24 / 29</div>
+        <div class="story-title-en" data-lang-en>Why Convenience Store Lunches Are So Popular</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">편의점 도시락이 인기인 이유</div>
+        <div class="story-body-en" data-lang-en>Convenience store meals are a part of modern Korean life. Unlike prepackaged food elsewhere, they're affordable, fresh, and surprisingly good. Students, office workers, and people living alone rely on them, and companies compete on taste and variety. Grabbing lunch there isn't unusual &mdash; it's everyday life.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">편의점 음식은 현대 한국 생활의 큰 부분이다. 다른 나라의 즉석식품과 달리 저렴하고 신선하며 의외로 맛있다. 학생과 직장인, 혼자 사는 사람들이 자주 이용하고, 업체들은 맛과 종류를 두고 치열하게 경쟁한다. 한국에선 편의점에서 점심을 사는 게 이상하거나 부실한 일로 여겨지지 않는다. 그저 바쁜 일상의 일부다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep25.jpg" alt="Why People Walk Alone at Night" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#25</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 25 / 29</div>
+        <div class="story-title-en" data-lang-en>Why People Walk Alone at Night</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">사람들이 밤에 혼자 걷는 이유</div>
+        <div class="story-body-en" data-lang-en>Many scenes show characters walking alone at night through quiet streets, which surprises foreign viewers. Korea is among the safest countries, with excellent transit and late-night businesses. Crime exists and caution matters, but many Koreans feel safe walking home after midnight &mdash; ordinary life, not drama.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉엔 늦은 밤 조용한 거리를 혼자 걷는 장면이 많다. 일부 해외 시청자에겐 놀랍게 보일 수 있다. 한국은 세계에서 비교적 안전한 나라로 꼽히며, 특히 대중교통과 심야 영업이 잘 갖춰진 도시가 그렇다. 범죄가 없진 않고 조심은 늘 필요하지만, 많은 한국인이 자정 이후 혼자 귀가하는 데 큰 불안을 느끼지 않는다. 극적 장치가 아니라 그저 일상이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep26.jpg" alt="The Hidden Meaning of Rain in Korean Dramas" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#26</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 26 / 29</div>
+        <div class="story-title-en" data-lang-en>The Hidden Meaning of Rain in Korean Dramas</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 드라마에서 비의 숨은 의미</div>
+        <div class="story-body-en" data-lang-en>Rain appears constantly in K-dramas, and rarely by accident. It symbolizes sadness, change, healing, or a new chapter &mdash; directors use weather like another character. In My Mister, rainy scenes arrive at emotional turning points, reflecting what characters can't say aloud. Korean viewers read meaning instantly.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">비는 K-드라마에 끊임없이 등장하고, 우연인 경우는 드물다. 흔히 슬픔이나 변화, 치유, 새로운 시작을 상징하며, 감독들은 날씨를 또 하나의 인물처럼 쓴다. 〈나의 아저씨〉에선 비 오는 장면이 중요한 감정의 전환점에 나타나, 인물이 말로 못 하는 마음을 대신한다. 한국 시청자는 그 의미를 단번에 읽어낸다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep27.jpg" alt="Why So Many Young Koreans Related to Ji-an" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#27</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 27 / 29</div>
+        <div class="story-title-en" data-lang-en>Why So Many Young Koreans Related to Ji-an</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">많은 청년들이 지안에게 공감한 이유</div>
+        <div class="story-body-en" data-lang-en>Many Koreans saw themselves in Ji-an: financial pressure, unstable jobs, debt, family duties, and exhaustion. Her generation feels trapped between high living costs and competition. Ji-an wasn't a hero or victim &mdash; just a real person trying to survive a hard day. Realism forged a connection.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 한국 청년이 지안에게서 자신을 봤다. 경제적 압박, 불안정한 일자리, 빚, 가족 부양, 그리고 소진. 이 세대는 흔히 높은 생활비와 치열한 경쟁 사이에 갇힌 기분을 이야기한다. 지안은 영웅도 피해자도 아니었다. 그저 또 하루를 버티려는 진짜 사람이었다. 그 현실감이 시청자와 깊은 유대를 만들었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep28.jpg" alt="The Real Meaning of &quot;Fighting!&quot;" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#28</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 28 / 29</div>
+        <div class="story-title-en" data-lang-en>The Real Meaning of "Fighting!"</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">'파이팅!'의 진짜 의미</div>
+        <div class="story-body-en" data-lang-en>If you've watched K-dramas, you've heard "Fighting!" It doesn't mean fighting anyone &mdash; it means "You can do it," "Stay strong," or "Keep going." It's less about victory than endurance and encouragement. Koreans use it for friends, family, coworkers, even strangers &mdash; matching My Mister's message.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">K-드라마를 봤다면 '파이팅!'이라는 말을 들어봤을 것이다. 누구와 싸우라는 뜻이 아니다. '넌 할 수 있어', '힘내', '계속 가자'는 뜻이다. 승리보다 인내와 격려에 초점이 있다. 한국인은 친구, 가족, 동료, 심지어 낯선 이에게도 이 말을 건넨다. 여러모로 〈나의 아저씨〉의 메시지와 꼭 맞닿아 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep29.jpg" alt="Why My Mister Connected With the World" onerror="this.style.display='none';this.parentElement.innerHTML='🌧️';">
+        <span class="story-num-badge">#29</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 29 / 29</div>
+        <div class="story-title-en" data-lang-en>Why My Mister Connected With the World</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈나의 아저씨〉가 전 세계와 통한 이유</div>
+        <div class="story-body-en" data-lang-en>My Mister became a global hit because it wasn't about superheroes &mdash; but ordinary people carrying invisible burdens and helping each other. They rarely solve problems with speeches; instead they offer kindnesses and companionship. Those moments feel universal, reminding us being there can change a life.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈나의 아저씨〉가 세계적으로 사랑받은 건 초인적 영웅 이야기가 아니었기 때문이다. 보이지 않는 짐을 진 평범한 사람들이 서로를 조용히 살게 하는 이야기다. 이들은 거창한 연설로 문제를 풀지 않는다. 대신 작은 친절과 곁을 내어준다. 그런 순간은 언어와 문화를 넘어 보편적으로 다가온다. 그저 곁에 있어 주는 것이 한 사람의 삶을 바꿀 수 있음을 일깨운다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
   </div>
 
 </div>
@@ -109,28 +669,39 @@
 
 <script src="../../js/app.js"></script>
 <script>
-
   function goHome() { window.location.href = '../../index.html'; }
 
   function applyPageLang() {
     var isKo = getLang() === 'ko';
     document.documentElement.lang = isKo ? 'ko' : 'en';
-    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
-    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
-    document.getElementById('bc-drama').textContent  = isKo ? '나의 아저씨' : 'My Mister';
-    document.getElementById('hdr-title').textContent = isKo ? '나의 아저씨' : 'My Mister';
-    document.getElementById('hdr-meta').textContent  = isKo ? '16화 · 2018 · 휴먼 드라마' : '16 Episodes · 2018 · Life Drama';
-    document.querySelectorAll('[data-lang-en]').forEach(function(el) { el.style.display = isKo ? 'none' : ''; });
-    document.querySelectorAll('[data-lang-ko]').forEach(function(el) { el.style.display = isKo ? '' : 'none'; });
+    // null-safe lookups: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every element to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '나의 아저씨' : 'My Mister');
+    setTxt('hdr-title',    isKo ? '나의 아저씨' : 'My Mister');
+    setTxt('hdr-meta',     isKo ? '유튜브 쇼츠 29개 · 2018 · 휴먼 드라마' : '29 YouTube Shorts · 2018 · Life Drama');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 29개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 29 Stories');
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
     injectTermsModal();
     document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
     applyPageLang();
     applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
   });
-
 </script>
 </body>
 </html>
