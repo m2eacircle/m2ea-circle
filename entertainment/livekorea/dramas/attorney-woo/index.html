@@ -13,21 +13,79 @@
     }
     .drama-info-card .di-label {
       font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
-    .coming-soon-bar {
-      background: rgba(232,36,92,0.07); border: 1.5px solid rgba(232,36,92,0.2);
-      border-radius: var(--radius); padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .coming-soon-bar .cs-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
-      border-radius: 20px; padding: 5px 18px;
-      font-size: 0.75rem; font-weight: 700; color: var(--accent);
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -67,36 +125,657 @@
   <div class="page-header">
     <div class="page-header-thumb">
       <img src="../../images/attorney-woo.jpg" alt="Extraordinary Attorney Woo"
-        onerror="this.style.display='none';this.parentElement.innerHTML='🐋';this.parentElement.style.cssText='display:flex;align-items:center;justify-content:center;font-size:3rem;';">
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e0f2fe,#bae6fd)';this.parentElement.innerHTML='🐋';">
     </div>
     <div class="page-header-info">
       <div class="page-header-title" id="hdr-title">Extraordinary Attorney Woo</div>
-      <div class="page-header-meta" id="hdr-meta">16 Episodes &middot; 2022 &middot; Legal Drama</div>
+      <div class="page-header-meta" id="hdr-meta">36 YouTube Shorts &middot; 2022 &middot; Legal Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-attorney-woo"
+          onclick="toggleBookmark('show','show-attorney-woo','🐋 Extraordinary Attorney Woo','dramas/attorney-woo/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Coming Soon notice — EN -->
-  <div class="coming-soon-bar" id="cs-en" data-lang-en>
-    <div class="cs-badge">&#128679; Coming Soon</div>
-    <p>We are currently preparing study content for <strong>Extraordinary Attorney Woo</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
-  </div>
-
-  <!-- Coming Soon notice — KO -->
-  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
-    <div class="cs-badge">&#128679; 준비중</div>
-    <p><strong>이상한 변호사 우영우</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
-  </div>
-
-  <!-- EN description -->
   <div class="drama-info-card" id="desc-en" data-lang-en>
     <div class="di-label">&#127916; About This Drama</div>
-    <div class="di-desc"><strong>Extraordinary Attorney Woo</strong> is a 2022 ENA drama starring Park Eun-bin as Woo Young-woo, a brilliant lawyer on the autism spectrum who navigates cases and social challenges with warmth and wit. The show became a global phenomenon, earning praise for its sensitive portrayal of neurodiversity and its charming, sharply written courtroom stories.</div>
+    <div class="di-desc">
+      <strong>Extraordinary Attorney Woo</strong> is a 2022 ENA drama starring Park Eun-bin as Woo Young-woo, a brilliant lawyer on the autism spectrum who navigates cases and social challenges with warmth and wit. The show became a global phenomenon, earning praise for its sensitive portrayal of neurodiversity and its charming, sharply written courtroom stories.
+    </div>
   </div>
 
-  <!-- KO description -->
   <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
     <div class="di-label">&#127916; 드라마 소개</div>
-    <div class="di-desc"><strong>이상한 변호사 우영우</strong>는 자폐 스펙트럼을 가진 천재 변호사 우영우(박은빈)가 법정 안팎에서 펼치는 이야기를 담은 2022년 ENA 드라마입니다. 신경다양성에 대한 따뜻하고 섬세한 묘사와 유머 있는 법정 스토리로 전 세계적인 사랑을 받았습니다.</div>
+    <div class="di-desc">
+      <strong>이상한 변호사 우영우</strong>는 자폐 스펙트럼을 가진 천재 변호사 우영우(박은빈)가 법정 안팎에서 펼치는 이야기를 담은 2022년 ENA 드라마입니다. 신경다양성에 대한 따뜻하고 섬세한 묘사와 유머 있는 법정 스토리로 전 세계적인 사랑을 받았습니다.
+    </div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 36 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="The Real-Life Inspiration Behind Woo Young-woo" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 36</div>
+        <div class="story-title-en" data-lang-en>The Real-Life Inspiration Behind Woo Young-woo</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">우영우의 실제 모델</div>
+        <div class="story-body-en" data-lang-en>Woo Young-woo was partly inspired by autism advocate Temple Grandin, herself on the spectrum. The team reportedly studied her TED talks for Young-woo's courtroom mannerisms, aiming to highlight intense focus and unique strengths rather than limitations, challenging stereotypes about autistic characters.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">우영우 캐릭터는 자폐 스펙트럼 당사자이자 자폐 옹호 활동가인 템플 그랜딘에게서 일부 영감을 받았다고 한다. 제작진은 영우의 법정 태도를 만들 때 그녀의 테드 강연을 참고했다고 전해진다. 한계보다 강렬한 몰입과 고유한 강점을 부각해, 자폐 캐릭터에 대한 고정관념에 도전하고자 했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="Was Hanbada Inspired by a Real Korean Law Firm?" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 36</div>
+        <div class="story-title-en" data-lang-en>Was Hanbada Inspired by a Real Korean Law Firm?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한바다는 실제 로펌에서 영감을 받았을까?</div>
+        <div class="story-body-en" data-lang-en>Many believe fictional firm Hanbada was inspired by real firm Bae, Kim & Lee. But the name actually changed once whales became central to the story &mdash; "Hanbada" means "great ocean," fitting Young-woo's love of whales. A real lawyer there helped review legal accuracy.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 사람이 극중 로펌 '한바다'가 실제 로펌 '법무법인 광장'에서 영감을 받았다고 여긴다. 하지만 실제로는 고래가 이야기의 중심이 되면서 이름이 바뀐 것이다. '한바다'는 '큰 바다'를 뜻하며 영우의 고래 사랑과 잘 맞아떨어진다. 실제 로펌의 한 변호사가 법률 고증을 도왔다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="Woo Young-woo's Story Actually Began Three Years Earlier" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 36</div>
+        <div class="story-title-en" data-lang-en>Woo Young-woo's Story Actually Began Three Years Earlier</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">우영우의 이야기는 3년 전에 시작됐다</div>
+        <div class="story-body-en" data-lang-en>Young-woo's story began with writer Moon Ji-won's earlier film Innocent Witness, whose autistic character Ji-woo dreams of becoming a lawyer. Producers later asked: what if she grew up and did? Moon said yes &mdash; and that conversation became Extraordinary Attorney Woo.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">영우의 이야기는 문지원 작가의 이전 영화 〈증인〉에서 시작됐다. 그 영화 속 자폐를 가진 지우는 변호사가 되길 꿈꾼다. 훗날 제작진은 물었다. 그 아이가 자라 실제로 변호사가 된다면? 문지원은 그렇다고 답했고, 그 대화가 〈이상한 변호사 우영우〉가 되었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="The K-Drama That Came Before Extraordinary Attorney Woo" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 36</div>
+        <div class="story-title-en" data-lang-en>The K-Drama That Came Before Extraordinary Attorney Woo</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈우영우〉 이전에 있었던 드라마</div>
+        <div class="story-body-en" data-lang-en>Before Attorney Woo, Korea had Good Doctor, about an autistic doctor with extraordinary skill. Medicine and law are Korea's top dream professions for science and humanities students respectively. Good Doctor became a US remake &mdash; and Attorney Woo has now sold its own US remake rights.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈우영우〉 이전에 한국엔 자폐를 가진 천재 의사 이야기 〈굿 닥터〉가 있었다. 의학과 법학은 각각 이과와 문과 학생들의 최고 선망 직업이다. 〈굿 닥터〉는 미국판으로 리메이크됐고, 이제 〈우영우〉도 미국 리메이크 판권을 판매하며 같은 길을 걷고 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="The Rare K-Drama That Became a Webtoon" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 36</div>
+        <div class="story-title-en" data-lang-en>The Rare K-Drama That Became a Webtoon</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">드물게 웹툰이 된 드라마</div>
+        <div class="story-body-en" data-lang-en>Most K-dramas start as webtoons; Attorney Woo did the opposite. After its global success, publishers created a webtoon adaptation with entirely new stories, launched on Naver Webtoon in July 2022 and planned for sixty episodes &mdash; reversing Korea's usual adaptation process.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 K-드라마는 웹툰에서 시작하지만, 〈우영우〉는 정반대였다. 전 세계적 성공 이후 출판사들은 완전히 새로운 이야기를 담은 웹툰을 제작했다. 2022년 7월 네이버웹툰에서 연재를 시작해 총 60화로 기획됐다. 한국의 일반적인 각색 순서를 뒤집은 드문 사례다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="The Production Team Waited One Entire Year for Park Eun-bin" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 36</div>
+        <div class="story-title-en" data-lang-en>The Production Team Waited One Entire Year for Park Eun-bin</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">박은빈을 위해 1년을 기다린 제작진</div>
+        <div class="story-body-en" data-lang-en>Originally set for 2021, the show was delayed a full year because producers believed only Park Eun-bin could play Young-woo. She initially declined, worried and scheduling-conflicted. Instead of recasting, they simply waited &mdash; and a year later, touched by their trust, she accepted.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">원래 2021년 방영 예정이던 이 작품은 오직 박은빈만이 영우를 연기할 수 있다는 제작진의 믿음으로 1년이 미뤄졌다. 박은빈은 부담과 일정 문제로 처음엔 고사했다. 제작진은 다른 배우를 찾는 대신 그저 기다렸고, 1년 뒤 그 신뢰에 감동한 그녀는 결국 수락했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="Why Park Eun-bin Refused to Copy Real People" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Park Eun-bin Refused to Copy Real People</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">박은빈이 실존 인물을 따라 하지 않은 이유</div>
+        <div class="story-body-en" data-lang-en>Unlike many actors, Park Eun-bin avoided studying specific autistic individuals, worried it could feel disrespectful or like parody. Instead she spent months reading books and research on autism spectrum disorder, building the character through study rather than imitation &mdash; earning praise for her thoughtful performance.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">다른 배우들과 달리 박은빈은 특정 자폐 당사자를 따라 하는 방식을 피했다. 그것이 무례하거나 흉내처럼 보일까 우려했기 때문이다. 대신 몇 달간 자폐 스펙트럼에 관한 책과 연구 자료를 읽으며 인물을 만들어갔다. 모방이 아닌 공부로 빚어낸 연기는 많은 시청자의 찬사를 받았다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="The Tree That Became a National Treasure in Real Life" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 36</div>
+        <div class="story-title-en" data-lang-en>The Tree That Became a National Treasure in Real Life</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">현실에서 천연기념물이 된 나무</div>
+        <div class="story-body-en" data-lang-en>The famous tree from episodes 7&ndash;8 is a real 500-year-old hackberry tree in Changwon. At filming it lacked protected status, but after millions watched, public interest revived preservation talks &mdash; and months later, it was officially designated for cultural heritage protection.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">7~8화에 등장한 그 유명한 나무는 실제로 창원에 있는 수령 500년 팽나무다. 촬영 당시엔 보호수 지정을 받지 못한 상태였다. 하지만 수백만 명이 시청한 뒤 여론이 되살아나 보존 논의가 재개됐고, 몇 달 뒤 실제로 문화재로 지정됐다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep9.jpg" alt="Why the English Title Was Genius" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#9</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 9 / 36</div>
+        <div class="story-title-en" data-lang-en>Why the English Title Was Genius</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">영어 제목이 절묘했던 이유</div>
+        <div class="story-body-en" data-lang-en>The Korean title's key word could translate as "weird" or "strange" &mdash; both negative in English. Netflix chose "extraordinary" instead, suggesting brilliance and exceptional ability rather than awkwardness. Many praised the choice for preserving Young-woo's spirit while avoiding harmful stereotypes.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국어 제목의 핵심 단어는 영어로 'weird'나 'strange'로 옮길 수 있었지만, 둘 다 부정적인 어감을 지닌다. 넷플릭스는 대신 'extraordinary(비범한)'를 선택했다. 이는 어색함이 아니라 뛰어남과 탁월한 능력을 암시한다. 많은 이들이 이 번역이 해로운 고정관념을 피하면서도 영우의 정신을 지켰다고 칭찬했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep10.jpg" alt="The Translator Who Saved the Jokes" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#10</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 10 / 36</div>
+        <div class="story-title-en" data-lang-en>The Translator Who Saved the Jokes</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">농담을 살려낸 번역가</div>
+        <div class="story-body-en" data-lang-en>Translating Korean wordplay was one of the hardest parts of the show. In episode 11, jokes relying on pronunciation were rewritten from scratch into new English puns &mdash; like "sewed" versus "sued" &mdash; recreating the humor itself rather than translating literally.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국어 말장난을 옮기는 일은 이 드라마 번역에서 가장 까다로운 부분 중 하나였다. 11화에서 발음에 기댄 농담들은 완전히 새로 만들어져 영어식 말장난으로 재탄생했다. 'sewed(꿰맸다)'와 'sued(고소했다)'처럼, 직역이 아니라 유머 자체를 새로 창작한 것이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep11.jpg" alt="The Hidden Cameos Inside the Noodle Restaurant" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#11</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 11 / 36</div>
+        <div class="story-title-en" data-lang-en>The Hidden Cameos Inside the Noodle Restaurant</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">국숫집에 숨은 카메오</div>
+        <div class="story-body-en" data-lang-en>Rewatching episode 14, sharp-eyed fans can spot autographs from the actors themselves &mdash; Park Eun-bin, Kang Tae-oh, and Kang Ki-young &mdash; hanging inside Haengun Noodles. Most viewers missed this playful Easter egg the production team hid for observant fans.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">14화를 다시 보면 눈썰미 좋은 팬들은 행운분식 안에 걸린 사인 중 박은빈, 강태오, 강기영 등 배우 본인들의 사인을 발견할 수 있다. 대부분의 시청자는 처음엔 이 장난스러운 이스터에그를 놓쳤다. 세심한 팬들을 위해 제작진이 숨겨둔 디테일이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep12.jpg" alt="Why Does Young-woo Always Say Names Backwards?" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#12</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 12 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Does Young-woo Always Say Names Backwards?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">영우는 왜 이름을 거꾸로 읽을까?</div>
+        <div class="story-body-en" data-lang-en>Young-woo proudly explains her name reads the same forwards and backwards, like "kayak" or "level." The introduction became one of Korean drama's most iconic scenes &mdash; many fans can still recite it years later, and it's often the moment viewers fell for Young-woo.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">영우는 자신의 이름이 앞으로 읽으나 거꾸로 읽으나 같다고, 마치 'kayak'이나 'level'처럼 자랑스럽게 설명한다. 이 자기소개는 한국 드라마 역사상 가장 상징적인 장면 중 하나가 됐다. 몇 년이 지나도 많은 팬이 이를 외워서 말할 수 있고, 많은 시청자가 이 순간 영우에게 반했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep13.jpg" alt="Why Are Korean Law Firms So Competitive?" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#13</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 13 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Are Korean Law Firms So Competitive?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 로펌이 그토록 치열한 이유</div>
+        <div class="story-body-en" data-lang-en>The drama shows one of Korea's most competitive industries: top university, bar exam, major law firm can decide an entire career. Competition starts early and continues into adulthood, with long hours and intense pressure &mdash; softened onscreen, but recognizable to Korean viewers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">드라마는 한국에서 가장 치열한 업계 중 하나를 보여준다. 명문대 진학, 변호사 시험, 대형 로펌 입사가 커리어 전체를 좌우할 수 있다. 경쟁은 일찍 시작돼 성인이 되어서도 이어지고, 긴 근무 시간과 극심한 압박이 뒤따른다. 극에선 다소 순화됐지만 한국 시청자에겐 낯익은 현실이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep14.jpg" alt="Why Do Koreans Ask Your Age So Quickly?" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#14</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 14 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Do Koreans Ask Your Age So Quickly?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 나이를 빨리 묻는 이유</div>
+        <div class="story-body-en" data-lang-en>Many viewers are shocked characters ask age almost immediately after meeting. In Korea it's not rude &mdash; age determines speech level, titles, and even who pours drinks. Without knowing it, interactions can feel awkward, so it's often one of the first questions asked.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 시청자는 등장인물들이 만나자마자 나이를 묻는 데 놀란다. 한국에서 이는 무례한 일이 아니다. 나이는 말투와 호칭, 심지어 술자리에서 누가 술을 따르는지까지 정한다. 나이를 모르면 대화가 금세 어색해질 수 있어, 흔히 가장 먼저 묻는 질문 중 하나가 된다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep15.jpg" alt="Why Does Everyone Use Titles Instead of Names?" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#15</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 15 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Does Everyone Use Titles Instead of Names?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">왜 이름 대신 직함을 부를까?</div>
+        <div class="story-body-en" data-lang-en>Coworkers rarely use first names, instead saying "Attorney Woo" or "Team Leader Jung." In Korea, titles are more respectful and professional than personal names, and calling a boss by first name can feel uncomfortable &mdash; title culture remains huge in Korean offices.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">동료들은 이름 대신 '우영우 변호사님', '정 팀장님'처럼 직함으로 부른다. 한국에서 직함은 개인 이름보다 더 정중하고 격식 있게 여겨진다. 상사를 이름으로 부르는 건 많은 직장에서 어색하게 느껴진다. 직함 문화는 여전히 한국 사무실 문화의 큰 부분을 차지한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep16.jpg" alt="The Hidden Meaning Behind Bowing" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#16</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 16 / 36</div>
+        <div class="story-title-en" data-lang-en>The Hidden Meaning Behind Bowing</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">인사에 담긴 숨은 의미</div>
+        <div class="story-body-en" data-lang-en>Not all bows mean the same thing: a small nod can mean hello or thanks, a deeper bow respect or apology, and in business, status differences. To foreigners bows look identical; to Koreans, tiny angle and timing differences carry meaning the drama uses quietly.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">모든 인사가 같은 뜻은 아니다. 가벼운 목례는 인사나 감사, 더 깊은 절은 존경이나 사과를, 비즈니스에서는 지위 차이를 뜻하기도 한다. 외국인 눈엔 다 똑같아 보이지만, 한국인에겐 각도와 타이밍의 미묘한 차이가 중요한 의미를 지닌다. 드라마는 이를 조용히 활용한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep17.jpg" alt="Why Korean Offices Feel So Different" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#17</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 17 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Offices Feel So Different</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 사무실이 다르게 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>Korean offices emphasize teamwork, loyalty, and hierarchy over individual achievement. Employees often stay late if their team does, even with finished work, while seniors guide juniors who show them respect. The drama offers a realistic look at these unwritten workplace rules.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 사무실은 개인 성과보다 팀워크와 충성심, 위계를 중시한다. 자기 일을 끝냈어도 팀이 남아 있으면 함께 늦게까지 있는 경우가 많고, 선배는 후배를 이끌고 후배는 선배를 존중한다. 드라마는 이런 성문화되지 않은 직장 규칙을 꽤 현실적으로 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep18.jpg" alt="Why Korean Parents Care So Much About Education" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#18</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 18 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Parents Care So Much About Education</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 부모가 교육에 그토록 매달리는 이유</div>
+        <div class="story-body-en" data-lang-en>Education is seen as Korea's most reliable path to success, a belief shaped by rapid postwar growth. It became the key to financial stability and mobility, putting students under intense pressure. The drama indirectly reflects this through the prestige of elite universities and law.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">교육은 한국 사회에서 성공으로 가는 가장 확실한 길로 여겨지며, 이는 전후 급속한 경제 성장 속에서 형성된 믿음이다. 교육은 경제적 안정과 계층 이동의 열쇠가 됐고, 학생들은 큰 학업 압박에 시달린다. 드라마는 명문대와 법조계의 위상을 통해 이를 간접적으로 비춘다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep19.jpg" alt="Why Korean Lunch Breaks Are So Fast" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#19</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 19 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Lunch Breaks Are So Fast</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국의 점심시간이 그토록 짧은 이유</div>
+        <div class="story-body-en" data-lang-en>Korean office lunches often last an hour or less, with workers returning immediately after. Restaurants near office districts are built for speed, serving meals quickly, and workers joke lunch is just fuel to survive the day &mdash; a fast-paced culture the drama captures well.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 회사원의 점심시간은 흔히 한 시간 이내이고, 식사 후 곧바로 업무로 복귀한다. 오피스 상권 식당들은 빠른 속도에 맞춰져 있어 음식이 무척 빨리 나온다. 직장인들은 점심이 그저 남은 하루를 버티기 위한 연료일 뿐이라고 농담한다. 드라마는 이 빠른 문화를 잘 담아낸다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep20.jpg" alt="Why Everyone Shares Food in Korea" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#20</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 20 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Shares Food in Korea</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 음식을 나눠 먹는 이유</div>
+        <div class="story-body-en" data-lang-en>A big culture shock for foreigners: Korean meals often place several shared dishes at the table's center rather than individual plates, emphasizing community over portions. Refilling someone's plate or grilling meat for them is a caring gesture &mdash; one of many small moments the drama includes.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">외국인에게 큰 문화충격 중 하나는 공유 음식이다. 한국 식사는 개인 접시보다 여러 요리를 상 가운데 놓고 함께 먹는 경우가 많아, 개인의 몫보다 공동체를 강조한다. 상대의 그릇을 채워주거나 고기를 구워주는 건 다정함의 표현이다. 드라마는 이런 소소한 순간들을 여럿 담고 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep21.jpg" alt="Why Korean Convenience Stores Feel Magical" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#21</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 21 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Convenience Stores Feel Magical</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 편의점이 마법 같은 이유</div>
+        <div class="story-body-en" data-lang-en>International viewers assume K-drama convenience stores are exaggerated. They're not: full meals, coffee, desserts, medicine, chargers, bill payments, and package pickup, often 24 hours. Students study, workers grab late meals, travelers rely on them &mdash; practically miniature community centers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">해외 시청자들은 K-드라마 속 편의점이 과장됐다고 생각하곤 한다. 그렇지 않다. 편의점에선 식사, 커피, 디저트, 약, 충전기, 공과금 납부, 택배 수령까지 가능하고 대부분 24시간 운영된다. 학생은 공부하고, 직장인은 늦은 끼니를 해결하고, 여행자는 늘 이곳에 의지한다. 사실상 작은 동네 커뮤니티 센터다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep22.jpg" alt="Why Does Young-woo Love Kimbap So Much?" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#22</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 22 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Does Young-woo Love Kimbap So Much?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">영우는 왜 김밥을 그토록 좋아할까?</div>
+        <div class="story-body-en" data-lang-en>Young-woo's love of kimbap became one of the show's most memorable traits &mdash; affordable, portable, and nostalgic for school trips and family outings. International curiosity was so strong that Korean restaurants abroad reported a surge in interest after the drama aired.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">영우의 김밥 사랑은 이 드라마에서 가장 인상적인 요소 중 하나가 됐다. 저렴하고 휴대하기 편하며, 소풍이나 가족 나들이의 추억을 떠올리게 하는 음식이다. 해외 시청자들의 호기심이 워낙 커서, 드라마 방영 이후 해외 한식당들이 관심 급증을 보고했을 정도다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep23.jpg" alt="The Hidden Meaning Behind Whale Scenes" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#23</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 23 / 36</div>
+        <div class="story-title-en" data-lang-en>The Hidden Meaning Behind Whale Scenes</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">고래 장면에 담긴 숨은 의미</div>
+        <div class="story-body-en" data-lang-en>Whenever Young-woo has a breakthrough, whales swim across the screen &mdash; a visual signature representing freedom, imagination, and discovery. Rather than framing her mind as limited, the show presents it as vast and unique, like the ocean, turning legal problem-solving into something emotional.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">영우가 어떤 깨달음을 얻을 때마다 고래가 화면을 가로질러 헤엄친다. 이는 자유와 상상력, 발견을 상징하는 이 드라마의 시각적 상징이다. 그녀의 마음을 한계 지어진 것이 아니라 바다처럼 광활하고 고유한 것으로 그려내, 법률 문제 해결을 감성적인 순간으로 바꿔놓는다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep24.jpg" alt="Why Korean Apartments All Look Similar" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#24</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 24 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Apartments All Look Similar</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 아파트가 다 비슷해 보이는 이유</div>
+        <div class="story-body-en" data-lang-en>Korea's cities urbanized rapidly, making high-rise apartment complexes the most efficient housing solution. Today they often include schools, parks, and stores nearby, and some brands carry social status &mdash; where you live can shape how others perceive you, something the show quietly reflects.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 도시는 빠르게 도시화되며 고층 아파트 단지가 가장 효율적인 주거 해법이 됐다. 오늘날 아파트 단지엔 흔히 학교와 공원, 상가가 가까이 있고, 일부 브랜드는 사회적 지위를 상징하기도 한다. 어디에 사는지가 남들의 시선을 좌우할 수 있다는 걸 드라마는 은근히 비춘다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep25.jpg" alt="Why Koreans Remove Shoes Indoors" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#25</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 25 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Koreans Remove Shoes Indoors</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 실내에서 신발을 벗는 이유</div>
+        <div class="story-body-en" data-lang-en>This tradition partly comes from Korea's floor-heating system, "ondol" &mdash; since people sit and sleep on the floor, outdoor shoes are considered unhygienic indoors. Homes have a dedicated entry area for shoes, and many visitors say they never want to wear shoes inside again.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이 전통은 한국의 바닥 난방 방식인 '온돌'에서 비롯됐다. 사람들이 바닥에 앉고 눕기 때문에 실내에서 실외화를 신는 건 비위생적으로 여겨진다. 한국 집엔 신발을 위한 별도 현관 공간이 있고, 많은 방문객이 한 번 경험하면 다시는 실내에서 신발을 신고 싶지 않다고 말한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep26.jpg" alt="Why Korean Parents Stay Involved in Adult Children's Lives" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#26</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 26 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Parents Stay Involved in Adult Children's Lives</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 부모가 성인 자녀의 삶에 계속 관여하는 이유</div>
+        <div class="story-body-en" data-lang-en>Korean family ties often stay close through adulthood: parents may keep helping financially, offering advice, or joining major decisions, while adult children are expected to support aging parents in return &mdash; a mutual responsibility the show quietly reflects throughout.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국의 가족 관계는 자녀가 성인이 된 후에도 대체로 가깝게 유지된다. 부모는 계속 경제적으로 돕거나 조언을 주고 중요한 결정에 함께하기도 하며, 성인 자녀는 그 보답으로 나이 든 부모를 부양할 것으로 기대된다. 이런 상호 책임 의식을 드라마는 극 전반에 은근히 담아낸다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep27.jpg" alt="Why Korean Dramas Rarely Show Direct Romance" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#27</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 27 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Dramas Rarely Show Direct Romance</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 드라마가 직접적 로맨스를 잘 보여주지 않는 이유</div>
+        <div class="story-body-en" data-lang-en>Korean dramas often move slowly in romance &mdash; hand holding, eye contact, and small gestures carry huge emotional weight, building tension over dozens of episodes. Attorney Woo follows this tradition, and many viewers found a simple smile more exciting than entire other-show relationships.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 드라마는 흔히 로맨스를 천천히 전개한다. 손을 잡거나 눈을 맞추는 작은 몸짓 하나에도 커다란 감정의 무게가 실리고, 그 긴장은 수십 화에 걸쳐 쌓인다. 〈우영우〉도 이 전통을 따르며, 많은 시청자는 다른 드라마의 전체 로맨스보다 작은 미소 하나에 더 설렜다고 말했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep28.jpg" alt="Why Silence Isn't Awkward in Korea" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#28</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 28 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Silence Isn't Awkward in Korea</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국에서 침묵이 어색하지 않은 이유</div>
+        <div class="story-body-en" data-lang-en>Western conversations often rush to fill silence; Korea can differ. Silence can express respect, thoughtfulness, or emotional understanding, and the show uses it beautifully in scenes between characters who understand each other without speaking &mdash; not empty space, but part of the conversation.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">서구의 대화는 흔히 침묵을 서둘러 채우려 한다. 한국은 다를 수 있다. 침묵은 존중과 사려 깊음, 정서적 이해를 표현할 수 있다. 이 드라마는 서로를 말없이 이해하는 인물들 사이의 장면에서 침묵을 아름답게 활용한다. 빈 공간이 아니라 대화의 일부인 것이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep29.jpg" alt="Why Korean Teams Eat Together After Work" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#29</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 29 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Teams Eat Together After Work</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 직장 동료들이 퇴근 후 함께 식사하는 이유</div>
+        <div class="story-body-en" data-lang-en>These gatherings, called "hoesik," have long been part of office culture, once nearly mandatory for building trust among coworkers. Younger generations value personal time more now, but office dinners remain recognizable &mdash; and the show includes them to reveal hidden personalities.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">'회식'이라 불리는 이 모임은 오랫동안 사무실 문화의 일부였고, 한때는 동료 간 신뢰를 쌓기 위해 거의 필수처럼 여겨졌다. 요즘 젊은 세대는 개인 시간을 더 중시하지만, 회식은 여전히 익숙한 풍경이다. 드라마는 이를 통해 평소 드러나지 않던 인물들의 면모를 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep30.jpg" alt="Why Korean Business Cards Are Given With Two Hands" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#30</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 30 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Business Cards Are Given With Two Hands</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국에서 명함을 두 손으로 건네는 이유</div>
+        <div class="story-body-en" data-lang-en>Presenting or receiving a card with both hands shows respect; shoving it straight into a pocket can seem dismissive, so many briefly study it first. The card represents the person, not just contact info &mdash; a small gesture reflecting how much Korean culture values courtesy.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">명함을 두 손으로 주고받는 것은 존중의 표시다. 받자마자 주머니에 넣는 건 무성의해 보일 수 있어, 많은 사람이 잠시 명함을 살펴본다. 명함은 단순한 연락처가 아니라 그 사람 자체를 상징한다. 이런 작은 몸짓 하나가 한국 문화가 예의를 얼마나 중시하는지 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep31.jpg" alt="Why Korean Honorifics Are So Complicated" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#31</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 31 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Honorifics Are So Complicated</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국어 존댓말이 그토록 복잡한 이유</div>
+        <div class="story-body-en" data-lang-en>Korean changes constantly with age, status, and familiarity &mdash; the same sentence's ending can sound respectful, casual, or intimate. Subtitles struggle to capture this, so international viewers miss nuance, while Korean viewers instantly recognize shifting relationships from speech level alone.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국어는 나이와 지위, 친밀도에 따라 끊임없이 달라진다. 같은 문장도 어미에 따라 공손하거나 편하거나 친밀하게 들릴 수 있다. 자막은 이 미묘함을 온전히 담기 어려워, 해외 시청자는 뉘앙스를 놓치기도 한다. 반면 한국 시청자는 말투만으로도 관계의 변화를 즉시 알아챈다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep32.jpg" alt="The Real Reason Koreans Study So Late" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#32</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 32 / 36</div>
+        <div class="story-title-en" data-lang-en>The Real Reason Koreans Study So Late</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인들이 그토록 늦게까지 공부하는 진짜 이유</div>
+        <div class="story-body-en" data-lang-en>Many students go straight from school to private academies called "hagwons" for extra classes, sometimes until late evening. This intense culture grew from the belief that education creates opportunity and mobility &mdash; a major, still-evolving topic in Korean society today.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 학생이 학교가 끝나면 곧바로 '학원'이라는 사설 교육기관으로 향해 추가 수업을 듣고, 때론 늦은 저녁까지 이어진다. 이런 치열한 학습 문화는 교육이 곧 기회와 계층 이동을 만든다는 믿음에서 비롯됐다. 오늘날에도 한국 사회의 중요한 화두로 계속 논의되고 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep33.jpg" alt="Why Korean Streets Feel Safe at Night" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#33</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 33 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Streets Feel Safe at Night</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 거리가 밤에도 안전하게 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>It feels normal to walk outside late in Korea &mdash; convenience stores stay open, restaurants stay busy, and transit runs late. Relatively low violent-crime rates in many cities mean scenes of characters walking home alone at midnight rarely feel unusual to Korean viewers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국에서는 늦은 밤 밖을 걷는 것이 자연스럽게 느껴진다. 편의점은 계속 문을 열고, 식당엔 손님이 많고, 대중교통도 늦게까지 운행된다. 많은 도시에서 강력범죄율이 비교적 낮은 편이라, 자정에 혼자 귀가하는 장면은 한국 시청자에게 낯설게 느껴지지 않는다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep34.jpg" alt="Why Korean Cafes Are Everywhere" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#34</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 34 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Cafes Are Everywhere</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국에 카페가 이렇게 많은 이유</div>
+        <div class="story-body-en" data-lang-en>Korea has one of the world's most active cafe cultures &mdash; several coffee shops can thrive on the same street. Cafes serve for studying, working, dating, and meetings, some specializing in desserts or unique interior themes, which surprises many international visitors with their creativity.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국은 세계에서 카페 문화가 가장 활발한 나라 중 하나다. 같은 거리에 여러 커피숍이 있어도 각자 잘 운영된다. 카페는 공부와 업무, 데이트, 미팅의 공간으로 쓰이고, 디저트나 독특한 인테리어로 특화된 곳도 많다. 그 창의성과 완성도에 많은 해외 방문객이 놀란다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep35.jpg" alt="Why Korean Weddings Feel Different" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#35</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 35 / 36</div>
+        <div class="story-title-en" data-lang-en>Why Korean Weddings Feel Different</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 결혼식이 다르게 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>Korean weddings often move fast &mdash; some ceremonies last under an hour, with wedding halls hosting multiple weddings the same day as guests move between ceremonies and buffets. This developed partly from dense urban life and busy schedules, still surprising many international visitors.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국의 결혼식은 흔히 빠르게 진행된다. 일부 예식은 한 시간도 채 걸리지 않고, 예식장은 하루에 여러 결혼식을 치르며 하객들은 예식과 뷔페 사이를 오간다. 이는 밀도 높은 도시 생활과 바쁜 일정에서 비롯된 문화로, 많은 해외 방문객을 여전히 놀라게 한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep36.jpg" alt="The Scene North American Viewers Misunderstood" onerror="this.style.display='none';this.parentElement.innerHTML='🐋';">
+        <span class="story-num-badge">#36</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 36 / 36</div>
+        <div class="story-title-en" data-lang-en>The Scene North American Viewers Misunderstood</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">북미 시청자가 오해한 장면</div>
+        <div class="story-body-en" data-lang-en>Some viewers read certain characters as cold toward Young-woo, while Korean viewers often saw restraint and formality as maturity, not hostility. Subtle expressions can communicate care in Korean contexts &mdash; the show became a cultural bridge, prompting reconsideration of kindness across cultures.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">일부 시청자는 몇몇 인물이 영우에게 냉담하다고 느꼈지만, 한국 시청자는 그 절제되고 격식 있는 태도를 적대감이 아니라 성숙함으로 읽는 경우가 많았다. 한국적 맥락에서는 은근한 표현이 오히려 배려를 뜻하기도 한다. 이 드라마는 문화 간 친절과 소통에 대한 인식을 다시 돌아보게 한 문화적 다리가 되었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
   </div>
 
 </div>
@@ -109,28 +788,39 @@
 
 <script src="../../js/app.js"></script>
 <script>
-
   function goHome() { window.location.href = '../../index.html'; }
 
   function applyPageLang() {
     var isKo = getLang() === 'ko';
     document.documentElement.lang = isKo ? 'ko' : 'en';
-    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
-    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
-    document.getElementById('bc-drama').textContent  = isKo ? '이상한 변호사 우영우' : 'Extraordinary Attorney Woo';
-    document.getElementById('hdr-title').textContent = isKo ? '이상한 변호사 우영우' : 'Extraordinary Attorney Woo';
-    document.getElementById('hdr-meta').textContent  = isKo ? '16화 · 2022 · 법정 드라마' : '16 Episodes · 2022 · Legal Drama';
-    document.querySelectorAll('[data-lang-en]').forEach(function(el) { el.style.display = isKo ? 'none' : ''; });
-    document.querySelectorAll('[data-lang-ko]').forEach(function(el) { el.style.display = isKo ? '' : 'none'; });
+    // null-safe lookups: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every element to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '이상한 변호사 우영우' : 'Extraordinary Attorney Woo');
+    setTxt('hdr-title',    isKo ? '이상한 변호사 우영우' : 'Extraordinary Attorney Woo');
+    setTxt('hdr-meta',     isKo ? '유튜브 쇼츠 36개 · 2022 · 법정 드라마' : '36 YouTube Shorts · 2022 · Legal Drama');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 36개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 36 Stories');
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
     injectTermsModal();
     document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
     applyPageLang();
     applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
   });
-
 </script>
 </body>
 </html>
