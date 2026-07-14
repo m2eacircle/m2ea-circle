@@ -13,21 +13,79 @@
     }
     .drama-info-card .di-label {
       font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
-    .coming-soon-bar {
-      background: rgba(232,36,92,0.07); border: 1.5px solid rgba(232,36,92,0.2);
-      border-radius: var(--radius); padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .coming-soon-bar .cs-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
-      border-radius: 20px; padding: 5px 18px;
-      font-size: 0.75rem; font-weight: 700; color: var(--accent);
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -67,36 +125,640 @@
   <div class="page-header">
     <div class="page-header-thumb">
       <img src="../../images/kingdom.jpg" alt="Kingdom"
-        onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';this.parentElement.style.cssText='display:flex;align-items:center;justify-content:center;font-size:3rem;';">
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1e293b,#475569)';this.parentElement.innerHTML='⚔️';">
     </div>
     <div class="page-header-info">
       <div class="page-header-title" id="hdr-title">Kingdom</div>
-      <div class="page-header-meta" id="hdr-meta">12 Episodes &middot; 2019–2020 &middot; Historical Thriller</div>
+      <div class="page-header-meta" id="hdr-meta">35 YouTube Shorts &middot; 2019&ndash;2020 &middot; Historical Thriller</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-kingdom"
+          onclick="toggleBookmark('show','show-kingdom','⚔️ Kingdom','dramas/kingdom/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Coming Soon notice — EN -->
-  <div class="coming-soon-bar" id="cs-en" data-lang-en>
-    <div class="cs-badge">&#128679; Coming Soon</div>
-    <p>We are currently preparing study content for <strong>Kingdom</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
-  </div>
-
-  <!-- Coming Soon notice — KO -->
-  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
-    <div class="cs-badge">&#128679; 준비중</div>
-    <p><strong>킹덤</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
-  </div>
-
-  <!-- EN description -->
   <div class="drama-info-card" id="desc-en" data-lang-en>
     <div class="di-label">&#127916; About This Drama</div>
-    <div class="di-desc"><strong>Kingdom</strong> is a 2019–2020 Netflix historical zombie thriller set in Joseon-era Korea. Crown Prince Lee Chang investigates a mysterious plague that turns the dead into flesh-eating monsters, uncovering a political conspiracy in the process. Praised for its stunning cinematography, period authenticity, and relentless tension.</div>
+    <div class="di-desc">
+      <strong>Kingdom</strong> is a 2019&ndash;2020 Netflix historical zombie thriller set in Joseon-era Korea. Crown Prince Lee Chang investigates a mysterious plague that turns the dead into flesh-eating monsters, uncovering a political conspiracy in the process. Praised for its stunning cinematography, period authenticity, and relentless tension.
+    </div>
   </div>
 
-  <!-- KO description -->
   <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
     <div class="di-label">&#127916; 드라마 소개</div>
-    <div class="di-desc"><strong>킹덤</strong>은 조선 시대를 배경으로 한 2019–2020년 넷플릭스 사극 좀비 스릴러입니다. 세자 이창이 죽은 자들을 깨우는 의문의 역병을 추적하며 왕권을 둘러싼 정치적 음모를 파헤칩니다. 뛰어난 영상미와 시대 고증, 숨막히는 긴장감으로 전 세계적으로 극찬을 받았습니다.</div>
+    <div class="di-desc">
+      <strong>킹덤</strong>은 조선 시대를 배경으로 한 2019&ndash;2020년 넷플릭스 사극 좀비 스릴러입니다. 세자 이창이 죽은 자들을 깨우는 의문의 역병을 추적하며 왕권을 둘러싼 정치적 음모를 파헤칩니다. 뛰어난 영상미와 시대 고증, 숨막히는 긴장감으로 전 세계적으로 극찬을 받았습니다.
+    </div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 35 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="Kingdom Isn't Based on Real History" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 35</div>
+        <div class="story-title-en" data-lang-en>Kingdom Isn't Based on Real History</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈킹덤〉은 실제 역사가 아니다</div>
+        <div class="story-body-en" data-lang-en>Kingdom is set in Joseon but isn't based on real history &mdash; there are no actual historical figures, and the outbreak creates a fictional timeline. Think of it as an alternate Joseon devastated by war, corruption, famine, and an unstoppable plague.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉은 조선을 배경으로 하지만 실제 역사에 기반하지 않는다. 실존 인물은 등장하지 않으며, 역병 창궐은 완전히 허구의 타임라인을 만든다. 전쟁과 부패, 기근, 멈출 수 없는 역병에 휩싸인 '또 다른 조선'이라고 생각하면 된다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="The Hidden Clue Buried in the Seasons" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 35</div>
+        <div class="story-title-en" data-lang-en>The Hidden Clue Buried in the Seasons</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">계절 속에 숨겨진 단서</div>
+        <div class="story-body-en" data-lang-en>The drama reveals its timeline through seasons: in Season 1, characters mention it's not yet midwinter, placing the story before the solstice. In Season 2, zombies move in daylight after the solstice &mdash; a clever historical clue hidden in simple dialogue.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">드라마는 계절을 통해 시간의 흐름을 은근히 드러낸다. 시즌 1에서 인물들은 아직 한겨울이 아니라고 언급해 동지 이전임을 알린다. 시즌 2에서는 동지가 지난 뒤 좀비가 낮에도 움직인다. 평범한 대사 속에 숨겨진 영리한 시간적 단서다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="Not Every Noble Is a Villain" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 35</div>
+        <div class="story-title-en" data-lang-en>Not Every Noble Is a Villain</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모든 양반이 악당은 아니다</div>
+        <div class="story-body-en" data-lang-en>Many viewers think Kingdom portrays every noble as corrupt. While selfish aristocrats feast as commoners starve, not all are villains &mdash; Crown Prince Lee Chang and Lord Ahn Hyeon risk everything to protect the people. The drama criticizes corruption, not an entire class.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 시청자는 〈킹덤〉이 모든 양반을 부패한 존재로 그린다고 생각한다. 이기적인 귀족들이 백성이 굶는 동안 잔치를 벌이지만, 모두가 악당은 아니다. 세자 이창과 안현 대감은 백성을 지키기 위해 모든 것을 건다. 드라마는 특정 계층 전체가 아니라 부패 자체를 비판한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="Why Lee Chang Joins His Own Rebellion" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Lee Chang Joins His Own Rebellion</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">이창이 반란에 가담한 이유</div>
+        <div class="story-body-en" data-lang-en>Most historical dramas feature innocent princes framed for treason. Kingdom flips this: Lee Chang actually joins a rebellion himself, knowing powerful officials will replace him if the queen bears a son. His rebellion is a desperate move to survive.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 사극은 역모로 누명 쓴 무고한 세자를 그린다. 〈킹덤〉은 이를 뒤집는다. 이창은 실제로 반란에 가담한다. 왕비가 아들을 낳으면 권세가들이 자신을 갈아치울 것을 알기 때문이다. 그의 반란은 살아남기 위한 절박한 선택이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="Why Everyone Speaks the Same Korean" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Speaks the Same Korean</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모두가 같은 한국어를 쓰는 이유</div>
+        <div class="story-body-en" data-lang-en>Korea has many regional dialects, and Joseon-era people didn't speak modern Korean. So why does everyone sound the same? Writer Kim Eun-hee chose standard Korean to keep the story immersive &mdash; like Chernobyl using natural English instead of fake accents.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국엔 다양한 지역 방언이 있고, 조선 시대 사람들은 현대 한국어를 쓰지 않았다. 그런데 왜 모두 같은 말투를 쓸까? 김은희 작가는 몰입을 위해 표준어를 선택했다. 〈체르노빌〉이 가짜 러시아 억양 대신 자연스러운 영어를 쓴 것과 같은 이유다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="The Drama That Started Netflix's Korean Revolution" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 35</div>
+        <div class="story-title-en" data-lang-en>The Drama That Started Netflix's Korean Revolution</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">넷플릭스의 한국 드라마 혁명을 연 작품</div>
+        <div class="story-body-en" data-lang-en>Kingdom became Netflix's first original Korean series and proved Korean dramas could succeed worldwide. Its global popularity encouraged Netflix to invest heavily in Korea, paving the way for future hits like Squid Game &mdash; in many ways, Kingdom started it all.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉은 넷플릭스 최초의 한국 오리지널 시리즈가 되어, 한국 드라마가 세계적으로 통할 수 있음을 증명했다. 그 세계적 인기는 넷플릭스가 한국에 대대적으로 투자하게 만들었고, 훗날 〈오징어 게임〉 같은 히트작으로 이어졌다. 여러모로 〈킹덤〉이 그 시작이었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="The Real Villain Isn't the Zombies" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 35</div>
+        <div class="story-title-en" data-lang-en>The Real Villain Isn't the Zombies</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">진짜 악당은 좀비가 아니다</div>
+        <div class="story-body-en" data-lang-en>Unlike many zombie stories, Kingdom makes you feel sympathy for the infected. The real villains aren't always the zombies &mdash; they're greed, corruption, and abuse of power. Combining horror with political commentary made it one of Korea's most acclaimed dramas.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 좀비물과 달리 〈킹덤〉은 감염자들에게도 연민을 느끼게 한다. 진짜 악당은 늘 좀비가 아니다. 탐욕과 부패, 권력 남용이 진짜 적이다. 공포와 정치적 메시지를 결합해 한국에서 가장 극찬받는 드라마 중 하나가 됐다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="The Massive Budget Behind Kingdom" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 35</div>
+        <div class="story-title-en" data-lang-en>The Massive Budget Behind Kingdom</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈킹덤〉의 어마어마한 제작비</div>
+        <div class="story-body-en" data-lang-en>Kingdom had one of Netflix's biggest budgets outside the US and UK, costing around three million dollars per episode. Originally planned for eight episodes, early screenings impressed Netflix so much it became six episodes with an immediate Season 2 greenlight.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉은 미국과 영국을 제외하고 넷플릭스 최대 규모의 제작비 중 하나로, 회당 약 300만 달러가 들었다. 원래 8부작으로 기획됐지만, 초기 시사에서 넷플릭스가 크게 만족해 6부작으로 조정되고 곧바로 시즌 2 제작이 확정됐다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep9.jpg" alt="The Rule Kingdom Refused to Follow" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#9</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 9 / 35</div>
+        <div class="story-title-en" data-lang-en>The Rule Kingdom Refused to Follow</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈킹덤〉이 지키지 않은 금기</div>
+        <div class="story-body-en" data-lang-en>Most zombie films avoid showing children or pregnant women as victims. Kingdom breaks that rule completely, not shying away from the outbreak's tragic reality, making the horror feel more devastating and the danger frighteningly real for audiences.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 좀비 영화는 아이나 임산부를 희생자로 그리지 않는다. 〈킹덤〉은 이 금기를 완전히 깬다. 역병의 비극적 현실을 피하지 않아 공포가 더욱 처절하게 느껴지고, 위협이 섬뜩할 만큼 현실적으로 다가온다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep10.jpg" alt="Kingdom Made the World Fall for the Gat" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#10</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 10 / 35</div>
+        <div class="story-title-en" data-lang-en>Kingdom Made the World Fall for the Gat</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">전 세계가 갓에 반하다</div>
+        <div class="story-body-en" data-lang-en>One unexpected effect of Kingdom was worldwide interest in the traditional Korean hat, the "gat." Many international fans became fascinated by Joseon clothing and etiquette &mdash; some even traveled to Korea, visited palaces, and bought their own gat afterward.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉이 남긴 뜻밖의 영향 중 하나는 한국 전통 모자 '갓'에 대한 세계적 관심이다. 많은 해외 팬이 조선 시대 의복과 예법에 매료됐다. 일부는 실제로 한국을 방문해 궁을 둘러보고 갓을 구입하기도 했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep11.jpg" alt="The Webtoon That Started It All" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#11</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 11 / 35</div>
+        <div class="story-title-en" data-lang-en>The Webtoon That Started It All</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모든 것의 시작이 된 웹툰</div>
+        <div class="story-body-en" data-lang-en>The mysterious resurrection plant wasn't created just for the drama &mdash; it first appeared in writer Kim Eun-hee's earlier webtoon, The Kingdom of the Gods. Even the zombie disease's name originated there, making the webtoon the true foundation of Kingdom.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">그 의문의 부활초는 드라마만을 위해 만들어진 설정이 아니다. 김은희 작가의 이전 웹툰 〈신의 나라〉에 먼저 등장했다. 좀비 질병의 이름조차 그곳에서 비롯됐다. 이 웹툰이야말로 〈킹덤〉 세계관의 진짜 뿌리인 셈이다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep12.jpg" alt="The Burger King Joke Fans Loved" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#12</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 12 / 35</div>
+        <div class="story-title-en" data-lang-en>The Burger King Joke Fans Loved</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">팬들이 사랑한 버거킹 농담</div>
+        <div class="story-body-en" data-lang-en>In Kingdom, actor Ju Ji-hoon never actually becomes king. But in a Burger King commercial, he finally wears royal robes and declares, "This is the taste of a king!" Fans loved the unexpected joke connecting the actor to the brand.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉에서 배우 주지훈은 끝내 왕이 되지 못한다. 하지만 한 버거킹 광고에서 그는 마침내 곤룡포를 입고 "이것이 바로 왕의 맛이다!"라고 외친다. 팬들은 배우와 브랜드를 절묘하게 엮은 이 예상 밖의 농담을 무척 좋아했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep13.jpg" alt="The Long Road From Idea to Screen" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#13</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 13 / 35</div>
+        <div class="story-title-en" data-lang-en>The Long Road From Idea to Screen</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">아이디어에서 화면까지의 긴 여정</div>
+        <div class="story-body-en" data-lang-en>Kingdom wasn't an overnight success. Writer Kim Eun-hee began developing the story in 2011, turned it into the webtoon The Kingdom of the Gods in 2015, and finally brought it to Netflix in 2019 &mdash; the webtoon was its true blueprint.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉은 하루아침에 만들어지지 않았다. 김은희 작가는 2011년부터 이야기를 구상하기 시작해, 2015년 웹툰 〈신의 나라〉로 먼저 세상에 내놓았고, 2019년 마침내 넷플릭스 드라마로 완성했다. 웹툰은 이 드라마의 진짜 설계도였다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep14.jpg" alt="Korean Folklore Behind the Zombies" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#14</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 14 / 35</div>
+        <div class="story-title-en" data-lang-en>Korean Folklore Behind the Zombies</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">좀비 뒤에 숨은 한국 설화</div>
+        <div class="story-body-en" data-lang-en>Kingdom's zombies weren't inspired only by Hollywood. Ancient Korean folklore tells of mysterious diseases bringing the dead back to life, with historical records describing terrifying epidemics. Blending Korean legends with modern horror created zombies deeply connected to Korea's own history.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉의 좀비는 할리우드에서만 영감을 받은 게 아니다. 한국의 오랜 설화엔 죽은 자를 되살리는 기이한 병에 대한 이야기가 전해진다. 역사 기록에도 끔찍한 역병이 등장한다. 한국의 전설과 현대 호러를 결합해, 한국 역사와 깊이 연결된 독특한 좀비를 만들어냈다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep15.jpg" alt="Why Everyone Wears White" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#15</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 15 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Wears White</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모두가 흰옷을 입는 이유</div>
+        <div class="story-body-en" data-lang-en>Foreign viewers notice almost everyone wears white &mdash; historically accurate, since Korea was once called "The White-Clad Nation," symbolizing purity and humility. In Kingdom, those white clothes make every drop of blood stand out, creating unforgettable visuals.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">해외 시청자들은 거의 모든 인물이 흰옷을 입는다는 걸 알아챈다. 이는 역사적으로 정확하다. 한국은 한때 '백의민족'이라 불렸고, 흰색은 순결과 겸손을 상징했다. 〈킹덤〉에서 흰옷은 핏방울 하나하나를 두드러지게 만들어, 잊을 수 없는 시각적 장면을 만든다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep16.jpg" alt="The Real Power Struggles Behind the Fiction" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#16</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 16 / 35</div>
+        <div class="story-title-en" data-lang-en>The Real Power Struggles Behind the Fiction</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">허구 뒤에 숨은 진짜 권력 다툼</div>
+        <div class="story-body-en" data-lang-en>Crown Prince Lee Chang is fictional, but his political struggles weren't. During Joseon, powerful noble families often controlled young kings behind the scenes. Kingdom transforms these real power struggles into a zombie thriller, blending history with suspense authentically.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">세자 이창은 허구의 인물이지만, 그의 정치적 고난은 그렇지 않다. 조선 시대엔 권세가 가문이 어린 왕들을 뒤에서 좌지우지하는 일이 흔했다. 〈킹덤〉은 이 실제 권력 다툼을 좀비 스릴러로 변형해, 역사와 서스펜스를 놀라울 만큼 진정성 있게 엮어낸다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep17.jpg" alt="Why Everyone Removes Their Shoes" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#17</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 17 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Removes Their Shoes</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모두가 신발을 벗는 이유</div>
+        <div class="story-body-en" data-lang-en>Everyone removes shoes before entering a house &mdash; not just for modern audiences. Koreans followed this tradition for centuries because of heated floors called "ondol." Families sat, ate, and slept on the floor, making outdoor shoes indoors unacceptable.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">모두가 집에 들어가기 전 신발을 벗는다. 이는 현대 시청자를 위한 연출이 아니다. 한국인은 '온돌'이라는 바닥 난방 때문에 수백 년간 이 전통을 지켜왔다. 가족들이 바닥에 앉고 먹고 자기에, 실내에서 실외화를 신는 건 용납되지 않았다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep18.jpg" alt="Why Kingdom's Zombies Fear the Sun" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#18</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 18 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Kingdom's Zombies Fear the Sun</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈킹덤〉의 좀비가 햇빛을 두려워하는 이유</div>
+        <div class="story-body-en" data-lang-en>Unlike most zombie stories, Kingdom's creatures avoid sunlight &mdash; not just for suspense. The writers wanted a fresh biological twist instead of copying Hollywood, and the mystery connects directly to the resurrection plant, creating one of the series' most original ideas.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 좀비물과 달리 〈킹덤〉의 괴물들은 햇빛을 피한다. 이는 단순한 긴장감 조성이 아니다. 작가진은 할리우드를 답습하는 대신 새로운 생물학적 반전을 원했고, 그 미스터리는 부활초와 직접 연결되어 시리즈에서 가장 독창적인 설정 중 하나가 됐다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep19.jpg" alt="The Herbal Medicine Inspiration" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#19</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 19 / 35</div>
+        <div class="story-title-en" data-lang-en>The Herbal Medicine Inspiration</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한방 의학에서 온 영감</div>
+        <div class="story-body-en" data-lang-en>The resurrection plant may be fictional, but its inspiration isn't &mdash; Korea has centuries of traditional herbal medicine. Kingdom imagines what would happen if one medicinal herb had terrifying side effects, blending ancient medicine with horror into something uniquely Korean.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">부활초는 허구이지만, 그 영감의 원천은 그렇지 않다. 한국엔 수백 년에 걸친 전통 한방 의학이 있다. 〈킹덤〉은 만약 한 약초에 끔찍한 부작용이 있다면 어떨지 상상한다. 전통 의학과 호러를 결합해 한국만의 독특한 세계관을 만들어냈다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep20.jpg" alt="Why Rice Means Survival in Kingdom" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#20</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 20 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Rice Means Survival in Kingdom</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈킹덤〉에서 쌀이 생존을 뜻하는 이유</div>
+        <div class="story-body-en" data-lang-en>In Kingdom, rice isn't just food &mdash; it represents survival, power, and inequality. Repeated famines devastated Joseon, and whoever controlled food often controlled the people. Every bowl of rice reminds viewers hunger can be as deadly as the zombies themselves.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉에서 쌀은 단순한 음식이 아니다. 생존과 권력, 불평등을 상징한다. 조선은 거듭된 기근에 시달렸고, 식량을 쥔 자가 곧 백성을 쥐었다. 밥 한 그릇은 시청자에게 굶주림이 좀비만큼이나 치명적일 수 있음을 일깨운다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep21.jpg" alt="Real Palaces, Real History" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#21</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 21 / 35</div>
+        <div class="story-title-en" data-lang-en>Real Palaces, Real History</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">진짜 궁궐, 진짜 역사</div>
+        <div class="story-body-en" data-lang-en>Many of Kingdom's stunning palace scenes weren't filmed on sets. Netflix used real Joseon palaces and preserved historical villages across Korea. These centuries-old locations give the series an authenticity that few historical dramas can match.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉의 화려한 궁궐 장면 상당수는 세트가 아니다. 넷플릭스는 실제 조선 시대 궁궐과 전국의 보존된 전통 마을에서 촬영했다. 수백 년 된 이 장소들은 다른 사극이 좀처럼 따라가기 힘든 진정성을 이 시리즈에 부여한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep22.jpg" alt="The Sprinting Zombies That Shocked Fans" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#22</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 22 / 35</div>
+        <div class="story-title-en" data-lang-en>The Sprinting Zombies That Shocked Fans</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">전속력으로 질주하는 좀비</div>
+        <div class="story-body-en" data-lang-en>Forget slow zombies. Kingdom's creatures sprint at terrifying speed. The actors trained together to move like wild animals, creating synchronized attacks unlike anything viewers had seen before &mdash; their incredible speed became one of the series' signature features.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">느릿느릿한 좀비는 잊어라. 〈킹덤〉의 괴물들은 섬뜩한 속도로 질주한다. 배우들은 야생동물처럼 움직이도록 함께 훈련받아, 그전까지 본 적 없는 일사불란한 습격 장면을 만들어냈다. 그 무시무시한 속도는 이 시리즈의 대표적 특징이 됐다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep23.jpg" alt="The Real Meaning Behind Funeral White" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#23</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 23 / 35</div>
+        <div class="story-title-en" data-lang-en>The Real Meaning Behind Funeral White</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">상복의 흰색에 담긴 진짜 의미</div>
+        <div class="story-body-en" data-lang-en>Everyone wears white at funerals in Kingdom &mdash; authentic Korean tradition. Unlike Western cultures that associate black with mourning, Koreans historically wore white hemp clothing to symbolize purity and respect for the deceased, avoiding bright colors during mourning.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉의 장례식에서 모두가 흰옷을 입는 건 정확한 한국 전통이다. 검은색을 애도의 색으로 여기는 서구 문화와 달리, 한국인은 전통적으로 흰 삼베옷을 입어 고인에 대한 순결함과 존경을 표현했다. 상중에는 화려한 색도 피했다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep24.jpg" alt="The Famine Hiding Behind the Horror" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#24</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 24 / 35</div>
+        <div class="story-title-en" data-lang-en>The Famine Hiding Behind the Horror</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">공포 뒤에 숨은 굶주림</div>
+        <div class="story-body-en" data-lang-en>Kingdom isn't just about zombies &mdash; it's about hunger. Joseon suffered repeated famines from harsh weather and poor harvests, and food shortages led to disease and desperation. Long before zombies appear, hunger is already destroying lives &mdash; the empty bowl can be scarier than the monsters.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉은 단지 좀비 이야기가 아니라 굶주림에 관한 이야기이기도 하다. 조선은 혹독한 날씨와 흉작으로 거듭된 기근을 겪었고, 식량 부족은 질병과 절망으로 이어졌다. 좀비가 나타나기 훨씬 전부터 굶주림은 이미 삶을 파괴하고 있다. 빈 밥그릇이 괴물보다 더 무서울 수 있다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep25.jpg" alt="The King Who Wasn't Really in Charge" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#25</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 25 / 35</div>
+        <div class="story-title-en" data-lang-en>The King Who Wasn't Really in Charge</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">실권 없는 왕</div>
+        <div class="story-body-en" data-lang-en>Most people think kings had unlimited power. But in Kingdom, the king is surrounded by ministers who control key decisions &mdash; historically accurate, since Joseon kings constantly struggled against powerful noble families. A weak king could easily become a puppet.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 사람은 왕이 무한한 권력을 가졌다고 생각한다. 하지만 〈킹덤〉 속 왕은 중요한 결정을 좌우하는 대신들에게 둘러싸여 있다. 이는 역사적으로 정확하다. 조선의 왕들은 늘 권세가 가문과 씨름해야 했고, 약한 왕은 쉽게 꼭두각시가 될 수 있었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep26.jpg" alt="What Palace Gates Really Represent" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#26</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 26 / 35</div>
+        <div class="story-title-en" data-lang-en>What Palace Gates Really Represent</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">궁궐 문이 진짜 상징하는 것</div>
+        <div class="story-body-en" data-lang-en>Kingdom gives palace gates far more meaning than mere entrances. During Joseon, every gate represented rank and status &mdash; many people could never enter certain areas in their entire lives. The drama quietly uses gates to show who's gaining or losing power.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉에서 궁궐 문은 단순한 출입구 이상의 의미를 지닌다. 조선 시대엔 문 하나하나가 신분과 지위를 상징했다. 평생 특정 구역에 발도 들이지 못하는 사람도 많았다. 드라마는 말 한마디 없이 이 문들을 통해 누가 권력을 얻고 잃는지를 은근히 보여준다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep27.jpg" alt="Why Every Shadow Feels Dangerous" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#27</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 27 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Every Shadow Feels Dangerous</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모든 그림자가 위협적으로 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>Kingdom's night scenes feel realistic due to historical accuracy: before electricity, Korean homes relied on candles and paper lanterns, with wealthy families enjoying brighter light than villagers. Recreating this difference makes every shadow feel dangerous and every attack more terrifying.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉의 밤 장면이 사실적으로 느껴지는 건 역사적 고증 덕분이다. 전기가 없던 시절 한국 가정은 촛불과 종이 초롱에 의지했고, 부유한 집은 서민보다 더 밝은 빛을 누렸다. 이 차이를 재현해내며 모든 그림자가 위협적으로, 모든 습격이 더욱 공포스럽게 느껴진다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep28.jpg" alt="Why the King Couldn't Stop the Corruption" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#28</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 28 / 35</div>
+        <div class="story-title-en" data-lang-en>Why the King Couldn't Stop the Corruption</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">왕이 부패를 막지 못한 이유</div>
+        <div class="story-body-en" data-lang-en>Why doesn't the king simply arrest corrupt officials? The answer is history: powerful noble families called the yangban controlled politics, land, and even the military. Some grew so influential that kings had to negotiate with them, not command them.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">왕은 왜 부패한 관리들을 그냥 체포하지 않을까? 답은 역사에 있다. '양반'이라 불린 권세가 가문들이 정치와 토지, 심지어 군권까지 장악했다. 일부는 너무나 강력해져 왕이 명령이 아니라 협상해야 할 정도였다. 해원 조씨 가문은 허구이지만, 그 권력 다툼은 실제 역사를 반영한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep29.jpg" alt="The Medical Book That Inspired Kingdom" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#29</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 29 / 35</div>
+        <div class="story-title-en" data-lang-en>The Medical Book That Inspired Kingdom</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">〈킹덤〉에 영감을 준 의학서</div>
+        <div class="story-body-en" data-lang-en>The medicine in Kingdom isn't entirely fictional. Joseon published one of Asia's greatest medical books, Donguibogam, in 1613, compiling centuries of knowledge on herbs and diseases. While the resurrection plant is fictional, the drama builds on Korea's real herbal medicine tradition.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉의 의학 설정은 완전한 허구가 아니다. 조선은 1613년 아시아 최고의 의학서 중 하나인 〈동의보감〉을 편찬했다. 수백 년에 걸친 약초와 질병 지식을 집대성한 책이다. 부활초는 허구이지만, 드라마는 한국의 실제 한방 전통 위에 세계관을 쌓아 올렸다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep30.jpg" alt="Why Bows Matter More Than Swords" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#30</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 30 / 35</div>
+        <div class="story-title-en" data-lang-en>Why Bows Matter More Than Swords</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">칼보다 활이 중요한 이유</div>
+        <div class="story-body-en" data-lang-en>Think swords are Kingdom's most important weapon? Think again. Korea has one of the world's oldest archery traditions &mdash; essential for scholars and officers alike. Korean composite bows were famous for their power and accuracy, honoring precision over brute strength.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉에서 가장 중요한 무기가 검이라고 생각하는가? 다시 생각해보라. 한국은 세계에서 가장 오래된 궁술 전통 중 하나를 지녔다. 활은 선비와 장교 모두에게 필수 기예였다. 한국의 각궁은 강력한 위력과 정확도로 유명했으며, 드라마는 완력보다 정밀함을 예우한다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep31.jpg" alt="Costumes That Reveal Everything" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#31</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 31 / 35</div>
+        <div class="story-title-en" data-lang-en>Costumes That Reveal Everything</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모든 것을 말해주는 의상</div>
+        <div class="story-body-en" data-lang-en>Kingdom's costumes are more than beautiful clothing. During Joseon, every color, fabric, and accessory revealed social status, with royals, scholars, and commoners dressed by strict rules. Designers worked with historians to recreate these details, which Korean viewers instantly recognize.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉의 의상은 아름다운 옷 이상의 의미를 지닌다. 조선 시대엔 색상과 옷감, 장신구 하나하나가 신분을 드러냈다. 왕족과 선비, 평민 모두 엄격한 규칙에 따라 옷을 입었다. 의상 디자이너는 역사학자와 협업해 이를 정교하게 재현했고, 한국 시청자는 이를 단번에 알아본다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep32.jpg" alt="The Series That Transformed Korean TV" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#32</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 32 / 35</div>
+        <div class="story-title-en" data-lang-en>The Series That Transformed Korean TV</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국 TV를 바꿔놓은 시리즈</div>
+        <div class="story-body-en" data-lang-en>Kingdom didn't just reinvent zombie dramas &mdash; it transformed Korean television. As Netflix's first original Korean series, it received a blockbuster budget rarely seen in K-dramas, proving Korean stories could compete with Hollywood and paving the way for future global hits.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉은 좀비 드라마를 재발명한 데 그치지 않고 한국 TV 자체를 바꿔놓았다. 넷플릭스 최초의 한국 오리지널 시리즈로서 당시 K-드라마에서 보기 드문 블록버스터급 제작비를 받았다. 한국 이야기가 할리우드와 경쟁할 수 있음을 증명하며 이후 세계적 히트작들의 길을 열었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep33.jpg" alt="The Real Enemy Isn't the Monsters" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#33</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 33 / 35</div>
+        <div class="story-title-en" data-lang-en>The Real Enemy Isn't the Monsters</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">진짜 적은 괴물이 아니다</div>
+        <div class="story-body-en" data-lang-en>At first, Kingdom looks like a zombie thriller. But the real enemy is corruption, greed, and political ambition &mdash; society is already broken before the outbreak begins. Instead of asking how people survive zombies, Kingdom asks what happens when leaders stop protecting their people.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">처음엔 〈킹덤〉이 좀비 스릴러처럼 보인다. 하지만 진짜 적은 부패와 탐욕, 정치적 야심이다. 역병이 시작되기 전부터 사회는 이미 무너져 있었다. 〈킹덤〉은 사람들이 어떻게 좀비에서 살아남는가가 아니라, 지도자가 백성을 지키지 않을 때 무슨 일이 벌어지는가를 묻는다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep34.jpg" alt="The Body Language Foreigners Miss" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#34</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 34 / 35</div>
+        <div class="story-title-en" data-lang-en>The Body Language Foreigners Miss</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">외국인이 놓치는 몸짓 언어</div>
+        <div class="story-body-en" data-lang-en>Characters constantly bow slightly, lower their eyes, and choose words carefully around higher-status people. These aren't random acting choices &mdash; they reflect Confucian traditions shaping Korean society for centuries, where respect is shown through posture and behavior, not just words.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">등장인물들은 지위가 높은 사람 앞에서 살짝 고개를 숙이고, 시선을 낮추고, 말을 신중히 고른다. 이는 무작위 연기가 아니다. 수백 년간 한국 사회를 빚어온 유교 전통을 반영한다. 존중은 말뿐 아니라 자세와 몸짓으로도 드러난다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep35.jpg" alt="The Drama That Changed What K-Dramas Could Be" onerror="this.style.display='none';this.parentElement.innerHTML='⚔️';">
+        <span class="story-num-badge">#35</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 35 / 35</div>
+        <div class="story-title-en" data-lang-en>The Drama That Changed What K-Dramas Could Be</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">K-드라마의 가능성을 바꾼 작품</div>
+        <div class="story-body-en" data-lang-en>Before Kingdom, many thought Korean dramas were mostly romance stories. Then came a historical zombie thriller unlike anything seen before, combining history, politics, horror, and cinematic visuals. It introduced millions to K-dramas and helped open the global door for Korean entertainment.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">〈킹덤〉 이전, 많은 사람이 한국 드라마는 대부분 로맨스물이라고 생각했다. 그러다 지금껏 본 적 없는 사극 좀비 스릴러가 등장했다. 역사와 정치, 공포, 영화 같은 영상미를 하나로 엮어낸 이 작품은 수백만 신규 시청자를 K-드라마로 이끌며 한국 콘텐츠의 세계적 문을 열었다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
   </div>
 
 </div>
@@ -109,28 +771,39 @@
 
 <script src="../../js/app.js"></script>
 <script>
-
   function goHome() { window.location.href = '../../index.html'; }
 
   function applyPageLang() {
     var isKo = getLang() === 'ko';
     document.documentElement.lang = isKo ? 'ko' : 'en';
-    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
-    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
-    document.getElementById('bc-drama').textContent  = isKo ? '킹덤' : 'Kingdom';
-    document.getElementById('hdr-title').textContent = isKo ? '킹덤' : 'Kingdom';
-    document.getElementById('hdr-meta').textContent  = isKo ? '12화 · 2019–2020 · 사극 스릴러' : '12 Episodes · 2019–2020 · Historical Thriller';
-    document.querySelectorAll('[data-lang-en]').forEach(function(el) { el.style.display = isKo ? 'none' : ''; });
-    document.querySelectorAll('[data-lang-ko]').forEach(function(el) { el.style.display = isKo ? '' : 'none'; });
+    // null-safe lookups: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every element to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '킹덤' : 'Kingdom');
+    setTxt('hdr-title',    isKo ? '킹덤' : 'Kingdom');
+    setTxt('hdr-meta',     isKo ? '유튜브 쇼츠 35개 · 2019–2020 · 사극 스릴러' : '35 YouTube Shorts · 2019–2020 · Historical Thriller');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 35개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 35 Stories');
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
     injectTermsModal();
     document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
     applyPageLang();
     applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
   });
-
 </script>
 </body>
 </html>
