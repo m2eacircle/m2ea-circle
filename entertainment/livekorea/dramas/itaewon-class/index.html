@@ -13,21 +13,79 @@
     }
     .drama-info-card .di-label {
       font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
-    .coming-soon-bar {
-      background: rgba(232,36,92,0.07); border: 1.5px solid rgba(232,36,92,0.2);
-      border-radius: var(--radius); padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .coming-soon-bar .cs-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
-      border-radius: 20px; padding: 5px 18px;
-      font-size: 0.75rem; font-weight: 700; color: var(--accent);
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -67,24 +125,18 @@
   <div class="page-header">
     <div class="page-header-thumb">
       <img src="../../images/itaewon-class.jpg" alt="Itaewon Class"
-        onerror="this.style.display='none';this.parentElement.innerHTML='🍺';this.parentElement.style.cssText='display:flex;align-items:center;justify-content:center;font-size:3rem;';">
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#1e293b,#475569)';this.parentElement.innerHTML='🍺';">
     </div>
     <div class="page-header-info">
       <div class="page-header-title" id="hdr-title">Itaewon Class</div>
-      <div class="page-header-meta" id="hdr-meta">16 Episodes &middot; 2020 &middot; Business Drama</div>
+      <div class="page-header-meta" id="hdr-meta">27 YouTube Shorts &middot; 2020 &middot; Business Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-itaewon-class"
+          onclick="toggleBookmark('show','show-itaewon-class','🍺 Itaewon Class','dramas/itaewon-class/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
     </div>
-  </div>
-
-  <!-- Coming Soon notice — EN -->
-  <div class="coming-soon-bar" id="cs-en" data-lang-en>
-    <div class="cs-badge">&#128679; Coming Soon</div>
-    <p>We are currently preparing study content for <strong>Itaewon Class</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
-  </div>
-
-  <!-- Coming Soon notice — KO -->
-  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
-    <div class="cs-badge">&#128679; 준비중</div>
-    <p><strong>이태원 클라쓰</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
   </div>
 
   <!-- EN description -->
@@ -99,6 +151,478 @@
     <div class="di-desc"><strong>이태원 클라쓰</strong>는 아버지를 잃고 억울하게 옥살이까지 한 박새로이(박서준)가 이태원 골목에 작은 포차를 열고 거대 기업에 맞서는 복수와 성장의 이야기를 담은 2020년 JTBC 드라마입니다. 뚝심과 의리, 불의에 맞서는 용기를 뜨겁게 그려냈습니다.</div>
   </div>
 
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 27 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="Was Calling Yi-seo 'Unnie' a Mistake?" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 27</div>
+        <div class="story-title-en" data-lang-en>Was Calling Yi-seo 'Unnie' a Mistake?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">이서를 '언니'라 부른 건 실수였을까?</div>
+        <div class="story-body-en" data-lang-en>Sharp-eyed fans caught a detail in Episode 5: a blog review calls 20-year-old Jo Yi-seo 'unnie.' Some thought it a mistake, but in Korea women often call older female staff 'unnie' out of friendliness or respect without knowing their age &mdash; so maybe it's no error.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">눈썰미 좋은 팬들이 5화에서 한 디테일을 포착했습니다. 한 블로그 리뷰가 스무 살인 조이서를 '언니'라고 부른 것입니다. 실수라고 생각한 사람도 있었지만, 한국에서는 여성이 조금 더 나이 든 여성 직원을 나이를 정확히 몰라도 친근함이나 존중의 뜻으로 '언니'라 부르곤 합니다. 그러니 실수가 아닐 수도 있습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="Why Itaewon Is the Perfect Setting" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 27</div>
+        <div class="story-title-en" data-lang-en>Why Itaewon Is the Perfect Setting</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">이태원이 완벽한 배경인 이유</div>
+        <div class="story-body-en" data-lang-en>Most foreigners don't know Itaewon is Korea's most diverse neighborhood. For decades it has hosted international restaurants, foreign residents, and multicultural communities. The drama uses Itaewon as a symbol of people who don't fit Korean society &mdash; which is why Sae-ro-yi's dream restaurant feels meaningful here.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 외국인은 이태원이 한국에서 가장 다채로운 동네라는 걸 모릅니다. 수십 년간 이곳은 세계 각국의 식당과 외국인 주민, 다문화 공동체의 터전이었습니다. 드라마는 이태원을 전통적인 한국 사회에 어울리지 않는 사람들의 상징으로 사용합니다. 그래서 새로이의 꿈이 담긴 가게가 이곳에서 유독 의미 있게 느껴집니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="The Lines That Became Legendary" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 27</div>
+        <div class="story-title-en" data-lang-en>The Lines That Became Legendary</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">전설이 된 명대사들</div>
+        <div class="story-body-en" data-lang-en>Itaewon Class gave fans unforgettable quotes. Park Seo-joon's powerful line 'Don't decide my worth' became an instant favorite, and Yoo Jae-myung's calm, chilling 'Interesting' went viral. Their performances were so memorable the broadcaster even released special YouTube clips of these iconic scenes, making them legendary.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰는 잊지 못할 명대사를 남겼습니다. 박서준의 강렬한 대사 '내 가치를 네가 정하지 마'는 단숨에 사랑받았고, 유재명의 차분하면서도 서늘한 '재밌네'도 화제가 됐습니다. 두 배우의 연기가 워낙 인상적이라 방송사가 이 명장면들을 특별 유튜브 영상으로 공개했고, 팬들 사이에서 전설이 됐습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="You Can Still Visit the Original DanBam" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 27</div>
+        <div class="story-title-en" data-lang-en>You Can Still Visit the Original DanBam</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">지금도 갈 수 있는 원조 단밤</div>
+        <div class="story-body-en" data-lang-en>Did you know you can still visit the original DanBam location? The first DanBam was filmed in a building beside a GS25 in Itaewon. Even today, traces of the original sign remain, and the drama's main poster hangs inside &mdash; making it a must-visit filming spot.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">원조 단밤 촬영지를 지금도 방문할 수 있다는 사실, 알고 있었나요? 첫 단밤은 이태원의 GS25 편의점 옆 건물에서 촬영됐습니다. 오늘날에도 원래 간판의 흔적이 남아 있고, 안에는 드라마의 메인 포스터가 걸려 있습니다. 팬들에게는 꼭 들러야 할 촬영 명소가 됐습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="When the Boss Feels Like Family" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 27</div>
+        <div class="story-title-en" data-lang-en>When the Boss Feels Like Family</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">사장이 가족처럼 느껴질 때</div>
+        <div class="story-body-en" data-lang-en>In Itaewon Class, Park Sae-ro-yi treats his employees like family, reflecting a real part of Korean workplace culture. Many Korean companies traditionally built close, almost family-like bonds between bosses and staff. This can create loyalty and support &mdash; but also pressure and heavy expectations.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰에서 박새로이는 직원들을 가족처럼 대하는데, 이는 한국 직장 문화의 실제 단면을 보여줍니다. 많은 한국 기업은 전통적으로 사장과 직원 사이에 가족 같은 가까운 유대를 쌓았습니다. 이는 충성심과 든든함을 낳기도 하지만, 동시에 부담과 무거운 기대를 안기기도 합니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="Jangga Group and Korea's Chaebol Culture" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 27</div>
+        <div class="story-title-en" data-lang-en>Jangga Group and Korea's Chaebol Culture</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">장가그룹과 한국의 재벌 문화</div>
+        <div class="story-body-en" data-lang-en>In Itaewon Class, Jangga Group feels like a family empire more than a company &mdash; reflecting Korea's chaebol culture, where huge corporations are run by powerful founding families. Such firms drove Korea's growth, but the drama shows the darker side: power and unfair advantage.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰에서 장가그룹은 회사라기보다 가족 제국처럼 느껴지는데, 이는 거대 기업이 강력한 창업 가문에 의해 지배되는 한국의 재벌 문화를 반영합니다. 이런 기업들은 한국의 성장을 이끌었지만, 드라마는 그 이면도 보여줍니다. 권력, 경쟁, 그리고 불공정한 특혜를요.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="It Started as a Webtoon" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 27</div>
+        <div class="story-title-en" data-lang-en>It Started as a Webtoon</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">웹툰에서 시작됐다</div>
+        <div class="story-body-en" data-lang-en>Before it was a drama, Itaewon Class was a hugely popular Korean webtoon. Many of today's successful K-dramas begin as webtoons, because they arrive with loyal fans and proven, strong storytelling already built in.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">드라마가 되기 전, 이태원 클라쓰는 큰 인기를 끈 한국 웹툰이었습니다. 오늘날 성공한 한국 드라마 중 상당수가 웹툰에서 출발하는데, 이미 충성도 높은 팬층과 탄탄한 이야기를 갖추고 있기 때문입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="The Real Building Behind the Bigger DanBam" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 27</div>
+        <div class="story-title-en" data-lang-en>The Real Building Behind the Bigger DanBam</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">확장 이전한 단밤의 실제 건물</div>
+        <div class="story-body-en" data-lang-en>When DanBam moves to a bigger location, that building is real too &mdash; a restaurant called Urban Cliff, once owned by singer Jung Yup. Around the time the drama aired, online maps still showed the DanBam sign on it. Today it's another popular stop for fans.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">단밤이 더 큰 곳으로 이전할 때, 그 건물도 실재합니다. 가수 정엽이 한때 소유했던 어반클리프라는 식당입니다. 드라마 방영 무렵에는 온라인 지도에도 이 건물에 단밤 간판이 표시되어 있었습니다. 오늘날 이곳은 이태원을 찾는 팬들에게 또 하나의 인기 명소가 됐습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep9.jpg" alt="The Comeback COVID Cut Short" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#9</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 9 / 27</div>
+        <div class="story-title-en" data-lang-en>The Comeback COVID Cut Short</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">코로나가 앗아간 부활의 기회</div>
+        <div class="story-body-en" data-lang-en>Many expected Itaewon Class to draw huge crowds back to Itaewon. But soon after the drama became a massive hit, a major COVID-19 outbreak linked to Itaewon clubs changed everything. Instead of a boost, tourism and local businesses were hit hard &mdash; the momentum cut short.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 이가 이태원 클라쓰가 이태원에 큰 인파를 다시 불러올 거라 기대했습니다. 하지만 드라마가 대박을 터뜨린 직후, 이태원 클럽발 대규모 코로나19 확산이 모든 걸 바꿔 놓았습니다. 부흥은커녕 관광과 지역 상권이 큰 타격을 입었습니다. 상승세가 팬데믹에 꺾여버린 것입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep10.jpg" alt="The Drama That Inspired Young Entrepreneurs" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#10</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 10 / 27</div>
+        <div class="story-title-en" data-lang-en>The Drama That Inspired Young Entrepreneurs</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">청년 창업가들을 자극한 드라마</div>
+        <div class="story-body-en" data-lang-en>Many young Koreans were inspired by Park Sae-ro-yi's entrepreneurial journey. The drama encouraged viewers to think about starting their own businesses and carving out their own paths, rather than simply following traditional, expected careers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 한국 청년이 박새로이의 창업 여정에서 영감을 받았습니다. 이 드라마는 시청자들이 정해진 진로를 그대로 따르기보다, 스스로 사업을 시작하고 자신만의 길을 개척하는 것을 고민하도록 이끌었습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep11.jpg" alt="The Meaning Behind His Haircut" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#11</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 11 / 27</div>
+        <div class="story-title-en" data-lang-en>The Meaning Behind His Haircut</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">그의 머리 스타일에 담긴 의미</div>
+        <div class="story-body-en" data-lang-en>Why does Sae-ro-yi keep the same short haircut throughout? It isn't just style. His cut reflects his stubborn refusal to compromise his values. In Korea, appearance often signals identity and status, so his simple hairstyle becomes a symbol of independence, revenge, and staying true.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">박새로이는 왜 드라마 내내 똑같은 짧은 머리를 고수할까요? 단순한 스타일 선택이 아닙니다. 그의 머리는 고집스러운 성격과 가치를 타협하지 않으려는 태도를 상징합니다. 한국에서 외모는 종종 정체성과 사회적 지위를 드러내기에, 그의 소박한 머리 스타일은 독립과 복수, 그리고 자신에게 충실함의 상징이 됩니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep12.jpg" alt="The Classic Korean Underdog" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#12</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 12 / 27</div>
+        <div class="story-title-en" data-lang-en>The Classic Korean Underdog</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">전형적인 한국형 언더독</div>
+        <div class="story-body-en" data-lang-en>Park Sae-ro-yi is the classic Korean underdog: a powerless man challenging a giant corporation. Korean audiences love these stories because they stand for fairness and hope, showing that persistence can overcome even the steepest disadvantages.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">박새로이는 전형적인 한국형 언더독입니다. 힘없는 한 사람이 거대 기업에 맞섭니다. 한국 시청자들이 이런 이야기를 사랑하는 이유는, 공정함과 희망을 상징하기 때문입니다. 끈기가 아무리 큰 불리함도 이겨낼 수 있음을 보여줍니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep13.jpg" alt="The Strength Called 'Han'" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#13</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 13 / 27</div>
+        <div class="story-title-en" data-lang-en>The Strength Called 'Han'</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">'한'이라 불리는 힘</div>
+        <div class="story-body-en" data-lang-en>Park Sae-ro-yi's greatest strength isn't money or power &mdash; it's patience. Korean audiences deeply connect with characters who endure hardship without giving up. His journey reflects 'han,' a Korean idea of deep emotional pain transformed into determination, which runs through many beloved Korean stories.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">박새로이의 가장 큰 강점은 돈이나 권력이 아니라 인내입니다. 한국 시청자들은 포기하지 않고 고난을 견디는 인물에게 깊이 공감합니다. 그의 여정은 '한'을 담고 있습니다. 깊은 정서적 아픔이 의지로 승화된다는 한국적 개념으로, 사랑받는 많은 한국 이야기에 녹아 있습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep14.jpg" alt="What 'DanBam' Really Means" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#14</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 14 / 27</div>
+        <div class="story-title-en" data-lang-en>What 'DanBam' Really Means</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">'단밤'에 담긴 진짜 의미</div>
+        <div class="story-body-en" data-lang-en>Sae-ro-yi's restaurant name, DanBam, means 'Sweet Night' in Korean &mdash; but it's more than a name. It represents a fresh beginning after darkness. Throughout the drama, food becomes a symbol of hope, friendship, and rebuilding, perfectly matching his journey from tragedy to success.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">새로이의 가게 이름 '단밤'은 한국어로 '달콤한 밤'을 뜻하지만, 단순한 이름 그 이상입니다. 어둠 뒤에 찾아온 새 출발을 상징합니다. 드라마 내내 음식은 희망과 우정, 그리고 삶을 다시 쌓아 올리는 것의 상징이 되며, 비극에서 성공으로 향하는 그의 여정과 완벽하게 어울립니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep15.jpg" alt="What Does Success Really Mean?" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#15</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 15 / 27</div>
+        <div class="story-title-en" data-lang-en>What Does Success Really Mean?</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">성공이란 진짜 무엇일까?</div>
+        <div class="story-body-en" data-lang-en>Itaewon Class asks an important question: what does success really mean? Money, power, or staying true to yourself? That question resonates strongly with younger Korean audiences who are increasingly challenging traditional definitions of success.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰는 중요한 질문을 던집니다. 성공이란 진짜 무엇일까요? 돈일까요, 권력일까요, 아니면 자신에게 충실한 것일까요? 이 질문은 성공의 전통적 정의에 점점 의문을 던지는 젊은 한국 시청자들에게 강하게 와닿습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep16.jpg" alt="Why It Won Over the World" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#16</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 16 / 27</div>
+        <div class="story-title-en" data-lang-en>Why It Won Over the World</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">전 세계를 사로잡은 이유</div>
+        <div class="story-body-en" data-lang-en>Itaewon Class succeeded worldwide because it wasn't only a Korean story. It explored universal themes &mdash; revenge, friendship, ambition, and chasing dreams &mdash; while also introducing global audiences to Korean business culture, food, and social issues.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰가 전 세계에서 성공한 이유는 단지 한국만의 이야기가 아니었기 때문입니다. 복수와 우정, 야망, 꿈을 좇는 것 같은 보편적 주제를 다루면서, 동시에 세계 시청자에게 한국의 비즈니스 문화와 음식, 사회 문제를 소개했습니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep17.jpg" alt="Why Koreans Always Ask Your Age" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#17</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 17 / 27</div>
+        <div class="story-title-en" data-lang-en>Why Koreans Always Ask Your Age</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국인이 나이를 꼭 묻는 이유</div>
+        <div class="story-body-en" data-lang-en>One thing that surprises foreigners is how often Koreans ask about age. Age shapes language, titles, and social relationships. In Itaewon Class, characters constantly adjust how they speak depending on who they're addressing &mdash; a habit rooted in Korea's deep emphasis on respect and hierarchy.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">외국인을 놀라게 하는 것 하나는 한국인이 나이를 얼마나 자주 묻는가입니다. 나이는 말투와 호칭, 사회적 관계를 좌우합니다. 이태원 클라쓰에서 인물들은 상대가 누구인지에 따라 말하는 방식을 끊임없이 바꿉니다. 존중과 위계를 깊이 중시하는 한국 문화에서 비롯된 습관입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep18.jpg" alt="The Haircut Everyone Regretted" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#18</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 18 / 27</div>
+        <div class="story-title-en" data-lang-en>The Haircut Everyone Regretted</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모두가 후회한 그 머리 스타일</div>
+        <div class="story-body-en" data-lang-en>Itaewon Class didn't just become a hit &mdash; it sparked a fashion trend. Park Seo-joon's signature crop cut quickly became one of Korea's most requested hairstyles, and countless men copied it. The funny part? Many later admitted regret, since it was far harder to pull off.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰는 흥행에 그치지 않고 유행까지 만들었습니다. 박서준의 상징인 크롭컷은 순식간에 한국에서 가장 인기 있는 헤어스타일이 됐고, 수많은 남성이 따라 했습니다. 웃긴 점은? 많은 이가 나중에 후회했다는 겁니다. 박서준이 보여준 것보다 훨씬 소화하기 어려웠거든요.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep19.jpg" alt="Why Revenge Dramas Resonate" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#19</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 19 / 27</div>
+        <div class="story-title-en" data-lang-en>Why Revenge Dramas Resonate</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">복수극이 공감을 얻는 이유</div>
+        <div class="story-body-en" data-lang-en>Itaewon Class is a revenge story, but Korean revenge dramas are often about more than punishment. They explore fairness, injustice, and restoring balance. Many Korean viewers connect with characters fighting powerful systems, because they mirror real frustrations about inequality and social pressure.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이태원 클라쓰는 복수극이지만, 한국의 복수 드라마는 종종 단순한 응징 이상을 다룹니다. 공정함과 불의, 그리고 균형의 회복을 이야기합니다. 많은 한국 시청자가 거대한 시스템에 맞서는 인물에게 공감하는데, 불평등과 사회적 압박에 대한 현실의 답답함을 비추기 때문입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep20.jpg" alt="The Singles Bar Irony" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#20</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 20 / 27</div>
+        <div class="story-title-en" data-lang-en>The Singles Bar Irony</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">싱글 바 장면의 아이러니</div>
+        <div class="story-body-en" data-lang-en>One scene surprises many Korean viewers: a character suggests opening a singles bar in Itaewon, but executives reject it as unfitting for the neighborhood. Ironically, real Itaewon was already famous for exactly that nightlife &mdash; one of the rare moments the drama doesn't quite match reality.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한 장면이 많은 한국 시청자를 놀라게 합니다. 한 인물이 이태원에 싱글 바를 열자고 제안하지만, 임원들이 동네와 맞지 않는다며 곧바로 거절합니다. 아이러니하게도 실제 이태원은 바로 그런 밤 문화로 이미 유명했습니다. 드라마가 현실과 잘 들어맞지 않는 드문 순간 중 하나입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep21.jpg" alt="The Flirting Scene That Became a Meme" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#21</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 21 / 27</div>
+        <div class="story-title-en" data-lang-en>The Flirting Scene That Became a Meme</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">밈이 된 그 대시 장면</div>
+        <div class="story-body-en" data-lang-en>One scene became a legendary meme. Soo-ah repeatedly invites Sae-ro-yi to stay overnight, hinting there isn't even a spare blanket or room. Many fans felt she was obviously flirting &mdash; but Sae-ro-yi completely missed every hint and left anyway. His innocent reaction is still joked about.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한 장면이 전설적인 밈이 됐습니다. 수아가 새로이에게 자고 가라며 거듭 권하는데, 여분의 이불도 방도 없다는 걸 은근히 내비칩니다. 많은 팬은 그녀가 대놓고 대시한다고 느꼈지만, 새로이는 모든 신호를 완전히 놓치고 그냥 떠납니다. 그의 순진한 반응은 지금도 회자되는 웃음 포인트입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep22.jpg" alt="Why Drinking Scenes Are Everywhere" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#22</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 22 / 27</div>
+        <div class="story-title-en" data-lang-en>Why Drinking Scenes Are Everywhere</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">술자리 장면이 자주 나오는 이유</div>
+        <div class="story-body-en" data-lang-en>Drinking scenes appear often in Korean dramas because alcohol has long helped build relationships. Sharing soju can signal trust and friendship. Though younger generations are changing this culture, drinking together still remains an important social activity in many workplaces and friendships.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 드라마에 술자리 장면이 자주 등장하는 이유는, 술이 오랫동안 관계를 다지는 역할을 해왔기 때문입니다. 함께 소주를 나누는 것은 신뢰와 우정을 뜻하기도 합니다. 젊은 세대가 이 문화를 바꿔가고 있지만, 함께 술을 마시는 일은 여전히 많은 직장과 친구 사이에서 중요한 사교 활동입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep23.jpg" alt="The School Conflict That Started It All" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#23</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 23 / 27</div>
+        <div class="story-title-en" data-lang-en>The School Conflict That Started It All</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모든 것을 시작한 학교 사건</div>
+        <div class="story-body-en" data-lang-en>Korean schools often emphasize discipline, competition, and respect for teachers. Itaewon Class opens with a school conflict that upends Sae-ro-yi's entire life. Many Korean viewers grasp this pressure instantly, because school reputation and academic success can heavily shape future opportunities.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국 학교는 종종 규율과 경쟁, 그리고 교사에 대한 존중을 강조합니다. 이태원 클라쓰는 새로이의 인생 전체를 뒤바꾸는 학교 사건으로 시작합니다. 많은 한국 시청자가 이 압박을 단번에 이해하는데, 학교의 평판과 학업 성취가 미래의 기회를 크게 좌우할 수 있기 때문입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep24.jpg" alt="Chicken, Beer, and 'Chimaek'" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#24</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 24 / 27</div>
+        <div class="story-title-en" data-lang-en>Chicken, Beer, and 'Chimaek'</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">치킨, 맥주, 그리고 '치맥'</div>
+        <div class="story-body-en" data-lang-en>Korean fried chicken is more than food &mdash; it's a huge part of social life. Friends gather over chicken and beer, known as 'chimaek.' In Itaewon Class, food stands for connection, ambition, and business success, which is why restaurants appear so prominently in Korean dramas.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국식 프라이드치킨은 음식 그 이상으로, 사교 생활의 큰 부분입니다. 친구들은 치킨과 맥주, 이른바 '치맥'을 두고 모입니다. 이태원 클라쓰에서 음식은 연결과 야망, 사업의 성공을 상징합니다. 그래서 한국 드라마에 식당이 그토록 자주 등장하는 것입니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep25.jpg" alt="Why 'Have You Eaten?' Means So Much" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#25</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 25 / 27</div>
+        <div class="story-title-en" data-lang-en>Why 'Have You Eaten?' Means So Much</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">'밥 먹었어?'가 특별한 이유</div>
+        <div class="story-body-en" data-lang-en>In Korea, asking 'Have you eaten?' can mean far more than a question about food &mdash; it often means 'How are you?' or 'I care about you.' Food is one of Korea's strongest expressions of affection, and Itaewon Class shows characters bonding through shared meals.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국에서 '밥 먹었어?'라는 물음은 단순히 음식을 묻는 것 이상을 뜻할 때가 많습니다. '잘 지내?' 또는 '네가 걱정돼'라는 의미이기도 합니다. 음식은 한국에서 애정을 표현하는 가장 강한 방식 중 하나이며, 이태원 클라쓰는 인물들이 함께 밥을 먹으며 관계를 쌓는 모습을 보여줍니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep26.jpg" alt="How Hard It Is to Open a Restaurant" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#26</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 26 / 27</div>
+        <div class="story-title-en" data-lang-en>How Hard It Is to Open a Restaurant</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">식당을 여는 것이 얼마나 어려운가</div>
+        <div class="story-body-en" data-lang-en>Starting a restaurant in Korea is far harder than many foreigners realize. Competition is fierce, rent is expensive, and reputation matters enormously. Itaewon Class shows Sae-ro-yi fighting a powerful corporation with just a small bar &mdash; representing countless small owners struggling to survive Korea's cutthroat industry.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국에서 식당을 시작하는 일은 많은 외국인이 생각하는 것보다 훨씬 어렵습니다. 경쟁은 치열하고, 임대료는 비싸며, 평판이 매우 중요합니다. 이태원 클라쓰는 작은 포차 하나로 거대 기업에 맞서는 새로이를 보여줍니다. 한국의 치열한 외식업에서 살아남으려 애쓰는 수많은 소상공인을 상징합니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep27.jpg" alt="Why Rags-to-Riches Stories Win in Korea" onerror="this.style.display='none';this.parentElement.innerHTML='&#127866;';">
+        <span class="story-num-badge">#27</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 27 / 27</div>
+        <div class="story-title-en" data-lang-en>Why Rags-to-Riches Stories Win in Korea</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">한국에서 자수성가 이야기가 통하는 이유</div>
+        <div class="story-body-en" data-lang-en>Rags-to-riches stories are hugely popular in Korea, and Itaewon Class succeeded because viewers connected with Sae-ro-yi's struggle. His success wasn't luck &mdash; it came from sheer persistence, reflecting a deep cultural admiration for endurance and determination.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">무일푼에서 시작하는 이야기는 한국에서 큰 인기를 끕니다. 이태원 클라쓰가 성공한 것도 시청자들이 새로이의 고군분투에 공감했기 때문입니다. 그의 성공은 운이 아니라 순전한 끈기에서 나왔습니다. 인내와 의지를 향한 깊은 문화적 존경을 반영합니다.</div>
+        <a class="btn-youtube pending" href="#" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
 </div>
 </main>
 
@@ -109,28 +633,39 @@
 
 <script src="../../js/app.js"></script>
 <script>
-
   function goHome() { window.location.href = '../../index.html'; }
 
   function applyPageLang() {
     var isKo = getLang() === 'ko';
     document.documentElement.lang = isKo ? 'ko' : 'en';
-    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
-    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
-    document.getElementById('bc-drama').textContent  = isKo ? '이태원 클라쓰' : 'Itaewon Class';
-    document.getElementById('hdr-title').textContent = isKo ? '이태원 클라쓰' : 'Itaewon Class';
-    document.getElementById('hdr-meta').textContent  = isKo ? '16화 · 2020 · 비즈니스 드라마' : '16 Episodes · 2020 · Business Drama';
-    document.querySelectorAll('[data-lang-en]').forEach(function(el) { el.style.display = isKo ? 'none' : ''; });
-    document.querySelectorAll('[data-lang-ko]').forEach(function(el) { el.style.display = isKo ? '' : 'none'; });
+    // null-safe lookups: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every element to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '이태원 클라쓰' : 'Itaewon Class');
+    setTxt('hdr-title',    isKo ? '이태원 클라쓰' : 'Itaewon Class');
+    setTxt('hdr-meta',     isKo ? '유튜브 쇼츠 27개 · 2020 · 비즈니스 드라마' : '27 YouTube Shorts · 2020 · Business Drama');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 27개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 27 Stories');
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
     injectTermsModal();
     document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
     applyPageLang();
     applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
   });
-
 </script>
 </body>
 </html>
