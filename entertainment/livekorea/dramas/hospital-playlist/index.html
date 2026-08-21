@@ -13,21 +13,79 @@
     }
     .drama-info-card .di-label {
       font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 10px;
     }
     .drama-info-card .di-desc { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
-    .coming-soon-bar {
-      background: rgba(232,36,92,0.07); border: 1.5px solid rgba(232,36,92,0.2);
-      border-radius: var(--radius); padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    .story-card {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      margin-bottom: 16px; box-shadow: var(--shadow);
+      transition: var(--transition);
     }
-    .coming-soon-bar .cs-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,36,92,0.1); border: 1px solid rgba(232,36,92,0.3);
-      border-radius: 20px; padding: 5px 18px;
-      font-size: 0.75rem; font-weight: 700; color: var(--accent);
-      letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    .story-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(232,36,92,0.12); }
+    .story-card-inner { display: flex; }
+    .story-thumb {
+      width: 110px; min-width: 110px; position: relative;
+      background: linear-gradient(135deg, var(--card2), var(--card3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; flex-shrink: 0;
     }
-    .coming-soon-bar p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .story-thumb img { width: 110px; height: 100%; min-height: 100px; object-fit: cover; display: block; }
+    .story-num-badge {
+      position: absolute; bottom: 6px; left: 7px;
+      background: rgba(255,255,255,0.92); color: var(--accent2);
+      font-size: 0.65rem; font-weight: 800; padding: 2px 7px;
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .story-content { flex: 1; padding: 14px 16px 14px 14px; min-width: 0; }
+    .story-label {
+      font-family: 'Syne', sans-serif; font-size: 0.63rem; font-weight: 800;
+      letter-spacing: 1.8px; text-transform: uppercase;
+      color: var(--accent2); margin-bottom: 5px;
+    }
+    .story-title-en {
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); line-height: 1.4; margin-bottom: 7px; letter-spacing: -0.01em;
+    }
+    .story-title-ko {
+      font-size: 0.95rem; font-weight: 800; color: var(--accent);
+      line-height: 1.35; margin-bottom: 7px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .story-body-en { font-size: 0.84rem; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .story-body-ko {
+      font-size: 0.84rem; color: var(--text); line-height: 1.85; margin-bottom: 10px;
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; word-break: keep-all;
+    }
+    .btn-youtube {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #d91a60);
+      color: #fff; border: none; border-radius: 8px;
+      padding: 7px 16px; font-size: 0.8rem; font-weight: 800;
+      cursor: pointer; transition: all 0.22s; text-decoration: none; font-family: inherit;
+    }
+    .btn-youtube:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(255,45,120,0.4); }
+    .btn-youtube.pending {
+      background: var(--card2); color: var(--muted);
+      border: 1px solid var(--border); cursor: not-allowed; pointer-events: none; opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+      /* Stack each story card so the image is a full-width square
+         and the description spans the full width below it. */
+      .story-card-inner { flex-direction: column; }
+      .story-thumb {
+        width: 100%; min-width: 0;
+        aspect-ratio: 1 / 1; height: auto;
+        font-size: 3rem;
+      }
+      .story-thumb img {
+        width: 100%; height: 100%;
+        min-height: 0; object-fit: cover;
+      }
+      .story-num-badge { bottom: 8px; left: 8px; font-size: 0.72rem; padding: 3px 9px; }
+      .story-content { padding: 14px 18px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -67,36 +125,472 @@
   <div class="page-header">
     <div class="page-header-thumb">
       <img src="../../images/hospital-playlist.jpg" alt="Hospital Playlist"
-        onerror="this.style.display='none';this.parentElement.innerHTML='🏥';this.parentElement.style.cssText='display:flex;align-items:center;justify-content:center;font-size:3rem;';">
+        onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#eff6ff,#bfdbfe)';this.parentElement.innerHTML='&#127973;';">
     </div>
     <div class="page-header-info">
       <div class="page-header-title" id="hdr-title">Hospital Playlist</div>
-      <div class="page-header-meta" id="hdr-meta">24 Episodes &middot; 2020–2021 &middot; Medical Drama</div>
+      <div class="page-header-meta" id="hdr-meta">25 YouTube Shorts &middot; 2020&ndash;2021 &middot; Medical Drama</div>
+      <div class="page-header-actions">
+        <button class="btn-bm" data-bm-id="show-hospital-playlist"
+          onclick="toggleBookmark('show','show-hospital-playlist','&#127973; Hospital Playlist','dramas/hospital-playlist/index.html')">
+          &#128278; <span id="bm-label">Bookmark</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <!-- Coming Soon notice — EN -->
-  <div class="coming-soon-bar" id="cs-en" data-lang-en>
-    <div class="cs-badge">&#128679; Coming Soon</div>
-    <p>We are currently preparing study content for <strong>Hospital Playlist</strong>.<br>Korean expression cards and YouTube Shorts will be available soon — check back!</p>
-  </div>
-
-  <!-- Coming Soon notice — KO -->
-  <div class="coming-soon-bar" id="cs-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
-    <div class="cs-badge">&#128679; 준비중</div>
-    <p><strong>슬기로운 의사생활</strong> 학습 콘텐츠를 열심히 준비하고 있습니다.<br>한국어 표현 카드와 YouTube 쇼츠가 곧 업데이트될 예정입니다!</p>
-  </div>
-
-  <!-- EN description -->
   <div class="drama-info-card" id="desc-en" data-lang-en>
     <div class="di-label">&#127916; About This Drama</div>
-    <div class="di-desc"><strong>Hospital Playlist</strong> is a 2020–2021 tvN drama following five doctor friends who have known each other since medical school. Set in a fictional Seoul hospital, it balances heartfelt patient stories with the warmth of deep friendship, a band that plays together, and the everyday moments that make life meaningful.</div>
+    <div class="di-desc">
+      <strong>Hospital Playlist</strong> is a 2020&ndash;2021 tvN Korean drama following five doctors who have been close friends since medical school and now work together at Yulje Medical Center. Across two seasons it blends warm friendship, everyday hospital life, romance, and the band they play in together.<br><br>
+      Beloved for its heartfelt storytelling, humor, and music, it became one of Korea&#39;s most cherished dramas.
+    </div>
   </div>
 
-  <!-- KO description -->
   <div class="drama-info-card" id="desc-ko" data-lang-ko style="display:none;font-family:'Noto Sans KR','DM Sans',sans-serif;word-break:keep-all;">
     <div class="di-label">&#127916; 드라마 소개</div>
-    <div class="di-desc"><strong>슬기로운 의사생활</strong>은 의대 동기로 만나 20년 넘게 우정을 이어온 다섯 의사의 이야기를 담은 tvN 드라마입니다. 감동적인 환자 사연과 따뜻한 우정, 밴드 활동과 일상의 소소한 행복을 유머와 감성으로 풀어내며 큰 사랑을 받았습니다.</div>
+    <div class="di-desc">
+      <strong>슬기로운 의사생활</strong>은 2020&ndash;2021년 tvN에서 방영된 드라마로, 의대 시절부터 절친한 다섯 의사가 같은 병원 율제의료원에서 함께 일하는 이야기를 그립니다. 두 시즌에 걸쳐 따뜻한 우정과 병원의 일상, 로맨스, 그리고 이들이 함께하는 밴드를 담아냅니다.<br><br>
+      진심 어린 이야기와 유머, 음악으로 큰 사랑을 받은 한국의 대표 드라마 중 하나입니다.
+    </div>
+  </div>
+
+  <div class="bookmark-bar" id="bookmarkBar">
+    <div class="bookmark-bar-head">
+      <span class="bm-icon">&#128278;</span>
+      <span id="bm-bar-title">Your Bookmarks</span>
+    </div>
+    <div class="bookmark-chips" id="bookmarkChips"></div>
+  </div>
+
+  <div class="section-label" id="shorts-label">&#127381; YouTube Shorts &mdash; 25 Stories</div>
+  <div id="storiesList">
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep1.jpg" alt="The Band Represents Balance" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#1</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 1 / 25</div>
+        <div class="story-title-en" data-lang-en>The Band Represents Balance</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">밴드는 균형을 상징한다</div>
+        <div class="story-body-en" data-lang-en>The five doctors' band isn't just for fun &mdash; it represents balance. Despite stressful careers, they make time for friendship and hobbies. Many Korean viewers connected with this, because work-life balance has become an increasingly important topic in modern Korea.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">다섯 의사의 밴드는 단순한 취미가 아니라 균형을 상징합니다. 바쁘고 스트레스 많은 삶 속에서도 그들은 우정과 취미를 위한 시간을 냅니다. 많은 한국 시청자가 이 메시지에 공감했는데, 일과 삶의 균형이 현대 한국에서 점점 더 중요한 화두가 되고 있기 때문입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/nYjD4tHicnk?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep2.jpg" alt="Hospital Playlist Had a Secret Writing Team" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#2</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 2 / 25</div>
+        <div class="story-title-en" data-lang-en>Hospital Playlist Had a Secret Writing Team</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">슬의생의 숨은 작가팀</div>
+        <div class="story-body-en" data-lang-en>Most people know Lee Woo-jung created Hospital Playlist, but few know several other writers worked behind the scenes, researching medical cases, procedures, and hospital life to keep everything realistic. That's why the credits separate 'Writer' and 'Story Development' &mdash; the accuracy was a team effort.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 사람이 이우정 작가가 슬기로운 의사생활을 만들었다는 건 알지만, 여러 다른 작가가 뒤에서 함께했다는 사실은 잘 모릅니다. 이들은 의학 사례와 시술, 병원 생활을 조사해 모든 것을 사실적으로 유지했습니다. 크레딧에 '극본'과 '스토리 개발'이 나뉘어 있는 이유이며, 의학적 정확성은 팀워크의 결과였습니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/MLlAXkA1m34?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep3.jpg" alt="Why They Still Honor Their Old Professors" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#3</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 3 / 25</div>
+        <div class="story-title-en" data-lang-en>Why They Still Honor Their Old Professors</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">옛 스승을 여전히 공경하는 이유</div>
+        <div class="story-body-en" data-lang-en>Many doctors in the drama keep respecting the professors who taught them years earlier. Korean culture places strong emphasis on honoring teachers and mentors. Even successful professionals often speak formally to their former instructors throughout their entire careers.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">드라마 속 많은 의사는 수년 전 자신을 가르친 교수들을 계속 공경합니다. 한국 문화는 스승과 멘토를 존중하는 것을 매우 중요하게 여깁니다. 성공한 전문가들조차 평생에 걸쳐 옛 스승에게 격식을 갖춰 말하는 경우가 많습니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/tH-Bu-MtXgw?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep4.jpg" alt="The Real Reason the Band Was So Good" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#4</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 4 / 25</div>
+        <div class="story-title-en" data-lang-en>The Real Reason the Band Was So Good</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">병원 밴드가 그렇게 잘했던 진짜 이유</div>
+        <div class="story-body-en" data-lang-en>Did you know most of the cast are real musical-theater actors? Jo Jung-suk, Yoo Yeon-seok, Jeon Mi-do and Kim Dae-myung all came from musicals. That's why the band scenes felt so authentic &mdash; with years of real singing and stage experience, Mido and Falasol sounded genuine.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">출연진 대부분이 실제 뮤지컬 배우라는 사실, 알고 있었나요? 조정석, 유연석, 전미도, 김대명을 비롯한 많은 배우가 뮤지컬 무대 출신입니다. 그래서 밴드 장면이 그토록 진짜 같았습니다. 오랜 노래와 무대 경험 덕에 미도와 파라솔은 진짜 밴드처럼 들렸습니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/G13YHqZWxww?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep5.jpg" alt="Why Doctors Always Eat Together" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#5</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 5 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Doctors Always Eat Together</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">의사들이 늘 함께 식사하는 이유</div>
+        <div class="story-body-en" data-lang-en>Hospital Playlist often shows doctors sharing meals, and these scenes aren't only about friendship. In Korean workplaces, eating together strengthens trust and teamwork. Busy doctors frequently use meal breaks to discuss patients, support one another, and build relationships outside the operating room.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">슬기로운 의사생활은 의사들이 함께 식사하는 장면을 자주 보여주는데, 이는 단지 우정 때문만이 아닙니다. 한국의 직장에서 함께 밥을 먹는 일은 신뢰와 팀워크를 다집니다. 바쁜 의사들은 식사 시간을 활용해 환자를 논의하고, 서로를 격려하며, 수술실 밖에서 관계를 쌓습니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/45uYg5BxneM?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep6.jpg" alt="Fans Found a Rare Medical Mistake" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#6</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 6 / 25</div>
+        <div class="story-title-en" data-lang-en>Fans Found a Rare Medical Mistake</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">팬들이 찾아낸 드문 의학적 오류</div>
+        <div class="story-body-en" data-lang-en>Hospital Playlist is praised for its realism, but eagle-eyed medical professionals spotted one mistake: a doctor touched their face while wearing sterile gloves during an emergency procedure, which would contaminate them instantly. It's a tiny slip, and one of the very few fans ever found.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">슬기로운 의사생활은 사실성으로 호평받지만, 눈썰미 좋은 의료진이 한 가지 실수를 발견했습니다. 응급 시술 중 한 의사가 멸균 장갑을 낀 채 얼굴을 만진 것입니다. 이는 즉시 장갑을 오염시킵니다. 아주 사소한 실수이지만, 팬들이 찾아낸 몇 안 되는 오류 중 하나입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/_XMrBt51fP0?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep7.jpg" alt="The Punishing Hours Behind the Job" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#7</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 7 / 25</div>
+        <div class="story-title-en" data-lang-en>The Punishing Hours Behind the Job</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">직업 뒤에 숨은 고된 근무 시간</div>
+        <div class="story-body-en" data-lang-en>Hospital Playlist shows doctors staying day and night. Though softened, Korean doctors often work demanding schedules, especially during residency; long shifts have long been part of training. The series celebrates not just medical skill but the teamwork and dedication that keep hospitals running.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">슬기로운 의사생활은 밤낮으로 병원에 머무는 의사들을 보여줍니다. 다소 순화되긴 했지만, 한국 의사들은 특히 전공의 시절 고된 일정을 소화하는 경우가 많고, 긴 근무는 오랫동안 수련의 일부였습니다. 이 드라마는 의술뿐 아니라 병원을 지탱하는 팀워크와 헌신을 함께 조명합니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/eND-iKGIoE0?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep8.jpg" alt="A 10-Year-Old Changed Lives After This Episode" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#8</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 8 / 25</div>
+        <div class="story-title-en" data-lang-en>A 10-Year-Old Changed Lives After This Episode</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">이 에피소드를 보고 삶을 바꾼 열 살 아이</div>
+        <div class="story-body-en" data-lang-en>One episode inspired something incredible. A young girl named Jung Su-a decided to become an organ donor after watching the show. Sadly she passed away at just ten, but her wish was honored &mdash; a powerful reminder that television can sometimes spark real acts of kindness.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한 에피소드가 놀라운 일을 불러일으켰습니다. 정수아라는 어린 소녀가 이 드라마를 보고 장기 기증자가 되기로 결심했습니다. 안타깝게도 그는 겨우 열 살에 세상을 떠났지만, 그 소망은 지켜졌습니다. 텔레비전이 때로 현실에서 특별한 선행을 이끌어낼 수 있음을 보여준 뭉클한 이야기입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/0OPXurRcYAE?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep9.jpg" alt="Why the Hospital Feels So Calm" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#9</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 9 / 25</div>
+        <div class="story-title-en" data-lang-en>Why the Hospital Feels So Calm</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">병원이 그토록 조용하게 느껴지는 이유</div>
+        <div class="story-body-en" data-lang-en>Many North American viewers notice how calm the hospital feels. Korean hospitals generally encourage quiet waiting areas and respectful behavior; family members speak softly and visitors avoid disturbing other patients. This atmosphere reflects Korea's strong emphasis on consideration for the people around you.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 북미 시청자가 병원이 얼마나 차분한지 알아챕니다. 한국의 병원은 대체로 조용한 대기 공간과 예의 바른 행동을 권장합니다. 가족들은 낮은 목소리로 말하고, 방문객은 다른 환자를 방해하지 않으려 합니다. 이 분위기는 주변 사람을 배려하는 한국의 강한 문화를 보여줍니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/4JsjutGaPSU?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep10.jpg" alt="The Small Bow You Might Miss" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#10</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 10 / 25</div>
+        <div class="story-title-en" data-lang-en>The Small Bow You Might Miss</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">놓치기 쉬운 작은 인사, 목례</div>
+        <div class="story-body-en" data-lang-en>One detail many viewers miss: Korean doctors often bow when greeting patients. Even a slight bow signals respect and professionalism &mdash; in Korea, courtesy is considered part of good medical care. Hospital Playlist captures these subtle gestures, making the hospital feel authentic to Korean audiences.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 시청자가 놓치는 디테일이 있습니다. 한국 의사들은 환자를 맞을 때 종종 고개를 숙여 인사합니다. 살짝 숙이는 목례조차 존중과 전문성을 드러냅니다. 한국에서 예의는 좋은 의료의 일부로 여겨집니다. 슬기로운 의사생활은 이런 섬세한 몸짓을 담아 병원을 한국 시청자에게 진짜처럼 느껴지게 합니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/yIFLADFha6Q?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep11.jpg" alt="Why Healthcare Workers Find It So Real" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#11</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 11 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Healthcare Workers Find It So Real</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">의료진이 유독 사실적이라 느끼는 이유</div>
+        <div class="story-body-en" data-lang-en>Unlike many medical dramas, Hospital Playlist focuses on ordinary moments instead of constant emergencies. The creators interviewed real doctors, nurses, and hospital staff to make everyday hospital life feel authentic. That's why so many Korean healthcare workers say the drama feels surprisingly realistic.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 의학 드라마와 달리, 슬기로운 의사생활은 끊임없는 응급 상황 대신 평범한 순간에 집중합니다. 제작진은 실제 의사, 간호사, 병원 직원을 인터뷰해 일상적인 병원 생활을 진짜처럼 그려냈습니다. 그래서 수많은 한국 의료 종사자가 이 드라마가 놀랍도록 현실적이라고 말합니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/wqlE04HCwlk?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep12.jpg" alt="The Band Stayed Together After Filming" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#12</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 12 / 25</div>
+        <div class="story-title-en" data-lang-en>The Band Stayed Together After Filming</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">촬영이 끝난 뒤에도 뭉친 밴드</div>
+        <div class="story-body-en" data-lang-en>Most TV bands vanish once filming ends &mdash; not this one. Even after Season 1 wrapped, the cast kept meeting to rehearse, and Mido and Falasol regularly practiced Season 2 songs long before filming began. Their friendship became so real the band existed outside the drama.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">대부분의 드라마 밴드는 촬영이 끝나면 사라지지만, 이 밴드는 달랐습니다. 시즌 1이 끝난 뒤에도 배우들은 계속 모여 연습했고, 미도와 파라솔은 촬영 시작 훨씬 전부터 시즌 2 곡을 꾸준히 연습했습니다. 그들의 우정이 너무나 진짜여서, 밴드는 드라마 밖에서도 존재하는 셈이었습니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/cNcLf-9k9Qs?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep13.jpg" alt="Teamwork Over the Lone Hero" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#13</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 13 / 25</div>
+        <div class="story-title-en" data-lang-en>Teamwork Over the Lone Hero</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">영웅 한 명보다 팀워크</div>
+        <div class="story-body-en" data-lang-en>Unlike many Western medical dramas, Hospital Playlist focuses on teamwork rather than one heroic doctor. Korean workplaces often emphasize collective success over individual recognition. Every nurse, resident, technician, and surgeon contributes to patient care &mdash; reflecting an important value in Korean working life.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 서구 의학 드라마와 달리, 슬기로운 의사생활은 영웅 한 명이 아니라 팀워크에 집중합니다. 한국의 직장은 개인의 성취보다 공동의 성공을 강조하는 경우가 많습니다. 간호사, 전공의, 기사, 외과의 모두가 환자 진료에 기여하며, 이는 한국 직장 생활의 중요한 가치를 보여줍니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/-7TJYKrr3qI?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep14.jpg" alt="Why Doctors Think This Poster Is Horror" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#14</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 14 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Doctors Think This Poster Is Horror</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">의사들이 이 포스터를 공포로 여기는 이유</div>
+        <div class="story-body-en" data-lang-en>Season 2's poster shows all five doctors gathered around one patient. Fans found it heartwarming; real doctors found it terrifying. Why? If specialists from all five departments surround a single patient, that patient is likely in serious condition &mdash; a medical horror hidden in plain sight.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">시즌 2 포스터는 다섯 의사가 한 환자를 둘러싼 모습을 보여줍니다. 팬들은 훈훈하다고 느꼈지만, 실제 의사들은 오싹하다고 봤습니다. 왜일까요? 다섯 개 과의 전문의가 한 환자를 에워쌌다면, 그 환자는 매우 위중한 상태일 가능성이 큽니다. 눈앞에 숨겨진 의학 공포 이야기인 셈입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/FSor2DNciQY?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep15.jpg" alt="Why Everyone Shares the Same Dishes" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#15</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 15 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Shares the Same Dishes</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모두가 같은 반찬을 나눠 먹는 이유</div>
+        <div class="story-body-en" data-lang-en>During meals, everyone eats from the same side dishes. Sharing food is central to Korean dining culture: rather than ordering separate plates, people enjoy many dishes together. It's a simple tradition that emphasizes community, generosity, and togetherness &mdash; and it quietly shapes the show's warmth.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">식사 때 모두가 같은 반찬을 함께 먹습니다. 음식을 나누는 것은 한국 식문화의 핵심입니다. 각자 따로 시키기보다 여러 음식을 함께 즐깁니다. 공동체, 나눔, 함께함을 강조하는 소박한 전통이며, 이 드라마의 따뜻함을 조용히 만들어냅니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/-P5PFTZovI4?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep16.jpg" alt="Why Patients Are Rarely Alone" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#16</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 16 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Patients Are Rarely Alone</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">환자가 좀처럼 혼자 있지 않는 이유</div>
+        <div class="story-body-en" data-lang-en>One detail surprises many foreign viewers: patients are rarely alone. In Korea, family members often stay with hospitalized loved ones, helping with meals, emotional support, and daily care. Though professional caregivers are becoming more common, family involvement remains a key part of Korean hospital culture.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 외국 시청자를 놀라게 하는 디테일이 있습니다. 환자가 혼자 있는 경우가 드뭅니다. 한국에서는 가족이 입원한 가족 곁에 머물며 식사와 정서적 지지, 일상적인 돌봄을 돕는 경우가 많습니다. 전문 간병인이 늘고 있지만, 가족의 참여는 여전히 한국 병원 문화의 중요한 부분입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/--4ZrSP5FW8?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep17.jpg" alt="The Hidden Weight Behind Ik-jun's Humor" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#17</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 17 / 25</div>
+        <div class="story-title-en" data-lang-en>The Hidden Weight Behind Ik-jun's Humor</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">익준의 유머 뒤에 숨은 무게</div>
+        <div class="story-body-en" data-lang-en>Ik-jun always seems cheerful, but his humor serves another purpose. In Korean culture, many people hide stress to avoid burdening others. His optimism supports his friends while quietly carrying his own struggles &mdash; making him one of the drama's most relatable characters.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">익준은 늘 밝아 보이지만, 그의 유머에는 또 다른 이유가 있습니다. 한국 문화에서는 남에게 부담을 주지 않으려 스트레스를 감추는 사람이 많습니다. 그의 낙천성은 친구들을 지지하면서도 자신의 힘겨움은 조용히 감당합니다. 그래서 그는 드라마에서 가장 공감 가는 인물 중 하나입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/G6UKJPqoLZ8?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep18.jpg" alt="The Actor They Refused to Replace" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#18</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 18 / 25</div>
+        <div class="story-title-en" data-lang-en>The Actor They Refused to Replace</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">절대 대체할 수 없었던 배우</div>
+        <div class="story-body-en" data-lang-en>For Lee Ik-jun the creators had only one choice: Jo Jung-suk. Producer Shin Won-ho wanted him so badly he even enlisted famed producer Na Young-seok to help persuade him. The role paid less than Jo usually earned, but after hearing the pitch he signed on.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">이익준 역에 제작진의 선택지는 단 하나, 조정석뿐이었습니다. 신원호 PD는 그를 너무나 원한 나머지, 유명 제작자 나영석까지 설득에 동원했습니다. 이 역할은 조정석이 평소 받던 것보다 출연료가 적었지만, 그는 기획을 듣고 결국 합류했습니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/KYWb5e055GI?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep19.jpg" alt="Friends Since Medical School" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#19</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 19 / 25</div>
+        <div class="story-title-en" data-lang-en>Friends Since Medical School</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">의대 시절부터 이어진 우정</div>
+        <div class="story-body-en" data-lang-en>The five main characters have been friends since medical school. Long-lasting friendships are highly valued in Korea, where people often stay close with classmates for decades &mdash; celebrating weddings, supporting careers, and raising families together. Hospital Playlist beautifully captures this lifelong bond.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">다섯 주인공은 의대 시절부터 친구였습니다. 한국에서는 오래가는 우정을 매우 소중히 여기며, 수십 년간 동창들과 가깝게 지내는 경우가 많습니다. 서로의 결혼을 축하하고, 커리어를 응원하며, 함께 가정을 꾸려갑니다. 슬기로운 의사생활은 이 평생의 유대를 아름답게 담아냅니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/6kiuGaraQF4?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep20.jpg" alt="Why Coworkers Use Titles, Not Names" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#20</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 20 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Coworkers Use Titles, Not Names</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">이름 대신 직함으로 부르는 이유</div>
+        <div class="story-body-en" data-lang-en>Notice how coworkers usually address each other by title instead of first name. Korean workplaces place great importance on professional titles and seniority; using someone's title shows respect and acknowledges their years of training and experience &mdash; a habit woven through every hospital scene.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">동료들이 이름 대신 직함으로 서로를 부르는 모습에 주목해 보세요. 한국의 직장은 직함과 연차를 매우 중시합니다. 직함을 부르는 것은 존중을 나타내고, 오랜 수련과 경험을 인정하는 일입니다. 병원의 모든 장면에 스며 있는 습관입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/9gFkgw3Ie0k?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep21.jpg" alt="The Hospital Set That Refused to Die" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#21</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 21 / 25</div>
+        <div class="story-title-en" data-lang-en>The Hospital Set That Refused to Die</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">사라지지 않은 병원 세트</div>
+        <div class="story-body-en" data-lang-en>COVID changed Hospital Playlist forever. When filming in real hospitals grew difficult, the production built a hyper-realistic hospital set &mdash; so convincing and costly that even after the series ended, other tvN dramas kept using it, simply renaming the hospital. You've likely seen it without realizing.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">코로나는 슬기로운 의사생활을 완전히 바꿔 놓았습니다. 실제 병원 촬영이 어려워지자, 제작진은 거대하고 극도로 사실적인 병원 세트를 지었습니다. 너무나 진짜 같고 값비쌌던 나머지, 시리즈가 끝난 뒤에도 다른 tvN 드라마들이 병원 이름만 바꿔 계속 사용했습니다. 당신도 모르는 사이 이미 봤을지 모릅니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/HOaZxN5Qy-U?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep22.jpg" alt="Real Doctors Corrected Hospital Playlist" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#22</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 22 / 25</div>
+        <div class="story-title-en" data-lang-en>Real Doctors Corrected Hospital Playlist</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">실제 의사들이 바로잡은 슬의생</div>
+        <div class="story-body-en" data-lang-en>One episode showed a family insisting that natural childbirth makes babies smarter than C-sections, and the scene sparked online debate. Soon after, real OB-GYNs posted videos explaining the belief is a myth &mdash; proof that even Korea's most accurate drama couldn't escape a little controversy.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한 에피소드에서 어떤 가족이 자연분만이 제왕절개보다 아이를 더 똑똑하게 만든다고 주장하는 장면이 나와 온라인에서 논쟁이 일었습니다. 얼마 뒤 실제 산부인과 의사들이 이 믿음이 근거 없는 속설이라고 설명하는 영상을 올렸습니다. 한국에서 가장 의학적으로 정확한 드라마조차 작은 논란은 피하지 못한 것입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/JD-rSw2H6g4?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep23.jpg" alt="Why Everyone Is Called 'Professor'" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#23</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 23 / 25</div>
+        <div class="story-title-en" data-lang-en>Why Everyone Is Called 'Professor'</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">모두를 '교수님'이라 부르는 이유</div>
+        <div class="story-body-en" data-lang-en>In Korea, attending physicians at university hospitals are commonly called 'Professor,' even while treating patients, since many are both doctors and medical-school faculty. That's why characters keep saying 'Professor Kim' or 'Professor Chae.' To international viewers it sounds unusual, but in Korea it's completely normal.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">한국에서는 대학병원의 주치의를 환자를 진료하는 중에도 흔히 '교수님'이라 부릅니다. 많은 이가 의사이면서 동시에 의대 교수이기 때문입니다. 그래서 인물들이 '김 교수님', '채 교수님'이라고 계속 말하는 것입니다. 외국 시청자에게는 낯설게 들리지만, 한국에서는 지극히 당연한 일입니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/9MpJCzurhH4?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep24.jpg" alt="Hospitals Built Like Small Towns" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#24</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 24 / 25</div>
+        <div class="story-title-en" data-lang-en>Hospitals Built Like Small Towns</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">작은 마을 같은 병원</div>
+        <div class="story-body-en" data-lang-en>Many large Korean hospitals contain convenience stores, coffee shops, pharmacies, and even bakeries inside the building. Because patients and families may spend long hours there, hospitals are designed almost like small communities. This practical, all-in-one setup often surprises foreign visitors.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">많은 대형 한국 병원 안에는 편의점, 카페, 약국, 심지어 베이커리까지 들어서 있습니다. 환자와 가족이 오랜 시간을 보내기 때문에, 병원은 마치 작은 공동체처럼 설계됩니다. 이 실용적인 원스톱 구조는 외국인 방문객을 종종 놀라게 합니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/6NzNlyN_LVU?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <div class="story-card-inner">
+      <div class="story-thumb">
+        <img src="images/ep25.jpg" alt="The Tradition of Thank-You Gifts" onerror="this.style.display='none';this.parentElement.innerHTML='&#127973;';">
+        <span class="story-num-badge">#25</span>
+      </div>
+      <div class="story-content">
+        <div class="story-label">&#127381; STORY 25 / 25</div>
+        <div class="story-title-en" data-lang-en>The Tradition of Thank-You Gifts</div>
+        <div class="story-title-ko" data-lang-ko style="display:none;">감사의 선물이라는 전통</div>
+        <div class="story-body-en" data-lang-en>Sometimes patients bring fruit or thank-you gifts after recovering. In Korea, expressing gratitude through small gifts is a long-held tradition. Hospitals now have stricter rules about accepting them, but sincere appreciation remains an important part of the doctor-patient relationship &mdash; a warmth the drama captures.</div>
+        <div class="story-body-ko" data-lang-ko style="display:none;">환자들은 회복한 뒤 과일이나 감사의 선물을 가져오기도 합니다. 한국에서 작은 선물로 고마움을 표현하는 것은 오랜 전통입니다. 오늘날 병원은 선물 수령에 대한 규정이 더 엄격해졌지만, 진심 어린 감사는 여전히 의사와 환자 관계의 중요한 부분입니다. 드라마가 담아내는 따뜻함이기도 합니다.</div>
+        <a class="btn-youtube" href="https://youtube.com/shorts/KKkZymzxGzM?feature=share" target="_blank" rel="noopener">&#9654; <span data-lang-en>Watch on YouTube</span><span data-lang-ko style="display:none;">유튜브에서 보기</span></a>
+      </div>
+    </div>
+  </div>
+
   </div>
 
 </div>
@@ -109,28 +603,39 @@
 
 <script src="../../js/app.js"></script>
 <script>
-
   function goHome() { window.location.href = '../../index.html'; }
 
   function applyPageLang() {
     var isKo = getLang() === 'ko';
     document.documentElement.lang = isKo ? 'ko' : 'en';
-    document.getElementById('nav-home').textContent  = isKo ? '홈' : 'Home';
-    document.getElementById('nav-back').textContent  = isKo ? '뒤로' : 'Back';
-    document.getElementById('bc-drama').textContent  = isKo ? '슬기로운 의사생활' : 'Hospital Playlist';
-    document.getElementById('hdr-title').textContent = isKo ? '슬기로운 의사생활' : 'Hospital Playlist';
-    document.getElementById('hdr-meta').textContent  = isKo ? '24화 · 2020–2021 · 의학 드라마' : '24 Episodes · 2020–2021 · Medical Drama';
-    document.querySelectorAll('[data-lang-en]').forEach(function(el) { el.style.display = isKo ? 'none' : ''; });
-    document.querySelectorAll('[data-lang-ko]').forEach(function(el) { el.style.display = isKo ? '' : 'none'; });
+    // null-safe helpers: the bookmark button text can be re-rendered by
+    // syncBookmarkButtons(), so guard every lookup to keep the EN/KO toggle robust.
+    function setTxt(id, v)  { var el = document.getElementById(id); if (el) el.textContent = v; }
+    function setHtml(id, v) { var el = document.getElementById(id); if (el) el.innerHTML  = v; }
+    setTxt('nav-home',     isKo ? '홈' : 'Home');
+    setTxt('nav-back',     isKo ? '뒤로' : 'Back');
+    setTxt('bc-drama',     isKo ? '슬기로운 의사생활' : 'Hospital Playlist');
+    setTxt('hdr-title',    isKo ? '슬기로운 의사생활' : 'Hospital Playlist');
+    setTxt('hdr-meta',     isKo ? '유튜브 쇼츠 25개 · 2020–2021 · 의학 드라마' : '25 YouTube Shorts · 2020–2021 · Medical Drama');
+    setTxt('bm-label',     isKo ? '저장' : 'Bookmark');
+    setTxt('bm-bar-title', isKo ? '북마크' : 'Your Bookmarks');
+    setHtml('shorts-label', isKo
+      ? '&#127381; 유튜브 쇼츠 &mdash; 25개 스토리'
+      : '&#127381; YouTube Shorts &mdash; 25 Stories');
   }
 
   window.addEventListener('DOMContentLoaded', function() {
+    if (!hasAgreed()) {
+      window.location.href = '../../index.html?redirect=' + encodeURIComponent(window.location.href);
+      return;
+    }
     injectTermsModal();
     document.getElementById('topbar-lang-wrap').innerHTML = buildLangToggle();
     applyPageLang();
     applyLang();
+    renderBookmarkBar();
+    syncBookmarkButtons();
   });
-
 </script>
 </body>
 </html>
