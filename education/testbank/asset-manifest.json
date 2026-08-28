@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/education/testbank/static/css/main.233b3b67.css",
-    "main.js": "/education/testbank/static/js/main.3deccaca.js",
+    "main.js": "/education/testbank/static/js/main.bd18a49f.js",
     "index.html": "/education/testbank/index.html",
     "main.233b3b67.css.map": "/education/testbank/static/css/main.233b3b67.css.map",
-    "main.3deccaca.js.map": "/education/testbank/static/js/main.3deccaca.js.map"
+    "main.bd18a49f.js.map": "/education/testbank/static/js/main.bd18a49f.js.map"
   },
   "entrypoints": [
     "static/css/main.233b3b67.css",
-    "static/js/main.3deccaca.js"
+    "static/js/main.bd18a49f.js"
   ]
 }
